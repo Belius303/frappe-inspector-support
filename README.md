@@ -15,7 +15,7 @@ Use this repository for:
 
 ## Links
 
-- JetBrains Marketplace: https://plugins.jetbrains.com/plugin/
+- JetBrains Marketplace: https://plugins.jetbrains.com/plugin/32992-frappe-inspector
 - Documentation: https://github.com/Belius303/frappe-inspector-support/tree/main/docs
 - Issue tracker: https://github.com/Belius303/frappe-inspector-support/issues
 - EULA: https://github.com/Belius303/frappe-inspector-support/blob/main/docs/eula.md
