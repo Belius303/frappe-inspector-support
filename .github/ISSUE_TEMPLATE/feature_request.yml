@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest an improvement or new Frappe Inspector workflow.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What Frappe or ERPNext workflow would this improve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: dropdown
+    id: edition
+    attributes:
+      label: Suggested edition
+      options:
+        - Community
+        - Pro
+        - Not sure
+    validations:
+      required: true

@@ -1,0 +1,31 @@
+name: Performance problem
+description: Report slow indexing, slow completion or IDE responsiveness issues.
+title: "[Performance]: "
+labels: ["performance"]
+body:
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Frappe Inspector version
+    validations:
+      required: true
+  - type: input
+    id: ide-version
+    attributes:
+      label: JetBrains IDE and version
+    validations:
+      required: true
+  - type: textarea
+    id: scale
+    attributes:
+      label: Project scale
+      description: Approximate number of apps, DocTypes and files.
+    validations:
+      required: true
+  - type: textarea
+    id: symptom
+    attributes:
+      label: Performance symptom
+      description: Include where it happens and how long it takes.
+    validations:
+      required: true

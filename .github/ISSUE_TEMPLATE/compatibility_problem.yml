@@ -1,0 +1,28 @@
+name: Compatibility problem
+description: Report an IDE, OS, Frappe, ERPNext or plugin compatibility issue.
+title: "[Compatibility]: "
+labels: ["compatibility"]
+body:
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Frappe Inspector version
+    validations:
+      required: true
+  - type: input
+    id: ide-version
+    attributes:
+      label: JetBrains IDE and version
+    validations:
+      required: true
+  - type: input
+    id: frappe-version
+    attributes:
+      label: Frappe or ERPNext version
+      placeholder: "Frappe 15 / ERPNext 15"
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is incompatible?
+    validations:
+      required: true
