@@ -12,6 +12,7 @@ Use Issues for bugs, feature requests, compatibility problems, false-positive di
 ## Links
 
 - Documentation: https://github.com/Belius303/frappe-inspector-support/tree/main/docs
+- Cross-platform downloads: https://github.com/Belius303/frappe-inspector-support/releases/tag/cross-platform-v1.0.0
 - Issues: https://github.com/Belius303/frappe-inspector-support/issues
 - GitHub Action: https://github.com/Belius303/frappe-inspector-action
 - Community vs Pro: https://github.com/Belius303/frappe-inspector-support/blob/main/docs/free-vs-pro.md
