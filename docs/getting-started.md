@@ -1,13 +1,23 @@
 # Getting Started
 
-1. Install Frappe Inspector from JetBrains Marketplace.
-2. Open a Frappe bench folder in PyCharm or IntelliJ IDEA.
-3. Open **Tools > Frappe Inspector** or the **Frappe Inspector** tool window.
-4. Click **Refresh** if the project was already open before installing the plugin.
-5. Use the **DocTypes**, **Problems**, **References**, **Graph**, and **Migrations** tabs.
+## JetBrains
 
-Community features are free. Graph, advanced references, Migration Analyzer,
-Custom Field-aware completion and other Pro features require a Marketplace
-trial or Pro license.
+Install Frappe Inspector from JetBrains Marketplace, open a Frappe bench or app, then open **Tools > Frappe Inspector**.
 
-Frappe Inspector is an independent third-party plugin and is not affiliated with or endorsed by Frappe Technologies, ERPNext, or JetBrains.
+## VS Code Or Cursor
+
+Install Frappe Inspector from VS Code Marketplace, Open VSX or a signed VSIX. Open the Frappe Inspector Activity Bar view and run **Frappe Inspector: Scan Project**.
+
+## CLI
+
+Run `frappe-inspector scan .` for Community diagnostics or `frappe-inspector diff . --base-ref origin/main` with Universal Pro.
+
+## GitHub Action
+
+See `docs/ci.md`. Check out full Git history with `fetch-depth: 0` and store Universal Pro in an encrypted secret.
+
+## MCP
+
+Configure `frappe-inspector-mcp` as a local stdio server in a compatible client. The server reads project files but never executes them.
+
+Frappe Inspector is independent and is not affiliated with or endorsed by Frappe Technologies, ERPNext, JetBrains, Microsoft, Cursor, GitHub or the Eclipse Foundation.
