@@ -65,7 +65,7 @@ Use the public Action at:
 Belius303/frappe-inspector-action@v1
 Full workflow example: CI setup.
 
-Release integrity
+### Release integrity
 
 The cross-platform release includes SHA256SUMS.txt.
 
@@ -75,7 +75,7 @@ Get-FileHash .\frappe-inspector-vscode-1.0.1.vsix -Algorithm SHA256
 
 Compare the result with the matching line in SHA256SUMS.txt.
 
-Privacy
+### Privacy
 
 Project analysis is designed to run locally.
 
@@ -83,7 +83,7 @@ Do not post private source code, customer data, database dumps, API keys, creden
 
 Read the privacy policy.
 
-Support and feedback
+### Support and feedback
 
 Use GitHub Issues for:
 
@@ -96,7 +96,7 @@ Documentation corrections
 
 Clear criticism and improvement ideas are welcome.
 
-Reports should include:
+### Reports should include:
 
 Editor and version
 Frappe or ERPNext version
