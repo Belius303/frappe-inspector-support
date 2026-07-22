@@ -62,9 +62,8 @@ Download the corresponding `.tgz` packages from the release and install them loc
 
 Use the public Action at:
 
-```text
 Belius303/frappe-inspector-action@v1
-ull workflow example: CI setup.
+Full workflow example: CI setup.
 
 Release integrity
 
@@ -113,4 +112,3 @@ Community vs Pro
 EULA
 
 Frappe Inspector is an independent third-party project and is not affiliated with or endorsed by Frappe Technologies, ERPNext, JetBrains, Microsoft, Cursor or GitHub.
-```text
