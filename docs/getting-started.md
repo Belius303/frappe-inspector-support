@@ -2,7 +2,7 @@
 
 ## JetBrains
 
-Install Frappe Inspector from JetBrains Marketplace, open a Frappe bench or app, then open **Tools > Frappe Inspector**.
+Install [Frappe Inspector from JetBrains Marketplace](https://plugins.jetbrains.com/plugin/32992-frappe-inspector), open a Frappe bench or app, then open **Tools > Frappe Inspector**.
 
 ## VS Code Or Cursor
 
