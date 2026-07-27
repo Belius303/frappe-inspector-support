@@ -1,293 +1,155 @@
 # Frappe Inspector CLI
 
-The Frappe Inspector CLI runs framework-aware Frappe and ERPNext analysis from a terminal.
+The Frappe Inspector CLI runs framework-aware Frappe and ERPNext static analysis from a terminal.
 
-It can be used for:
-
-- Local project scans
-- Pre-commit checks
-- Development scripts
-- CI pipelines
-- Project metadata inspection
-- Report generation
-
-## Download
-
-Download the CLI package from:
-
-https://github.com/Belius303/frappe-inspector-support/releases/tag/cross-platform-v1.0.1
-
-The package is named:
-
-`frappe-inspector-cli-1.0.1.tgz`
+Current npm package: [`@frappe-inspector/cli`](https://www.npmjs.com/package/@frappe-inspector/cli), version **1.1.4**.
 
 ## Requirements
 
-- Node.js 20 or newer is recommended
+- Node.js 20 or newer
 - npm
-- A Frappe Bench directory or Frappe application
-
-Check your installed versions:
-
-```powershell
-node --version
-npm --version
-```
+- A Frappe Bench directory or individual Frappe application
 
 ## Installation
 
-### Global installation
+Install globally:
 
-From the directory containing the downloaded package:
-
-```powershell
-npm install --global .\frappe-inspector-cli-1.0.1.tgz
-```
-
-Check that the command is available:
-
-```powershell
+```shell
+npm install --global @frappe-inspector/cli
 frappe-inspector --help
 ```
 
-### Local project installation
+Or install in a project:
 
-```powershell
-npm install --save-dev .\frappe-inspector-cli-1.0.1.tgz
-```
-
-Run it with:
-
-```powershell
+```shell
+npm install --save-dev @frappe-inspector/cli
 npx frappe-inspector --help
 ```
 
-### Run from the package without a global installation
+Audited `.tgz` packages and SHA-256 checksums are also available from [GitHub Releases](https://github.com/Belius303/frappe-inspector-support/releases/latest).
 
-```powershell
-npx --package .\frappe-inspector-cli-1.0.1.tgz frappe-inspector --help
-```
+## Community scan
 
-## Basic scan
+Community analysis does not require a license:
 
-Run the CLI from the project root:
-
-```powershell
+```shell
 frappe-inspector scan .
 ```
 
-Or provide an explicit path:
+Write a Markdown report:
 
-```powershell
-frappe-inspector scan C:\Projects\frappe-bench
+```shell
+frappe-inspector scan . --format markdown --output frappe-inspector.md
 ```
 
-For a local installation:
+Choose the minimum severity that fails the process:
 
-```powershell
-npx frappe-inspector scan .
+```shell
+frappe-inspector scan . --fail-on warning
 ```
 
-## Community analysis
+## Universal Pro
 
-Community mode performs conservative static checks without requiring a paid license.
+Universal Pro adds migration comparison, snapshot baselines, advanced references, Custom Field and Property Setter overlays, plus JSON and SARIF reports.
 
-It can analyze:
+Activate the device:
 
-- Project structure
-- Apps and modules
-- DocTypes and fields
-- Related source files
-- Basic field references
-- Basic hooks configuration
-- Patch entries
-
-Example:
-
-```powershell
-frappe-inspector scan .
+```shell
+frappe-inspector license activate FI-PRO-XXXX-XXXX-XXXX-XXXX-XXXX
+frappe-inspector license status
 ```
 
-## Pro analysis
+Refresh or deactivate it:
 
-Universal Pro unlocks advanced analysis such as:
-
-- Schema comparison
-- Migration safety analysis
-- Removed-field usage detection
-- Link-target changes
-- Field type changes
-- Required, default and uniqueness changes
-- Custom Fields
-- Property Setters
-- Advanced whitelisted-method analysis
-- JSON and SARIF reports
-
-Use the license mechanism supported by your installed CLI version.
-
-Keep license keys out of command history, public scripts and repositories.
-
-A PowerShell environment variable can be used where supported:
-
-```powershell
-$env:FRAPPE_INSPECTOR_LICENSE_KEY = "YOUR_PRIVATE_LICENSE_KEY"
+```shell
+frappe-inspector license refresh
+frappe-inspector license deactivate
 ```
 
-Do not commit this value.
+The stored key and certificate use `~/.frappe-inspector/license.json` with user-only permissions. Deactivation releases both CLI and MCP access for the device.
 
-## Git-reference analysis
+For temporary automation, use `FRAPPE_INSPECTOR_LICENSE_KEY` or `--license-file`. Explicit environment or file credentials are used ephemerally and are not persisted by the CLI.
 
-The Pro migration analyzer can compare the current project with a Git reference.
-
-Typical references include:
-
-- `main`
-- `origin/main`
-- `HEAD~1`
-- `v1.0.0`
-
-Check the exact options supported by the installed version:
+PowerShell:
 
 ```powershell
-frappe-inspector --help
+$env:FRAPPE_INSPECTOR_LICENSE_KEY = "FI-PRO-..."
+frappe-inspector diff . --base-ref origin/main
+Remove-Item Env:FRAPPE_INSPECTOR_LICENSE_KEY
 ```
 
-```powershell
-frappe-inspector scan --help
+## Compare with Git
+
+Compare the working tree with a Git ref:
+
+```shell
+frappe-inspector diff . --base-ref origin/main
 ```
 
-Command options may evolve between releases.
+Generate SARIF:
 
-## Reports
+```shell
+frappe-inspector diff . \
+  --base-ref origin/main \
+  --format sarif \
+  --output frappe-inspector.sarif
+```
 
-Supported Pro workflows can generate machine-readable reports such as:
+Include safe additions:
 
-- JSON
-- SARIF
-- Markdown
+```shell
+frappe-inspector diff . --base-ref origin/main --include-safe
+```
 
-SARIF can be used by compatible CI and code-scanning systems.
+## Snapshot baseline
 
-A report should only be considered successfully generated when:
+Create a portable baseline:
 
-- The CLI exits successfully
-- The expected output file exists
-- The file contains valid report data
+```shell
+frappe-inspector snapshot . --output .frappe-inspector/snapshot.json
+```
+
+Compare against it:
+
+```shell
+frappe-inspector diff . --baseline .frappe-inspector/snapshot.json
+```
+
+## Options
+
+```text
+-f, --format pretty|markdown|json|sarif
+-o, --output <file>
+    --base-ref <git-ref>
+    --baseline <snapshot.json>
+    --fail-on note|warning|error
+    --license-file <file>
+    --include-safe
+-h, --help
+```
+
+JSON and SARIF require Universal Pro. Pretty and Markdown output are available for Community scans.
 
 ## Exit codes
 
-The CLI can be used in automation by checking its process exit code.
+| Code | Meaning |
+| :---: | --- |
+| `0` | The configured threshold is clear |
+| `1` | Findings reached the configured threshold |
+| `2` | Invalid arguments, discovery failure or another execution error |
+| `3` | The requested capability requires Universal Pro |
 
-PowerShell example:
+## Updating and uninstalling
 
-```powershell
-frappe-inspector scan .
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "Frappe Inspector reported a failure."
-    exit $LASTEXITCODE
-}
+```shell
+npm install --global @frappe-inspector/cli@latest
+npm uninstall --global @frappe-inspector/cli
 ```
 
-A non-zero exit code may indicate:
-
-- Invalid command arguments
-- Project discovery failure
-- Analysis errors
-- Findings above the configured threshold
-- License validation failure for a Pro-only operation
-
-## Updating
-
-Uninstall the previous global version:
-
-```powershell
-npm uninstall --global frappe-inspector
-```
-
-Install the newer package:
-
-```powershell
-npm install --global .\frappe-inspector-cli-NEW_VERSION.tgz
-```
-
-For a local dependency, install the newer tarball using npm.
-
-## Uninstalling
-
-Global installation:
-
-```powershell
-npm uninstall --global frappe-inspector
-```
-
-Local installation:
-
-```powershell
-npm uninstall frappe-inspector
-```
-
-## Verifying the package
-
-The release includes `SHA256SUMS.txt`.
-
-Run:
-
-```powershell
-Get-FileHash .\frappe-inspector-cli-1.0.1.tgz -Algorithm SHA256
-```
-
-Compare the result with the corresponding line in `SHA256SUMS.txt`.
-
-## Troubleshooting
-
-### Command not found
-
-Check npm's global installation directory:
-
-```powershell
-npm prefix --global
-```
-
-Restart the terminal after installation.
-
-You can also try:
-
-```powershell
-npx frappe-inspector --help
-```
-
-### The wrong project is scanned
-
-Pass the complete project path explicitly:
-
-```powershell
-frappe-inspector scan C:\Projects\frappe-bench
-```
-
-### The scan reports false positives
-
-Open an issue and include:
-
-- Operating system
-- Node.js version
-- Frappe Inspector version
-- Frappe and ERPNext versions
-- Sanitized project structure
-- Command used
-- Expected result
-- Actual result
-
-Issue tracker:
-
-https://github.com/Belius303/frappe-inspector-support/issues
-
-Do not post private source code, database contents, credentials or license keys.
+For a local dependency, omit `--global`.
 
 ## Privacy
 
-The CLI is designed for local project analysis.
+Project files are read locally and are not executed. Universal Pro activation and refresh communicate with the Frappe Inspector license service; see [Privacy](privacy.md).
 
-Privacy documentation:
-
-https://github.com/Belius303/frappe-inspector-support/blob/main/docs/privacy.md
+Report bugs with sanitized reproduction details in the [public issue tracker](https://github.com/Belius303/frappe-inspector-support/issues). Never include private source, customer data, credentials or license keys.
