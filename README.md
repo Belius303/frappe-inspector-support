@@ -1,114 +1,144 @@
 # Frappe Inspector
 
-Framework-aware tooling for Frappe Framework and ERPNext across JetBrains IDEs, VS Code, Cursor, the command line, MCP clients and GitHub Actions.
+> Understand Frappe projects faster. Change them with confidence. Catch unsafe migrations before production.
 
-Frappe Inspector connects project concepts that general-purpose tools usually see as unrelated files: DocType JSON schemas, Python controllers, client scripts, hooks, patches, fixtures, Custom Fields, Property Setters, permissions and migrations.
+[![Latest release](https://img.shields.io/github/v/release/Belius303/frappe-inspector-support?display_name=tag)](https://github.com/Belius303/frappe-inspector-support/releases/latest)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/mohamedtazihnyine.frappe-inspector?label=VS%20Code)](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector)
+[![GitHub issues](https://img.shields.io/github/issues/Belius303/frappe-inspector-support)](https://github.com/Belius303/frappe-inspector-support/issues)
 
-The goal is simple: help developers understand a Frappe project faster and catch risky changes before they reach production.
+[Website](https://frappeinspector.xyz) · [Pricing](https://frappeinspector.xyz/pricing) · [JetBrains](https://plugins.jetbrains.com/plugin/32992-frappe-inspector) · [VS Code](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector) · [Downloads](https://github.com/Belius303/frappe-inspector-support/releases/latest) · [Documentation](docs/getting-started.md)
 
-## Available surfaces
+Frappe Inspector is a framework-aware static analysis suite for **Frappe Framework** and **ERPNext** projects. It connects the files and concepts that general-purpose tools usually treat separately: DocType JSON, Python controllers, client scripts, hooks, patches, fixtures, Custom Fields, Property Setters, permissions and migrations.
 
-| Surface | Status | Distribution |
+It is available for JetBrains IDEs, VS Code, Cursor, the command line, MCP clients and GitHub Actions.
+
+## Why Frappe Inspector?
+
+A schema edit that looks harmless can break code far away from the DocType definition. Frappe Inspector helps surface those relationships before the change reaches production.
+
+It can help you:
+
+- explore apps, modules, DocTypes and fields from your editor;
+- jump between DocType JSON, controllers, client scripts and tests;
+- validate common `hooks.py` and `patches.txt` patterns;
+- inspect Link, Dynamic Link and child-table relationships;
+- account for Custom Fields and Property Setters in the effective schema;
+- find references to removed fields;
+- compare a project against a Git ref or snapshot;
+- detect risky type, link-target, required/default and uniqueness changes;
+- generate Markdown, JSON and SARIF reports for supported workflows;
+- give AI assistants deterministic, Frappe-aware context through a local MCP server.
+
+Project analysis runs locally. Your source code is not uploaded to Frappe Inspector for analysis.
+
+## Choose your workflow
+
+| Surface | Best for | Get it |
 | --- | --- | --- |
-| JetBrains plugin | Available | [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/32992-frappe-inspector) |
-| VS Code extension | Available as VSIX | [Cross-platform v1.0.1 release](https://github.com/Belius303/frappe-inspector-support/releases/tag/cross-platform-v1.0.1) |
-| Cursor | Available through the same VSIX | [Installation guide](docs/vscode-cursor.md) |
-| CLI | Available as an audited npm tarball | [CLI guide](docs/cli.md) |
-| Local MCP server | Available as an audited npm tarball | [MCP guide](docs/mcp.md) |
-| GitHub Action | Available | [Belius303/frappe-inspector-action](https://github.com/Belius303/frappe-inspector-action) |
+| JetBrains plugin | PyCharm and IntelliJ-based Frappe development | [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/32992-frappe-inspector) |
+| VS Code extension | Navigation, diagnostics and the interactive DocType graph | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector) |
+| Cursor | The same editor integration through the VSIX package | [Latest release](https://github.com/Belius303/frappe-inspector-support/releases/latest) |
+| CLI | Local scans, scripts, pre-commit hooks and CI | [CLI guide](docs/cli.md) |
+| MCP server | Frappe-aware tools for compatible AI clients | [MCP guide](docs/mcp.md) |
+| GitHub Action | Pull-request checks and migration safety | [Action repository](https://github.com/Belius303/frappe-inspector-action) |
 
-## What it analyzes
-
-- Frappe Bench installations and individual applications
-- Apps, modules, DocTypes and fields
-- Related JSON, Python, JavaScript and test files
-- `hooks.py` and `patches.txt`
-- Link, Dynamic Link and Table relationships
-- Custom Fields and Property Setters
-- Whitelisted methods
-- Schema changes and migration risks
-- References to removed fields
-- Link-target, type, required/default and uniqueness changes
-- Machine-readable reports for supported Pro workflows
-
-## Community and Pro
-
-Community features remain available without a paid license and after a Pro license expires.
-
-Community focuses on project discovery, navigation, exploration and conservative static diagnostics. Pro focuses on project-wide inference, schema comparison, migration safety, advanced Frappe metadata and automation.
-
-See the complete comparison: [Community vs Pro](docs/free-vs-pro.md).
+The latest release contains the current cross-platform packages and SHA-256 checksums. VS Code is currently at **1.1.5**; the companion CLI and MCP packages are at **1.1.4**.
 
 ## Quick start
 
 ### JetBrains
 
-Install [Frappe Inspector from JetBrains Marketplace](https://plugins.jetbrains.com/plugin/32992-frappe-inspector), then open either a Frappe Bench root or an individual Frappe application.
+Install [Frappe Inspector from JetBrains Marketplace](https://plugins.jetbrains.com/plugin/32992-frappe-inspector), then open a Frappe Bench root or an individual Frappe application.
 
-### VS Code or Cursor
+### VS Code
 
-Download `frappe-inspector-vscode-1.0.1.vsix` from the [cross-platform release](https://github.com/Belius303/frappe-inspector-support/releases/tag/cross-platform-v1.0.1), then choose **Install from VSIX** in the editor.
+Install [Frappe Inspector from the VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector), then open a Frappe project. The extension activates when it detects common Frappe project files.
 
-Full instructions: [VS Code and Cursor](docs/vscode-cursor.md).
+### Cursor
+
+Download the latest `frappe-inspector-vscode-*.vsix` from [Releases](https://github.com/Belius303/frappe-inspector-support/releases/latest), then use **Install from VSIX**.
+
+See the complete [VS Code and Cursor guide](docs/vscode-cursor.md).
 
 ### CLI and MCP
 
-Download the corresponding `.tgz` packages from the release and install them locally or globally with npm.
+Download the current `.tgz` packages from [Releases](https://github.com/Belius303/frappe-inspector-support/releases/latest), then follow:
 
-- [CLI guide](docs/cli.md)
-- [MCP guide](docs/mcp.md)
+- [CLI installation and usage](docs/cli.md)
+- [MCP server setup](docs/mcp.md)
 
 ### GitHub Action
 
-Use the public Action at:
+Start with the free Community scan:
 
-Belius303/frappe-inspector-action@v1
-Full workflow example: CI setup.
+```yaml
+name: Frappe checks
 
-### Release integrity
+on:
+  pull_request:
 
-The cross-platform release includes SHA256SUMS.txt.
+permissions:
+  contents: read
 
-Verify an artifact in PowerShell with:
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Belius303/frappe-inspector-action@v1
+        with:
+          mode: scan
+          path: .
+```
 
-Get-FileHash .\frappe-inspector-vscode-1.0.1.vsix -Algorithm SHA256
+For schema comparison, migration checks and SARIF output, see the complete [CI guide](docs/ci.md).
 
-Compare the result with the matching line in SHA256SUMS.txt.
+## Community vs Pro
 
-### Privacy
+**Community helps you navigate and understand a Frappe project. Pro helps you change it safely.**
 
-Project analysis is designed to run locally.
+| Capability | Community | Pro |
+| --- | :---: | :---: |
+| Project detection and DocType explorer | ✓ | ✓ |
+| Related JSON, Python, JavaScript and test navigation | ✓ | ✓ |
+| Conservative static diagnostics | ✓ | ✓ |
+| Basic hooks and patches validation | ✓ | ✓ |
+| CLI human-readable scan | ✓ | ✓ |
+| Migration Safety Analyzer |  | ✓ |
+| Git-ref and snapshot schema comparison |  | ✓ |
+| Removed-field and advanced reference analysis |  | ✓ |
+| Custom Field and Property Setter effective schema |  | ✓ |
+| Interactive DocType graph |  | ✓ |
+| JSON and SARIF reports |  | ✓ |
+| GitHub Action migration mode |  | ✓ |
+| Advanced MCP analysis tools |  | ✓ |
 
-Do not post private source code, customer data, database dumps, API keys, credentials or paid-license keys in public issues.
+Community features remain available without a paid license and after a Pro license expires. See the [full Community vs Pro comparison](docs/free-vs-pro.md) and [pricing](https://frappeinspector.xyz/pricing).
 
-Read the privacy policy.
+## Documentation
 
-### Support and feedback
+- [Getting started](docs/getting-started.md)
+- [VS Code and Cursor](docs/vscode-cursor.md)
+- [CLI](docs/cli.md)
+- [MCP server](docs/mcp.md)
+- [GitHub Actions and CI](docs/ci.md)
+- [Analysis rules](docs/rules.md)
+- [Community vs Pro](docs/free-vs-pro.md)
+- [Changelog](docs/changelog.md)
+- [Privacy](docs/privacy.md)
+- [EULA](docs/eula.md)
 
-Use GitHub Issues for:
+## Support and feedback
 
-Bug reports
-Feature requests
-Compatibility problems
-False-positive diagnostics
-Performance reports
-Documentation corrections
+Use [GitHub Issues](https://github.com/Belius303/frappe-inspector-support/issues) for bug reports, feature requests, compatibility problems, false positives, performance reports and documentation corrections.
 
-Clear criticism and improvement ideas are welcome.
+Please include:
 
-### Reports should include:
+- editor and editor version;
+- Frappe or ERPNext version;
+- minimal reproduction steps;
+- sanitized logs when relevant.
 
-Editor and version
-Frappe or ERPNext version
-Minimal reproduction steps
-Sanitized logs where relevant
-Links
-JetBrains Marketplace
-Cross-platform v1.0.1 release
-GitHub Action
-Documentation
-Issue tracker
-Community vs Pro
-EULA
+Do not post private source code, customer data, database dumps, credentials, API keys or license keys in public issues.
 
 Frappe Inspector is an independent third-party project and is not affiliated with or endorsed by Frappe Technologies, ERPNext, JetBrains, Microsoft, Cursor or GitHub.
