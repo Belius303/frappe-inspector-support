@@ -108,7 +108,8 @@ For schema comparison, migration checks and SARIF output, see the complete [CI g
 | Git-ref and snapshot schema comparison |  | ✓ |
 | Removed-field and advanced reference analysis |  | ✓ |
 | Custom Field and Property Setter effective schema |  | ✓ |
-| Interactive DocType graph |  | ✓ |
+| Interactive DocType graph in VS Code/Cursor | ✓ | ✓ |
+| Interactive DocType graph in JetBrains |  | ✓ |
 | JSON and SARIF reports |  | ✓ |
 | GitHub Action migration mode |  | ✓ |
 | Advanced MCP analysis tools |  | ✓ |
