@@ -1,97 +1,37 @@
 # Frappe Inspector MCP Server
 
-The Frappe Inspector MCP server exposes Frappe-aware project analysis to compatible AI clients and developer tools through the Model Context Protocol.
+The Frappe Inspector MCP server exposes read-only, framework-aware analysis of local Frappe and ERPNext projects to compatible AI clients through the Model Context Protocol.
 
-It allows an MCP client to request structured information about a local Frappe or ERPNext project instead of relying only on generic file search.
+Current npm package: [`@frappe-inspector/mcp`](https://www.npmjs.com/package/@frappe-inspector/mcp), version **1.1.4**.
 
-## Use cases
-
-The MCP server can help compatible clients:
-
-- Detect Frappe projects
-- List applications and modules
-- Inspect DocTypes and fields
-- Understand relationships between DocTypes
-- Find related JSON, Python, JavaScript and test files
-- Run conservative static scans
-- Analyze migration risks with Pro
-- Inspect Custom Fields and Property Setters with Pro
-- Return structured findings
-
-The server provides deterministic project analysis. The connected AI client can use those results to explain problems or suggest changes.
-
-## Download
-
-Download the MCP package from:
-
-https://github.com/Belius303/frappe-inspector-support/releases/tag/cross-platform-v1.0.1
-
-The package is named:
-
-`frappe-inspector-mcp-1.0.1.tgz`
+Project files are read as text and are never executed by the server.
 
 ## Requirements
 
-- Node.js 20 or newer is recommended
+- Node.js 20 or newer
 - npm
 - An MCP-compatible client
-- Local access to the Frappe project being analyzed
-
-Check Node.js:
-
-```powershell
-node --version
-```
+- Local access to the Frappe project
 
 ## Installation
 
-### Global installation
+Install globally:
 
-```powershell
-npm install --global .\frappe-inspector-mcp-1.0.1.tgz
+```shell
+npm install --global @frappe-inspector/mcp
 ```
 
-### Local installation
+Or install in a project:
 
-```powershell
-npm install --save-dev .\frappe-inspector-mcp-1.0.1.tgz
+```shell
+npm install --save-dev @frappe-inspector/mcp
 ```
 
-Check installed packages:
+Audited `.tgz` packages and SHA-256 checksums are also available from [GitHub Releases](https://github.com/Belius303/frappe-inspector-support/releases/latest).
 
-```powershell
-npm list --global --depth=0
-```
+## Configuration
 
-For a local installation:
-
-```powershell
-npm list --depth=0
-```
-
-## Finding the executable
-
-The exact executable name is defined in the package metadata.
-
-Inspect it before configuring the MCP client:
-
-```powershell
-npm view .\frappe-inspector-mcp-1.0.1.tgz bin
-```
-
-You can also extract the archive and inspect the `bin` field inside `package.json`.
-
-Use the executable reported by the package in your MCP configuration.
-
-## Generic MCP configuration
-
-Most MCP clients expect:
-
-- A command
-- Optional command arguments
-- Optional environment variables
-
-Generic example:
+Generic global-installation example:
 
 ```json
 {
@@ -104,83 +44,42 @@ Generic example:
 }
 ```
 
-Replace `frappe-inspector-mcp` with the actual executable name reported by the package.
-
-For a local project installation, an MCP client may use `npx`:
+For a project-local installation:
 
 ```json
 {
   "mcpServers": {
     "frappe-inspector": {
       "command": "npx",
-      "args": [
-        "frappe-inspector-mcp"
-      ]
+      "args": ["frappe-inspector-mcp"]
     }
   }
 }
 ```
 
-The location and format of the MCP configuration file depend on the client.
+Configuration locations and environment-variable handling depend on the MCP client. Restart the client after changing its configuration.
 
-## Project path
+## Available tools
 
-The MCP server must be able to access the Frappe project locally.
+| Tool | Edition | Purpose |
+| --- | --- | --- |
+| `scan_frappe_project` | Community | Run a static scan and return structured diagnostics |
+| `list_doctypes` | Community | List detected apps, modules, DocTypes, fields and source files |
+| `get_doctype` | Community/Pro | Return a DocType schema; Pro includes licensed effective-schema overlays |
+| `find_field_usages` | Pro | Find recognized Python and JavaScript field usages |
+| `compare_frappe_schema` | Pro | Compare the working tree with a Git ref |
+| `create_frappe_ci_report` | Pro | Produce structured JSON analysis for CI agents |
 
-Depending on the client and supported server options, the project path may be provided through:
+All tools are declared read-only. The server does not edit project files.
 
-- An MCP tool request
-- A command argument
-- The active client workspace
-- An environment variable
-- Server configuration
+## Universal Pro
 
-Check the installed package help:
+The MCP server can use:
 
-```powershell
-frappe-inspector-mcp --help
-```
+- the device license activated by the CLI;
+- `FRAPPE_INSPECTOR_LICENSE_KEY` supplied by the MCP client environment.
 
-For a local installation:
-
-```powershell
-npx frappe-inspector-mcp --help
-```
-
-## Community tools
-
-Community MCP capabilities focus on:
-
-- Project detection
-- App and module discovery
-- DocType inspection
-- Field inspection
-- Basic project scans
-- Related-file discovery
-- Conservative diagnostics
-
-Community capabilities do not require a paid key.
-
-## Pro tools
-
-Universal Pro can unlock advanced MCP analysis such as:
-
-- Migration safety analysis
-- Git-reference schema comparison
-- Removed-field usage analysis
-- Link relationship validation
-- Field type and requirement changes
-- Custom Field effective-schema analysis
-- Property Setter effective-schema analysis
-- Advanced hooks and fixture analysis
-- Whitelisted-method inspection
-- Structured Pro reports
-
-## Universal Pro license
-
-Keep the Universal Pro key private.
-
-Where supported, the license can be provided to the MCP server through an environment variable:
+Example shape:
 
 ```json
 {
@@ -189,144 +88,56 @@ Where supported, the license can be provided to the MCP server through an enviro
       "command": "frappe-inspector-mcp",
       "args": [],
       "env": {
-        "FRAPPE_INSPECTOR_LICENSE_KEY": "YOUR_PRIVATE_LICENSE_KEY"
+        "FRAPPE_INSPECTOR_LICENSE_KEY": "FI-PRO-..."
       }
     }
   }
 }
 ```
 
-Do not store a real key in:
+Prefer the secret-storage or environment mechanism provided by the client. Do not commit a real key to a repository or shared configuration.
 
-- A public repository
-- Public screenshots
-- Shared dotfiles
-- Bug reports
-- Public CI logs
+The MCP server shares the local device record with the CLI but keeps a product-bound MCP certificate. Run:
 
-Prefer the secret-storage mechanism provided by the MCP client or operating system.
+```shell
+frappe-inspector license deactivate
+```
 
-## Security model
+to release both CLI and MCP access for that device.
 
-The MCP server analyzes files available to its local process.
+## Security and privacy
+
+The server communicates with the client over local `stdio`. Tool results are returned to that client, which may forward them to its configured AI provider.
 
 Before enabling it, review:
 
-- Which directories the client exposes
-- Which tools the server provides
-- Whether tool calls require confirmation
-- Whether logs may contain project paths or source excerpts
-- Where the client stores its MCP configuration
+- which directories the client exposes;
+- whether tool calls require confirmation;
+- whether logs can include paths or source excerpts;
+- the client and AI provider privacy policies.
 
-Use the smallest practical project scope.
+Use the smallest practical project scope and do not point the server at unrelated personal folders.
 
-Do not point the server at unrelated personal folders or directories containing secrets.
-
-## Testing the server
-
-Start by checking the help command:
-
-```powershell
-frappe-inspector-mcp --help
-```
-
-Then add the server to the MCP client and restart the client.
-
-Confirm that:
-
-- The server starts without an error
-- The client lists the Frappe Inspector tools
-- A Frappe project can be detected
-- A basic scan returns structured results
-- The server remains scoped to the requested project
-
-## Updating
-
-For a global installation:
-
-```powershell
-npm uninstall --global frappe-inspector-mcp
-npm install --global .\frappe-inspector-mcp-NEW_VERSION.tgz
-```
-
-For a local installation, install the new tarball with npm and restart the MCP client.
-
-## Uninstalling
-
-Global installation:
-
-```powershell
-npm uninstall --global frappe-inspector-mcp
-```
-
-Local installation:
-
-```powershell
-npm uninstall frappe-inspector-mcp
-```
-
-## Verifying the package
-
-Run:
-
-```powershell
-Get-FileHash .\frappe-inspector-mcp-1.0.1.tgz -Algorithm SHA256
-```
-
-Compare the result with the MCP entry in `SHA256SUMS.txt`.
+Universal Pro activation and refresh communicate with the Frappe Inspector license service. See [Privacy](privacy.md).
 
 ## Troubleshooting
 
-### The MCP server does not start
+### Server not found
 
-Check:
+- Confirm Node.js 20+ and npm are installed.
+- Run `npm list --global --depth=0`.
+- Confirm the MCP client inherits npm's global binary directory.
+- Use the project-local `npx` configuration if needed.
 
-- Node.js version
-- The package executable name
-- Absolute and relative paths
-- JSON syntax in the MCP configuration
-- Whether the client inherits the system `PATH`
-- Whether the package was installed globally or locally
+### Tools do not appear
 
-Using an absolute executable path may help when the MCP client does not inherit npm's global binary directory.
+- Validate the JSON configuration.
+- Restart the MCP client.
+- Check its MCP or JSON-RPC logs.
 
-### The client cannot see the tools
+### Project not detected
 
-Restart the client after changing its MCP configuration.
+- Pass a Bench root or Frappe app path to the tool.
+- Confirm `hooks.py`, `modules.txt` or DocType JSON files are present.
 
-Check the client's MCP logs for startup or JSON-RPC errors.
-
-### The server cannot find the Frappe project
-
-Use an explicit absolute path where supported.
-
-Make sure the selected directory is a Bench root or Frappe application root.
-
-### A tool returns an incorrect result
-
-Open an issue and include:
-
-- MCP client name and version
-- Operating system
-- Node.js version
-- Frappe Inspector version
-- Frappe and ERPNext versions
-- Tool name
-- Sanitized request and response
-- Minimal reproduction steps
-
-Issue tracker:
-
-https://github.com/Belius303/frappe-inspector-support/issues
-
-Never include private source code, customer data, API keys or license keys.
-
-## Privacy
-
-The MCP server is designed to run locally, but the connected AI client may have its own data-handling behavior.
-
-Review both the Frappe Inspector privacy documentation and the privacy policy of the connected MCP client or AI provider.
-
-Frappe Inspector privacy documentation:
-
-https://github.com/Belius303/frappe-inspector-support/blob/main/docs/privacy.md
+For incorrect results, open a sanitized report in the [public issue tracker](https://github.com/Belius303/frappe-inspector-support/issues). Never include private source, customer data, credentials or license keys.
