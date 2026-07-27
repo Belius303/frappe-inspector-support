@@ -1,194 +1,158 @@
 # VS Code and Cursor
 
-Frappe Inspector provides Frappe Framework and ERPNext project analysis for VS Code and Cursor.
+Frappe Inspector adds Frappe Framework and ERPNext project awareness to VS Code and Cursor. It uses the same shared analysis engine as the CLI, MCP server and GitHub Action.
 
-The extension uses the same shared analysis engine as the CLI, MCP server and GitHub Action.
+Current VS Code extension version: **1.1.5**.
+
+Project files are read as text and are never executed by the extension.
 
 ## Installation
 
-Download the latest VSIX from the cross-platform release:
+### VS Code Marketplace
 
-https://github.com/Belius303/frappe-inspector-support/releases/tag/cross-platform-v1.0.1
+Install [Frappe Inspector from the VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector).
 
-The file is named:
+### VSIX for Cursor or VS Code
 
-`frappe-inspector-vscode-1.0.1.vsix`
+Download the latest `frappe-inspector-vscode-*.vsix` from [GitHub Releases](https://github.com/Belius303/frappe-inspector-support/releases/latest).
 
-### VS Code
-
-1. Open the Extensions view.
-2. Click the `...` menu.
-3. Select **Install from VSIX...**
-4. Select `frappe-inspector-vscode-1.0.1.vsix`.
-5. Reload VS Code when prompted.
-
-You can also install it from PowerShell:
-
-```powershell
-code --install-extension .\frappe-inspector-vscode-1.0.1.vsix
-```
-
-### Cursor
+In the editor:
 
 1. Open the Extensions view.
-2. Click the `...` menu.
-3. Select **Install from VSIX...**
-4. Select `frappe-inspector-vscode-1.0.1.vsix`.
-5. Reload Cursor when prompted.
+2. Select the `...` menu.
+3. Choose **Install from VSIX**.
+4. Select the downloaded package.
+5. Reload the editor when prompted.
 
-When the Cursor command-line launcher is available:
+Command line:
 
-```powershell
-cursor --install-extension .\frappe-inspector-vscode-1.0.1.vsix
+```shell
+code --install-extension ./frappe-inspector-vscode-1.1.5.vsix
+cursor --install-extension ./frappe-inspector-vscode-1.1.5.vsix
 ```
 
-## Opening a project
+The extension requires VS Code or a compatible editor version `1.96` or newer.
 
-Frappe Inspector supports:
+## Quick start
 
-- A complete Frappe Bench directory
-- An individual Frappe application
-- A workspace containing one or more Frappe applications
+1. Open a Frappe Bench or one Frappe application as the first workspace folder.
+2. Run **Frappe Inspector: Scan Project** from the Command Palette.
+3. Open the Frappe Inspector icon in the Activity Bar.
+4. Browse DocTypes and review the Frappe Problems view.
 
-For best results, open the project root rather than an individual DocType directory.
-
-Typical Bench layout:
-
-```text
-frappe-bench/
-├── apps/
-│   ├── frappe/
-│   ├── erpnext/
-│   └── custom_app/
-├── sites/
-└── Procfile
-```
-
-Typical application layout:
-
-```text
-custom_app/
-├── custom_app/
-│   ├── hooks.py
-│   ├── modules.txt
-│   └── custom_module/
-│       └── doctype/
-└── pyproject.toml
-```
+Projects containing `hooks.py` or `sites/apps.txt` are detected automatically. Run **Scan Project** when opening a smaller app folder without one of those files.
 
 ## Community features
 
-The Community edition includes:
+Community works without an account or license.
 
-- Frappe and ERPNext project detection
-- App, module and DocType discovery
-- DocType explorer
-- Navigation between related JSON, Python, JavaScript and test files
-- Conservative DocType and field completion
-- Basic diagnostics for unknown DocTypes and fields
-- Basic `hooks.py` validation
-- Basic `patches.txt` validation
-- Local static analysis
+### Browse and navigate
 
-Community features remain available without a license key.
+- Explore apps, modules, DocTypes and fields.
+- Open DocType or field JSON definitions.
+- Use **Go to Definition** (`F12`) for recognized DocType and field strings.
+- Receive Frappe-aware completion in supported API and form patterns.
 
-## Pro features
+### Interactive DocType graph
 
-A Universal Pro license unlocks advanced cross-platform analysis, including:
+Run **Frappe Inspector: Show DocType Graph** or select the graph icon in the DocTypes view.
 
-- Migration Safety Analyzer
-- Git-reference and snapshot schema comparison
-- Removed-field usage detection
-- Link-target analysis
-- Field type change detection
-- Required, default and uniqueness change checks
-- Custom Field support
-- Property Setter effective-schema support
-- Advanced hooks and fixture analysis
-- Whitelisted-method analysis
-- JSON and SARIF reports
-- Advanced MCP tools
-- GitHub Action migration mode
+The graph:
 
-## Universal Pro license
+- groups DocTypes by app and module;
+- displays Link, Table and Table MultiSelect relationships;
+- supports Link/Table filters, pan, zoom and layout controls;
+- opens JSON source from DocTypes and relations;
+- shows missing relation targets explicitly.
 
-Cross-platform products use a Universal Pro license key.
+The VS Code/Cursor graph is included in Community.
 
-Do not post your license key in:
+### Diagnostics and Markdown
 
-- Public GitHub issues
-- Screenshots
-- CI logs
-- Public repositories
-- Shared configuration files
+Community reports malformed DocType JSON, unknown Link targets, recognized unknown DocType references, invalid hooks and invalid patch entries.
 
-Store it only in private editor settings, environment variables or secret managers.
+Run **Frappe Inspector: Export Report** and choose **Markdown** for a Community report.
 
-## Updating the extension
+## Universal Pro features
 
-1. Download the newer VSIX from the latest release.
-2. Open the Extensions view.
-3. Select **Install from VSIX...**
-4. Choose the new file.
-5. Reload the editor.
+Universal Pro adds:
 
-The new version replaces the previous installation.
+- Git-ref schema comparison and migration safety;
+- removed-field usage detection;
+- type, Link-target, required/default and uniqueness checks;
+- Custom Field and Property Setter effective-schema overlays;
+- advanced recognized field and whitelisted-method diagnostics;
+- JSON and SARIF exports.
 
-## Verifying the download
+Purchase Universal Pro at [frappeinspector.xyz/pricing](https://frappeinspector.xyz/pricing). One Universal Pro subscription covers VS Code, Cursor, CLI, MCP and GitHub Action usage with up to three persistent devices.
 
-The release includes `SHA256SUMS.txt`.
+### Activate
 
-In PowerShell:
+1. Run **Frappe Inspector: Activate Universal Pro**.
+2. Paste the `FI-PRO-...` key received after purchase.
+3. Use **Frappe Inspector: License Status** or **Manage Universal Pro** to review the local state.
 
-```powershell
-Get-FileHash .\frappe-inspector-vscode-1.0.1.vsix -Algorithm SHA256
-```
+The key and signed certificate are kept in VS Code Secret Storage.
 
-Compare the result with the corresponding line in `SHA256SUMS.txt`.
+### Compare with Git
+
+1. Open the project inside its Git repository.
+2. Set `frappeInspector.baseRef` if `origin/main` is not the correct baseline.
+3. Run **Frappe Inspector: Compare With Git Ref**.
+4. Confirm the baseline.
+
+Git and a reachable local or remote ref are required.
+
+### Manage devices and billing
+
+- **Deactivate This Device** releases the activation and returns the editor to Community.
+- **Open Billing Portal** opens the private customer account.
+
+## Commands
+
+| Command | Edition | Purpose |
+| --- | --- | --- |
+| Scan Project | Community | Scan the current workspace and refresh diagnostics |
+| Show DocType Graph | Community | Explore Link and child-table relationships |
+| Compare With Git Ref | Pro | Analyze migration changes against Git |
+| Export Report | Community/Pro | Export Community Markdown or Pro JSON/SARIF |
+| Activate Universal Pro | Community | Activate this installation |
+| License Status | Community | Show the local feature state |
+| Manage Universal Pro | Community | Review subscription, certificate and devices |
+| Deactivate This Device | Community | Release the device activation |
+| Open Billing Portal | Community | Open the customer account |
+
+## Settings
+
+| Setting | Default | Purpose |
+| --- | --- | --- |
+| `frappeInspector.scanOnSave` | `true` | Rescan supported project files after save |
+| `frappeInspector.baseRef` | `origin/main` | Default migration baseline |
+| `frappeInspector.severity` | `warning` | Minimum editor diagnostic severity |
+
+## Updating
+
+VS Code Marketplace installations update through the normal editor extension flow. For VSIX installations, download the latest release and install it over the existing version.
+
+Verify downloaded artifacts against `SHA256SUMS.txt` from the same release.
 
 ## Troubleshooting
 
-### The project is not detected
+### Project not detected
 
-Check that you opened:
+- Open the Bench or application root.
+- Confirm `hooks.py`, `sites/apps.txt`, `modules.txt` or DocType JSON files are present.
+- Run **Frappe Inspector: Scan Project** manually.
 
-- The Bench root
-- The application root
-- A workspace containing the complete application structure
+### Diagnostics do not refresh
 
-Make sure files such as `hooks.py`, `modules.txt` or DocType JSON files are present.
+- Save the supported project file.
+- Run **Scan Project**.
+- Reload the editor window.
+- Review the editor output logs.
 
-### Diagnostics do not appear immediately
+### Incorrect result
 
-Try:
+Open an issue with the editor version, Frappe Inspector version, Frappe/ERPNext versions and a minimal sanitized example.
 
-1. Save the current file.
-2. Reload the editor window.
-3. Reopen the project root.
-4. Check the editor output and extension logs.
-
-### A diagnostic looks incorrect
-
-Open an issue and include:
-
-- VS Code or Cursor version
-- Frappe version
-- ERPNext version, when relevant
-- Frappe Inspector version
-- Minimal sanitized example
-- Expected behavior
-- Actual behavior
-
-Issue tracker:
-
-https://github.com/Belius303/frappe-inspector-support/issues
-
-Do not include private source code, credentials, customer information or license keys.
-
-## Privacy
-
-Project analysis is designed to run locally.
-
-Privacy documentation:
-
-https://github.com/Belius303/frappe-inspector-support/blob/main/docs/privacy.md
+Never include private source, customer information, credentials or license keys. See [Privacy](privacy.md) and the [public issue tracker](https://github.com/Belius303/frappe-inspector-support/issues).
