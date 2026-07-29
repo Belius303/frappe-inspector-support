@@ -2,7 +2,7 @@
 
 The Frappe Inspector MCP server exposes read-only, framework-aware analysis of local Frappe and ERPNext projects to compatible AI clients through the Model Context Protocol.
 
-Current npm package: [`@frappe-inspector/mcp`](https://www.npmjs.com/package/@frappe-inspector/mcp), version **1.2.0**.
+Current npm package: [`@frappe-inspector/mcp`](https://www.npmjs.com/package/@frappe-inspector/mcp), version **1.2.1**.
 
 Project files are read as text and are never executed by the server.
 

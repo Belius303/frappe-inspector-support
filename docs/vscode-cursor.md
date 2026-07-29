@@ -2,7 +2,7 @@
 
 Frappe Inspector adds Frappe Framework and ERPNext project awareness to VS Code and Cursor. It uses the same shared analysis engine as the CLI, MCP server and GitHub Action.
 
-Current VS Code extension version: **1.2.0**.
+Current VS Code extension version: **1.2.1**.
 
 Project files are read as text and are never executed by the extension.
 
