@@ -2,10 +2,10 @@
 
 Frappe Inspector is released across several surfaces. Version numbers can differ between the JetBrains plugin, VS Code extension, CLI and MCP server.
 
-## 1.2.1 — Suite patch release
+## 1.2.2 — Suite patch release
 
-- Corrected the shared runtime and license activation version metadata after the synchronized 1.2.0 release.
-- Published matching 1.2.1 packages for JetBrains, VS Code, CLI, MCP and the public GitHub Action bundle.
+- Corrected the shared runtime, JetBrains release descriptor and license activation version metadata after the synchronized 1.2.0 release.
+- Published matching 1.2.2 packages for JetBrains, VS Code, CLI, MCP and the public GitHub Action bundle.
 
 ## 1.2.0 — Suite release
 

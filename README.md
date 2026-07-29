@@ -43,7 +43,7 @@ Project analysis runs locally. Your source code is not uploaded to Frappe Inspec
 | MCP server | Frappe-aware tools for compatible AI clients | [MCP guide](docs/mcp.md) |
 | GitHub Action | Pull-request checks and migration safety | [Action repository](https://github.com/Belius303/frappe-inspector-action) |
 
-The latest release contains the current cross-platform packages and SHA-256 checksums. The current suite version is **1.2.1**; JetBrains includes the runtime wiring diff, while VS Code, CLI and MCP share the corrected 1.2.1 runtime metadata.
+The latest release contains the current cross-platform packages and SHA-256 checksums. The current suite version is **1.2.2**; JetBrains includes the runtime wiring diff, while VS Code, CLI and MCP share the corrected 1.2.2 runtime metadata.
 
 ## Quick start
 
