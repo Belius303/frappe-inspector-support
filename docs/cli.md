@@ -2,7 +2,7 @@
 
 The Frappe Inspector CLI runs framework-aware Frappe and ERPNext static analysis from a terminal.
 
-Current npm package: [`@frappe-inspector/cli`](https://www.npmjs.com/package/@frappe-inspector/cli), version **1.1.4**.
+Current npm package: [`@frappe-inspector/cli`](https://www.npmjs.com/package/@frappe-inspector/cli), version **1.2.0**.
 
 ## Requirements
 

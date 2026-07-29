@@ -25,6 +25,7 @@ It can help you:
 - account for Custom Fields and Property Setters in the effective schema;
 - find references to removed fields;
 - compare a project against a Git ref or snapshot;
+- review changed hooks, DocType controllers, client script events and patches between two commits in JetBrains Pro;
 - detect risky type, link-target, required/default and uniqueness changes;
 - generate Markdown, JSON and SARIF reports for supported workflows;
 - give AI assistants deterministic, Frappe-aware context through a local MCP server.
@@ -42,7 +43,7 @@ Project analysis runs locally. Your source code is not uploaded to Frappe Inspec
 | MCP server | Frappe-aware tools for compatible AI clients | [MCP guide](docs/mcp.md) |
 | GitHub Action | Pull-request checks and migration safety | [Action repository](https://github.com/Belius303/frappe-inspector-action) |
 
-The latest release contains the current cross-platform packages and SHA-256 checksums. VS Code is currently at **1.1.5**; the companion CLI and MCP packages are at **1.1.4**.
+The latest release contains the current cross-platform packages and SHA-256 checksums. The current suite version is **1.2.0**; JetBrains 1.2.0 includes the runtime wiring diff, while VS Code, CLI and MCP receive the synchronized 1.2.0 release metadata.
 
 ## Quick start
 
@@ -106,6 +107,7 @@ For schema comparison, migration checks and SARIF output, see the complete [CI g
 | CLI human-readable scan | ✓ | ✓ |
 | Migration Safety Analyzer |  | ✓ |
 | Git-ref and snapshot schema comparison |  | ✓ |
+| Git runtime wiring diff in JetBrains |  | ✓ |
 | Removed-field and advanced reference analysis |  | ✓ |
 | Custom Field and Property Setter effective schema |  | ✓ |
 | Interactive DocType graph in VS Code/Cursor | ✓ | ✓ |
@@ -125,6 +127,7 @@ Community features remain available without a paid license and after a Pro licen
 - [GitHub Actions and CI](docs/ci.md)
 - [Analysis rules](docs/rules.md)
 - [Community vs Pro](docs/free-vs-pro.md)
+- [Runtime wiring diff](docs/runtime-wiring-diff.md)
 - [Changelog](docs/changelog.md)
 - [Privacy](docs/privacy.md)
 - [EULA](docs/eula.md)

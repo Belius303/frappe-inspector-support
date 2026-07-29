@@ -2,7 +2,7 @@
 
 Frappe Inspector adds Frappe Framework and ERPNext project awareness to VS Code and Cursor. It uses the same shared analysis engine as the CLI, MCP server and GitHub Action.
 
-Current VS Code extension version: **1.1.5**.
+Current VS Code extension version: **1.2.0**.
 
 Project files are read as text and are never executed by the extension.
 
@@ -83,6 +83,8 @@ Universal Pro adds:
 - Custom Field and Property Setter effective-schema overlays;
 - advanced recognized field and whitelisted-method diagnostics;
 - JSON and SARIF exports.
+
+The runtime wiring diff for hooks, DocType controllers, client script events and patches is currently a JetBrains Pro capability.
 
 Purchase Universal Pro at [frappeinspector.xyz/pricing](https://frappeinspector.xyz/pricing). One Universal Pro subscription covers VS Code, Cursor, CLI, MCP and GitHub Action usage with up to three persistent devices.
 

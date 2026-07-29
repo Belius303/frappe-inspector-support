@@ -14,6 +14,7 @@
 | Interactive DocType graph in VS Code/Cursor | Included | Included |
 | Migration Safety Analyzer | — | Included |
 | Git-ref and snapshot schema comparison | — | Included |
+| Git runtime wiring diff for hooks, controllers, client script events and patches | — | JetBrains Pro |
 | Removed-field usage detection | — | Included |
 | Link-target, type, required/default and unique checks | — | Included |
 | Advanced field and whitelisted-method analysis | — | Included |

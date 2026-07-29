@@ -2,6 +2,13 @@
 
 Frappe Inspector is released across several surfaces. Version numbers can differ between the JetBrains plugin, VS Code extension, CLI and MCP server.
 
+## 1.2.0 — Suite release
+
+- Synchronized the JetBrains plugin, VS Code extension, CLI, MCP server, shared core and GitHub Action package metadata at version 1.2.0.
+- JetBrains Pro Migration Analyzer now highlights changed hooks, DocType controllers, client script events and patches between two Git commits.
+- Added symbol-level added, removed and modified states, native IntelliJ diff navigation and support for benches with separate Git repositories under `apps/`.
+- Added public runtime wiring documentation and clarified the Community/Pro matrix.
+
 ## 1.1.5 — VS Code and Cursor
 
 - Added the interactive DocType relationship graph.
