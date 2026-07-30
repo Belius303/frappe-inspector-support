@@ -1,35 +1,23 @@
 # Frappe Inspector: Community vs Pro
 
-**Community helps you navigate and understand a Frappe project. Pro helps you change it safely.**
-
 | Capability | Community | Pro |
-| --- | :---: | :---: |
+| --- | --- | --- |
 | Frappe and ERPNext project detection | Included | Included |
 | DocType, app and module explorer | Included | Included |
 | Related JSON, Python, JavaScript and test navigation | Included | Included |
 | Conservative DocType completion and diagnostics | Included | Included |
-| Basic `hooks.py` and `patches.txt` validation | Included | Included |
-| CLI human-readable and Markdown scans | Included | Included |
+| Basic hooks.py and patches.txt validation | Included | Included |
+| CLI human-readable static scan | Included | Included |
 | VS Code/Cursor explorer and basic diagnostics | Included | Included |
-| Interactive DocType graph in VS Code/Cursor | Included | Included |
-| Migration Safety Analyzer | — | Included |
-| Git-ref and snapshot schema comparison | — | Included |
-| Git runtime wiring diff for hooks, controllers, client script events and patches | — | JetBrains Pro |
-| Removed-field usage detection | — | Included |
-| Link-target, type, required/default and unique checks | — | Included |
-| Advanced field and whitelisted-method analysis | — | Included |
-| Custom Field and Property Setter effective schema | — | Included |
-| Interactive DocType graph in JetBrains | — | Included |
-| JSON and SARIF reports | — | Included |
-| GitHub Action migration mode | — | Included |
-| Advanced MCP analysis tools | — | Included |
+| Migration Safety Analyzer | Not included | Included |
+| Git-ref and snapshot schema comparison | Not included | Included |
+| Removed-field usage detection | Not included | Included |
+| Link-target, type, required/default and unique checks | Not included | Included |
+| Advanced field and whitelisted-method analysis | Not included | Included |
+| Custom Field and Property Setter effective schema | Not included | Included |
+| Interactive DocType graph in JetBrains | Not included | Included |
+| JSON and SARIF reports | Not included | Included |
+| GitHub Action migration mode | Not included | Included |
+| Advanced MCP analysis tools | Not included | Included |
 
-## Licensing
-
-JetBrains Pro is purchased and validated separately through JetBrains Marketplace.
-
-Universal Pro covers VS Code, Cursor, CLI, MCP and GitHub Action usage. A personal subscription supports up to three persistent devices; ephemeral GitHub Action runners do not consume those device slots.
-
-Community capabilities remain available when no license exists or a paid license expires.
-
-See [pricing](https://frappeinspector.xyz/pricing), [getting started](getting-started.md) and the [EULA](eula.md).
+JetBrains Pro is validated by JetBrains Marketplace for product code `PFRAPPEINSPECTO`. Non-JetBrains surfaces use a Universal Pro key signed by Frappe Inspector. Community capabilities remain available when no key exists or a paid license expires.
