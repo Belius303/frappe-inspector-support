@@ -1,12 +1,43 @@
 # Privacy
 
-Frappe Inspector analyzes project files locally in the IDE, CLI, MCP server or
-CI runner process where it is invoked.
+Frappe Inspector is designed to analyze Frappe and ERPNext project files locally in the editor, command line, MCP server or CI runner where it is used.
 
+## Project data
+
+- Project source code is not uploaded to Frappe Inspector for analysis.
+- Static analysis does not execute project code, import project modules, run `bench` or connect to a Frappe site.
 - Telemetry is disabled by default.
-- Source code, customer names, full paths, database content and business data are not uploaded.
-- The software does not run `bench`, import project Python modules, connect to a Frappe site or execute project code during analysis.
-- JetBrains editions use JetBrains Marketplace licensing. Universal Pro keys are verified locally from a digital signature and are not transmitted by Frappe Inspector.
-- The GitHub Action reads the checked-out repository and writes reports only inside its runner workspace. GitHub's own handling of repositories, logs and artifacts is governed by GitHub's terms and settings.
-- The MCP server uses a local `stdio` transport. Tool results are returned to the connected MCP client; that client may send those results to its configured AI provider under the client's own privacy policy.
-- Bug reports are created by users and should be reviewed before sharing.
+- Reports remain in the environment where the analysis runs unless the user or a configured platform uploads or shares them.
+
+## Accounts and paid features
+
+Paid features may communicate with licensing, marketplace, payment and email services when a user purchases, activates or manages a subscription.
+
+Only information needed to provide those account and licensing functions is processed. Project source code and analysis results are not sent as part of license validation.
+
+External marketplaces, payment providers, email providers, editors, GitHub and MCP clients apply their own privacy policies to the services they operate.
+
+## GitHub Actions
+
+The GitHub Action reads the repository checked out in the runner and writes its reports in that runner environment. Repository owners control workflow permissions, secrets, logs and uploaded artifacts through GitHub.
+
+License keys should only be supplied through encrypted secrets and must not be printed in logs.
+
+## MCP clients
+
+The MCP server returns tool results to the connected client. The client may process or forward those results according to its own configuration and privacy policy.
+
+Review the client's permissions and data-handling policy before exposing a private project.
+
+## Public support
+
+Public issues are visible to everyone. Do not include:
+
+- private source code;
+- customer or business data;
+- database contents;
+- credentials or API keys;
+- license keys;
+- confidential logs or file paths.
+
+Use the [public issue tracker](https://github.com/Belius303/frappe-inspector-support/issues) only with sanitized information.
