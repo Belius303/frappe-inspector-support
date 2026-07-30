@@ -6,7 +6,7 @@
 [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/mohamedtazihnyine.frappe-inspector?label=VS%20Code)](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector)
 [![GitHub issues](https://img.shields.io/github/issues/Belius303/frappe-inspector-support)](https://github.com/Belius303/frappe-inspector-support/issues)
 
-[Website](https://frappeinspector.xyz) · [Pricing](https://frappeinspector.xyz/pricing) · [JetBrains](https://plugins.jetbrains.com/plugin/32992-frappe-inspector) · [VS Code](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector) · [Downloads](https://github.com/Belius303/frappe-inspector-support/releases/latest) · [Documentation](docs/getting-started.md)
+[Website](https://frappeinspector.xyz) · [Pricing](https://frappeinspector.xyz/pricing) · [JetBrains](https://plugins.jetbrains.com/plugin/32992-frappe-inspector) · [VS Code](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector) · [MCP Registry](https://prod.registry.modelcontextprotocol.io/?search=io.github.Belius303%2Ffrappe-inspector) · [GitHub Marketplace](https://github.com/marketplace/actions/frappe-inspector) · [Downloads](https://github.com/Belius303/frappe-inspector-support/releases/latest) · [Documentation](docs/getting-started.md)
 
 Frappe Inspector is a framework-aware static analysis suite for **Frappe Framework** and **ERPNext** projects. It connects the files and concepts that general-purpose tools usually treat separately: DocType JSON, Python controllers, client scripts, hooks, patches, fixtures, Custom Fields, Property Setters, permissions and migrations.
 
@@ -38,12 +38,27 @@ Project analysis runs locally. Your source code is not uploaded to Frappe Inspec
 | --- | --- | --- |
 | JetBrains plugin | PyCharm and IntelliJ-based Frappe development | [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/32992-frappe-inspector) |
 | VS Code extension | Navigation, diagnostics and the interactive DocType graph | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector) |
-| Cursor | The same editor integration through the VSIX package | [Latest release](https://github.com/Belius303/frappe-inspector-support/releases/latest) |
-| CLI | Local scans, scripts, pre-commit hooks and CI | [CLI guide](docs/cli.md) |
-| MCP server | Frappe-aware tools for compatible AI clients | [MCP guide](docs/mcp.md) |
-| GitHub Action | Pull-request checks and migration safety | [Action repository](https://github.com/Belius303/frappe-inspector-action) |
+| Cursor | The same editor integration through Open VSX | [Open VSX](https://open-vsx.org/extension/mohamedtazihnyine/frappe-inspector) |
+| CLI | Local scans, scripts, pre-commit hooks and CI | [npm package](https://www.npmjs.com/package/@frappe-inspector/cli) |
+| MCP server | Frappe-aware tools for compatible AI clients | [MCP Registry](https://prod.registry.modelcontextprotocol.io/?search=io.github.Belius303%2Ffrappe-inspector) |
+| GitHub Action | Pull-request checks and migration safety | [GitHub Marketplace](https://github.com/marketplace/actions/frappe-inspector) |
 
-The latest release contains the current cross-platform packages and SHA-256 checksums. The current suite version is **1.2.2**; JetBrains includes the runtime wiring diff, while VS Code, CLI and MCP share the corrected 1.2.2 runtime metadata.
+The latest release contains the current cross-platform packages and SHA-256 checksums. The published editor suite is version **1.2.2**, the CLI is **1.2.3**, and the registered MCP server is **1.2.5**.
+
+## Public signals
+
+Snapshot from official registries on 2026-07-30:
+
+| Channel | Public signal |
+| --- | ---: |
+| Open VSX | 804 downloads |
+| npm CLI | 523 downloads in the last 30 days |
+| npm MCP | 511 downloads in the last 30 days |
+| VS Code Marketplace | 76 downloads, 6 installs |
+| JetBrains Marketplace | 52 downloads |
+| GitHub support/action repositories | 0 stars so far |
+
+[Star or follow the public project](https://github.com/Belius303/frappe-inspector-support) to track releases, documentation and issues.
 
 ## Quick start
 
@@ -57,16 +72,17 @@ Install [Frappe Inspector from the VS Code Marketplace](https://marketplace.visu
 
 ### Cursor
 
-Download the latest `frappe-inspector-vscode-*.vsix` from [Releases](https://github.com/Belius303/frappe-inspector-support/releases/latest), then use **Install from VSIX**.
+Install the same extension from [Open VSX](https://open-vsx.org/extension/mohamedtazihnyine/frappe-inspector).
 
 See the complete [VS Code and Cursor guide](docs/vscode-cursor.md).
 
 ### CLI and MCP
 
-Download the current `.tgz` packages from [Releases](https://github.com/Belius303/frappe-inspector-support/releases/latest), then follow:
+Install the public npm packages, then follow:
 
 - [CLI installation and usage](docs/cli.md)
 - [MCP server setup](docs/mcp.md)
+- [Frappe Inspector on the MCP Registry](https://prod.registry.modelcontextprotocol.io/?search=io.github.Belius303%2Ffrappe-inspector)
 
 ### GitHub Action
 
@@ -92,7 +108,31 @@ jobs:
           path: .
 ```
 
-For schema comparison, migration checks and SARIF output, see the complete [CI guide](docs/ci.md).
+Use the [GitHub Marketplace listing](https://github.com/marketplace/actions/frappe-inspector) or see the complete [CI guide](docs/ci.md) for schema comparison, migration checks and SARIF output.
+
+## Example SARIF finding
+
+```json
+{
+  "ruleId": "FI-MIGRATION-REQUIRED-FIELD",
+  "level": "error",
+  "message": {
+    "text": "Sales Invoice.due_date is required but existing rows may not be backfilled."
+  },
+  "locations": [
+    {
+      "physicalLocation": {
+        "artifactLocation": {
+          "uri": "erpnext/patches/v15_0/backfill_due_date.py"
+        },
+        "region": {
+          "startLine": 12
+        }
+      }
+    }
+  ]
+}
+```
 
 ## Community vs Pro
 
