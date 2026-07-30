@@ -6,7 +6,7 @@
 [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/mohamedtazihnyine.frappe-inspector?label=VS%20Code)](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector)
 [![GitHub issues](https://img.shields.io/github/issues/Belius303/frappe-inspector-support)](https://github.com/Belius303/frappe-inspector-support/issues)
 
-[Website](https://frappeinspector.xyz) · [Pricing](https://frappeinspector.xyz/pricing) · [JetBrains](https://plugins.jetbrains.com/plugin/32992-frappe-inspector) · [VS Code](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector) · [MCP Registry](https://prod.registry.modelcontextprotocol.io/?search=io.github.Belius303%2Ffrappe-inspector) · [GitHub Marketplace](https://github.com/marketplace/actions/frappe-inspector) · [Downloads](https://github.com/Belius303/frappe-inspector-support/releases/latest) · [Documentation](docs/getting-started.md)
+[Website](https://frappeinspector.xyz) · [Pricing](https://frappeinspector.xyz/pricing) · [JetBrains](https://plugins.jetbrains.com/plugin/32992-frappe-inspector) · [VS Code](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector) · [MCP Registry](https://prod.registry.modelcontextprotocol.io/) · [GitHub Marketplace](https://github.com/marketplace/actions/frappe-inspector) · [Downloads](https://github.com/Belius303/frappe-inspector-support/releases/latest) · [Documentation](docs/getting-started.md)
 
 Frappe Inspector is a framework-aware static analysis suite for **Frappe Framework** and **ERPNext** projects. It connects the files and concepts that general-purpose tools usually treat separately: DocType JSON, Python controllers, client scripts, hooks, patches, fixtures, Custom Fields, Property Setters, permissions and migrations.
 
@@ -40,7 +40,7 @@ Project analysis runs locally. Your source code is not uploaded to Frappe Inspec
 | VS Code extension | Navigation, diagnostics and the interactive DocType graph | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector) |
 | Cursor | The same editor integration through Open VSX | [Open VSX](https://open-vsx.org/extension/mohamedtazihnyine/frappe-inspector) |
 | CLI | Local scans, scripts, pre-commit hooks and CI | [npm package](https://www.npmjs.com/package/@frappe-inspector/cli) |
-| MCP server | Frappe-aware tools for compatible AI clients | [MCP Registry](https://prod.registry.modelcontextprotocol.io/?search=io.github.Belius303%2Ffrappe-inspector) |
+| MCP server | Frappe-aware tools for compatible AI clients | [MCP Registry](https://prod.registry.modelcontextprotocol.io/) · Search: `io.github.Belius303/frappe-inspector` |
 | GitHub Action | Pull-request checks and migration safety | [GitHub Marketplace](https://github.com/marketplace/actions/frappe-inspector) |
 
 The latest release contains the current cross-platform packages and SHA-256 checksums. The published editor suite is version **1.2.2**, the CLI is **1.2.3**, and the registered MCP server is **1.2.5**.
@@ -52,11 +52,11 @@ Snapshot from official registries on 2026-07-30:
 | Channel | Public signal |
 | --- | ---: |
 | Open VSX | 804 downloads |
-| npm CLI | 523 downloads in the last 30 days |
-| npm MCP | 511 downloads in the last 30 days |
+| npm CLI | 523 weekly downloads |
+| npm MCP | 511 weekly downloads |
 | VS Code Marketplace | 76 downloads, 6 installs |
 | JetBrains Marketplace | 52 downloads |
-| GitHub support/action repositories | 0 stars so far |
+| GitHub Action | Live on Marketplace |
 
 [Star or follow the public project](https://github.com/Belius303/frappe-inspector-support) to track releases, documentation and issues.
 
@@ -82,7 +82,7 @@ Install the public npm packages, then follow:
 
 - [CLI installation and usage](docs/cli.md)
 - [MCP server setup](docs/mcp.md)
-- [Frappe Inspector on the MCP Registry](https://prod.registry.modelcontextprotocol.io/?search=io.github.Belius303%2Ffrappe-inspector)
+- [Open MCP Registry](https://prod.registry.modelcontextprotocol.io/) · Search: `io.github.Belius303/frappe-inspector`
 
 ### GitHub Action
 
