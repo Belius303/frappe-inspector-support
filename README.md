@@ -12,10 +12,6 @@ Frappe Inspector is a framework-aware static analysis suite for **Frappe Framewo
 
 It is available for JetBrains IDEs, VS Code, Cursor, the command line, MCP clients and GitHub Actions.
 
-## Technical benchmark archive
-
-The [July 2026 standalone-scan dataset](benchmarks/README.md) is retained for engine regression work, not as commercial evidence. Its isolated app checkouts omit Frappe and external dependency schemas, and the reviewed sample exposed substantial false positives in CLI 1.2.3. CLI 1.2.4 corrects dependency-aware DocType handling and standalone FI031 patch resolution; a replacement benchmark will use complete benches before results are promoted again.
-
 ## Why Frappe Inspector?
 
 A schema edit that looks harmless can break code far away from the DocType definition. Frappe Inspector helps surface those relationships before the change reaches production.
@@ -32,6 +28,8 @@ It can help you:
 - review changed hooks, DocType controllers, client script events and patches between two commits in JetBrains Pro;
 - detect risky type, link-target, required/default and uniqueness changes;
 - generate Markdown, JSON and SARIF reports for supported workflows;
+- trace Frappe-aware security flows across local Python helpers, permission guards and sensitive sinks;
+- explain why a finding was emitted with source, sink and related-location evidence;
 - give AI assistants deterministic, Frappe-aware context through a local MCP server.
 
 Project analysis runs locally. Your source code is not uploaded to Frappe Inspector for analysis.
@@ -47,7 +45,9 @@ Project analysis runs locally. Your source code is not uploaded to Frappe Inspec
 | MCP server | Frappe-aware tools for compatible AI clients | [MCP Registry](https://prod.registry.modelcontextprotocol.io/) · Search: `io.github.Belius303/frappe-inspector` |
 | GitHub Action | Pull-request checks and migration safety | [GitHub Marketplace](https://github.com/marketplace/actions/frappe-inspector) |
 
-The latest release contains the current cross-platform packages and SHA-256 checksums. The published editor suite is version **1.2.2**, the CLI is **1.2.3**, and the registered MCP server is **1.2.5**.
+The latest release contains the current cross-platform packages and SHA-256 checksums. VS Code/Cursor, the CLI and the MCP server are version **1.3.0**. The JetBrains plugin remains on **1.2.2** and is not part of this release.
+
+Version 1.3.0 adds interprocedural Python analysis for high-impact Frappe security patterns, evidence-rich explanations in every Node client, and more precise handling of optional integrations and local helper functions. Findings from public repositories are treated as review candidates, not confirmed vulnerabilities.
 
 ## Public signals
 

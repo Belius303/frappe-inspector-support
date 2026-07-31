@@ -1,76 +1,35 @@
 # Getting Started
 
-Frappe Inspector supports JetBrains IDEs, VS Code, Cursor, the command line, MCP clients and GitHub Actions.
-
 ## JetBrains
 
-1. Install [Frappe Inspector from JetBrains Marketplace](https://plugins.jetbrains.com/plugin/32992-frappe-inspector).
-2. Open a Frappe Bench root or an individual application.
-3. Open **Tools → Frappe Inspector**.
+Install [Frappe Inspector from JetBrains Marketplace](https://plugins.jetbrains.com/plugin/32992-frappe-inspector), open a Frappe bench or app, then open **Tools > Frappe Inspector**.
 
-JetBrains Pro licensing is managed separately through JetBrains Marketplace.
+## VS Code Or Cursor
 
-## VS Code
-
-1. Install [Frappe Inspector from the VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector).
-2. Open a Frappe Bench or application.
-3. Run **Frappe Inspector: Scan Project** from the Command Palette.
-4. Open the Frappe Inspector Activity Bar view.
-
-The current VS Code version is **1.1.5**.
-
-## Cursor
-
-1. Download the latest `frappe-inspector-vscode-*.vsix` from [GitHub Releases](https://github.com/Belius303/frappe-inspector-support/releases/latest).
-2. In Cursor, run **Extensions: Install from VSIX**.
-3. Open a Frappe project and run **Frappe Inspector: Scan Project**.
-
-See [VS Code and Cursor](vscode-cursor.md) for features, commands and troubleshooting.
+Install Frappe Inspector from VS Code Marketplace, Open VSX or the [latest public release](https://github.com/Belius303/frappe-inspector-support/releases/latest). In VS Code or Cursor, run **Extensions: Install from VSIX** when using the downloaded package, then open the Frappe Inspector Activity Bar view and run **Frappe Inspector: Scan Project**.
 
 ## CLI
 
-Requires Node.js 20 or newer:
+Install the public npm package:
 
 ```shell
-npm install --global @frappe-inspector/cli
-frappe-inspector scan .
+npm install --global @frappe-inspector/cli@1.3.0
 ```
 
-Universal Pro migration comparison:
-
-```shell
-frappe-inspector license activate FI-PRO-...
-frappe-inspector diff . --base-ref origin/main
-```
-
-See the [CLI guide](cli.md).
-
-## MCP server
-
-```shell
-npm install --global @frappe-inspector/mcp
-```
-
-Configure `frappe-inspector-mcp` as a local `stdio` server in a compatible MCP client. The server reads project files as text and does not execute them.
-
-See the [MCP guide](mcp.md).
+Run `frappe-inspector scan .` for Community diagnostics or `frappe-inspector diff . --base-ref origin/main` with Universal Pro.
 
 ## GitHub Action
 
-Start with Community mode:
+See `docs/ci.md`. Check out full Git history with `fetch-depth: 0` and store Universal Pro in an encrypted secret.
 
-```yaml
-- uses: actions/checkout@v4
-- uses: Belius303/frappe-inspector-action@v1
-  with:
-    mode: scan
-    path: .
+## MCP
+
+Install the public package, then configure `frappe-inspector-mcp` as a local stdio server in a compatible client:
+
+```shell
+npm install --global @frappe-inspector/mcp@1.3.0
 ```
 
-Migration mode requires Universal Pro, complete Git history and a baseline ref. See [GitHub Actions and CI](ci.md).
+The server reads project files but never executes them.
 
-## Community and Pro
-
-Community features work without an account or license. See [Community vs Pro](free-vs-pro.md) for the exact feature split.
-
-Frappe Inspector is independent and is not affiliated with or endorsed by Frappe Technologies, ERPNext, JetBrains, Microsoft, Cursor or GitHub.
+Frappe Inspector is independent and is not affiliated with or endorsed by Frappe Technologies, ERPNext, JetBrains, Microsoft, Cursor, GitHub or the Eclipse Foundation.
