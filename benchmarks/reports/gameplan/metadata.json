@@ -1,0 +1,45 @@
+{
+  "project": "gameplan",
+  "repository": "https://github.com/frappe/gameplan.git",
+  "branch": "develop",
+  "commit": "1de86a8fce4a16e25ef1797fd890c1fbcc7ea89e",
+  "commitDate": "2026-07-30T23:28:11+05:30",
+  "benchmarkDate": "2026-07-30",
+  "cliPackage": "@frappe-inspector/cli",
+  "cliVersion": "1.2.3",
+  "nodeVersion": "v22.11.0",
+  "npmVersion": "11.4.2",
+  "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+  "license": "community",
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-30T23:27:20.9566212Z",
+      "endedAt": "2026-07-30T23:27:21.6157122Z",
+      "durationMs": 658,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "81376c790d4e4729cd01105c4ca059aafc2f0a54d7d023cadf761ebe7f340888",
+      "errors": 71,
+      "warnings": 27,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-30T23:27:21.6303087Z",
+      "endedAt": "2026-07-30T23:27:22.3325830Z",
+      "durationMs": 702,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "81376c790d4e4729cd01105c4ca059aafc2f0a54d7d023cadf761ebe7f340888",
+      "errors": 71,
+      "warnings": 27,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

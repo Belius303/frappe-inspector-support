@@ -1,0 +1,45 @@
+{
+  "project": "lending",
+  "repository": "https://github.com/frappe/lending.git",
+  "branch": "develop",
+  "commit": "ee9269ba08b72fd22295a993986d6502ce1bc399",
+  "commitDate": "2026-07-29T10:47:12+05:30",
+  "benchmarkDate": "2026-07-30",
+  "cliPackage": "@frappe-inspector/cli",
+  "cliVersion": "1.2.3",
+  "nodeVersion": "v22.11.0",
+  "npmVersion": "11.4.2",
+  "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+  "license": "community",
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-30T23:27:01.6000545Z",
+      "endedAt": "2026-07-30T23:27:02.8967116Z",
+      "durationMs": 1296,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "73bd7a91f3fb5178f605338059bbf5bec25f9d523d59a5fe2a93f03345562e88",
+      "errors": 161,
+      "warnings": 114,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-30T23:27:02.9115076Z",
+      "endedAt": "2026-07-30T23:27:04.2525826Z",
+      "durationMs": 1340,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "73bd7a91f3fb5178f605338059bbf5bec25f9d523d59a5fe2a93f03345562e88",
+      "errors": 161,
+      "warnings": 114,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

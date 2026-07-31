@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Belius303/frappe-inspector-support/blob/main/benchmarks/schema.json",
+  "title": "Frappe Inspector public benchmark results",
+  "description": "Schema for benchmarks/results.json. Counts are raw CLI output; reviewed findings are a fixed three-item sample per project.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "benchmark",
+    "benchmarkDate",
+    "methodology",
+    "scope",
+    "caveats",
+    "totals",
+    "projects"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "benchmark": {
+      "type": "string"
+    },
+    "benchmarkDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "methodology": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "caveats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "totals": {
+      "$ref": "#/$defs/totals"
+    },
+    "projects": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/project"
+      }
+    }
+  },
+  "$defs": {
+    "nonNegativeInteger": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "projects",
+        "success",
+        "failure",
+        "errors",
+        "warnings",
+        "rawFindings",
+        "durationMs",
+        "reviewed",
+        "likelyActionable",
+        "needsMaintainerContext",
+        "falsePositive",
+        "deterministic"
+      ],
+      "properties": {
+        "projects": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "success": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "failure": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "errors": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "warnings": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "rawFindings": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "durationMs": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "reviewed": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "likelyActionable": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "needsMaintainerContext": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "falsePositive": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        },
+        "deterministic": {
+          "$ref": "#/$defs/nonNegativeInteger"
+        }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "rule",
+        "finding",
+        "location",
+        "evidence"
+      ],
+      "properties": {
+        "classification": {
+          "enum": [
+            "likely-actionable",
+            "needs-maintainer-context",
+            "false-positive"
+          ]
+        },
+        "rule": {
+          "type": "string",
+          "pattern": "^FI[0-9]{3}$"
+        },
+        "finding": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string",
+          "pattern": "^[^:]+:[0-9]+$"
+        },
+        "evidence": {
+          "type": "string"
+        }
+      }
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "project",
+        "slug",
+        "repository",
+        "branch",
+        "commit",
+        "commitDate",
+        "benchmarkDate",
+        "cli",
+        "environment",
+        "command",
+        "status",
+        "scan",
+        "deterministic",
+        "reviewed",
+        "artifacts"
+      ],
+      "properties": {
+        "project": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "repository": {
+          "type": "string",
+          "format": "uri"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "commitDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "benchmarkDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "cli": {
+          "type": "object"
+        },
+        "environment": {
+          "type": "object"
+        },
+        "command": {
+          "type": "string"
+        },
+        "status": {
+          "const": "success"
+        },
+        "scan": {
+          "type": "object"
+        },
+        "deterministic": {
+          "type": "boolean"
+        },
+        "artifacts": {
+          "type": "object"
+        },
+        "reviewed": {
+          "type": "object",
+          "required": [
+            "total",
+            "likelyActionable",
+            "needsMaintainerContext",
+            "falsePositive",
+            "findings"
+          ],
+          "properties": {
+            "total": {
+              "const": 3
+            },
+            "likelyActionable": {
+              "$ref": "#/$defs/nonNegativeInteger"
+            },
+            "needsMaintainerContext": {
+              "$ref": "#/$defs/nonNegativeInteger"
+            },
+            "falsePositive": {
+              "$ref": "#/$defs/nonNegativeInteger"
+            },
+            "findings": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "$ref": "#/$defs/finding"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

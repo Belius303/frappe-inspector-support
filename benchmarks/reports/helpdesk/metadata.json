@@ -1,0 +1,45 @@
+{
+  "project": "helpdesk",
+  "repository": "https://github.com/frappe/helpdesk.git",
+  "branch": "develop",
+  "commit": "d51b186dc51b49fa7ac93a40df7e736e1a97708d",
+  "commitDate": "2026-07-31T03:53:33+05:30",
+  "benchmarkDate": "2026-07-30",
+  "cliPackage": "@frappe-inspector/cli",
+  "cliVersion": "1.2.3",
+  "nodeVersion": "v22.11.0",
+  "npmVersion": "11.4.2",
+  "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+  "license": "community",
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-30T23:27:09.0779919Z",
+      "endedAt": "2026-07-30T23:27:10.0291796Z",
+      "durationMs": 951,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "d03bd43c6e69479a55688cf70b70ea69db80bfbb4631e819adf5c604e9c14f98",
+      "errors": 226,
+      "warnings": 21,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-30T23:27:10.0468683Z",
+      "endedAt": "2026-07-30T23:27:11.1808712Z",
+      "durationMs": 1133,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "d03bd43c6e69479a55688cf70b70ea69db80bfbb4631e819adf5c604e9c14f98",
+      "errors": 226,
+      "warnings": 21,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

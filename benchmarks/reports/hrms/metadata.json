@@ -1,0 +1,45 @@
+{
+  "project": "hrms",
+  "repository": "https://github.com/frappe/hrms.git",
+  "branch": "develop",
+  "commit": "fd430b654630becd4ae5298089450c9b2abd3753",
+  "commitDate": "2026-07-30T15:02:03+05:30",
+  "benchmarkDate": "2026-07-30",
+  "cliPackage": "@frappe-inspector/cli",
+  "cliVersion": "1.2.3",
+  "nodeVersion": "v22.11.0",
+  "npmVersion": "11.4.2",
+  "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+  "license": "community",
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-30T23:26:51.9481195Z",
+      "endedAt": "2026-07-30T23:26:54.6389957Z",
+      "durationMs": 2690,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "5ab2c20e291380b58c8d49654e8014ed67acf475c8569213a825d2f6cef6e171",
+      "errors": 581,
+      "warnings": 338,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-30T23:26:54.6602687Z",
+      "endedAt": "2026-07-30T23:26:57.2146072Z",
+      "durationMs": 2554,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "5ab2c20e291380b58c8d49654e8014ed67acf475c8569213a825d2f6cef6e171",
+      "errors": 581,
+      "warnings": 338,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

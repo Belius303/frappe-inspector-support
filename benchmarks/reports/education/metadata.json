@@ -1,0 +1,45 @@
+{
+  "project": "education",
+  "repository": "https://github.com/frappe/education.git",
+  "branch": "develop",
+  "commit": "71aada478bf682f6d034fd4caa6f2f5438b5ace9",
+  "commitDate": "2026-06-05T15:45:42+03:00",
+  "benchmarkDate": "2026-07-30",
+  "cliPackage": "@frappe-inspector/cli",
+  "cliVersion": "1.2.3",
+  "nodeVersion": "v22.11.0",
+  "npmVersion": "11.4.2",
+  "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+  "license": "community",
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-30T23:27:06.1227631Z",
+      "endedAt": "2026-07-30T23:27:06.8095662Z",
+      "durationMs": 686,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "81accba895164be0a43791d6d57a9295b270c509ee48e1d0cca406ca0d2fddf5",
+      "errors": 55,
+      "warnings": 41,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-30T23:27:06.8270368Z",
+      "endedAt": "2026-07-30T23:27:07.5148912Z",
+      "durationMs": 687,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "81accba895164be0a43791d6d57a9295b270c509ee48e1d0cca406ca0d2fddf5",
+      "errors": 55,
+      "warnings": 41,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

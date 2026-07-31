@@ -1,0 +1,739 @@
+{
+  "schemaVersion": "1.0.0",
+  "benchmark": "Frappe Inspector public Community benchmark v1",
+  "benchmarkDate": "2026-07-30",
+  "methodology": "methodology.md",
+  "scope": "Isolated standalone scans of ten public Frappe applications. Frappe and external dependency schemas were not included.",
+  "caveats": [
+    "Community mode was used without a Pro license.",
+    "JSON and SARIF exports and migration diff were unavailable in this run.",
+    "Exit code 1 indicates that the findings threshold was met; completed report generation is recorded as scan success.",
+    "Reviewed classifications apply only to the 30 sampled findings, not to every raw finding."
+  ],
+  "totals": {
+    "projects": 10,
+    "success": 10,
+    "failure": 0,
+    "errors": 2374,
+    "warnings": 1044,
+    "rawFindings": 3418,
+    "durationMs": 22021,
+    "reviewed": 30,
+    "likelyActionable": 2,
+    "needsMaintainerContext": 9,
+    "falsePositive": 19,
+    "deterministic": 10
+  },
+  "projects": [
+    {
+      "project": "ERPNext",
+      "slug": "erpnext",
+      "repository": "https://github.com/frappe/erpnext.git",
+      "branch": "develop",
+      "commit": "d59c5e36bcb53be84ec46bd5d29b5c0b2f46f929",
+      "commitDate": "2026-07-30T23:24:59+05:30",
+      "benchmarkDate": "2026-07-30",
+      "cli": {
+        "package": "@frappe-inspector/cli",
+        "version": "1.2.3",
+        "license": "community"
+      },
+      "environment": {
+        "nodeVersion": "v22.11.0",
+        "npmVersion": "11.4.2"
+      },
+      "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+      "status": "success",
+      "scan": {
+        "exitCode": 1,
+        "completed": true,
+        "startedAt": "2026-07-30T23:26:24.4502447Z",
+        "endedAt": "2026-07-30T23:26:37.6368651Z",
+        "durationMs": 13180,
+        "errors": 962,
+        "warnings": 430,
+        "rawFindings": 1392,
+        "riskyMigrations": 0,
+        "needsReview": 0,
+        "stderrEmpty": true,
+        "reportSha256": "8fd2ecb762d48e10d820147250d0803f8dd0f8e7f0ea2a5d5932491521d215af"
+      },
+      "deterministic": true,
+      "reviewed": {
+        "total": 3,
+        "likelyActionable": 1,
+        "needsMaintainerContext": 0,
+        "falsePositive": 2,
+        "findings": [
+          {
+            "classification": "likely-actionable",
+            "rule": "FI002",
+            "finding": "POS Profile.utm_medium points to UTM Campaign.",
+            "location": "erpnext/accounts/doctype/pos_profile/pos_profile.json:417",
+            "evidence": "The neighboring utm_campaign and utm_source fields target UTM Campaign and UTM Source, while other ERPNext utm_medium fields target UTM Medium. The source at lines 417-420 instead targets UTM Campaign."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target erpnext.patches.v12_0.update_is_cancelled_field could not be resolved.",
+            "location": "erpnext/patches.txt:2",
+            "evidence": "The target module exists at erpnext/patches/v12_0/update_is_cancelled_field.py in the scanned commit."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target erpnext.patches.v11_0.rename_production_order_to_work_order could not be resolved.",
+            "location": "erpnext/patches.txt:3",
+            "evidence": "The target module exists at erpnext/patches/v11_0/rename_production_order_to_work_order.py in the scanned commit."
+          }
+        ]
+      },
+      "artifacts": {
+        "projectPage": "projects/erpnext.md",
+        "report": "reports/erpnext/report.md",
+        "checksum": "reports/erpnext/report.sha256",
+        "metadata": "reports/erpnext/metadata.json",
+        "screenshot": "screenshots/erpnext.webp"
+      }
+    },
+    {
+      "project": "HRMS",
+      "slug": "hrms",
+      "repository": "https://github.com/frappe/hrms.git",
+      "branch": "develop",
+      "commit": "fd430b654630becd4ae5298089450c9b2abd3753",
+      "commitDate": "2026-07-30T15:02:03+05:30",
+      "benchmarkDate": "2026-07-30",
+      "cli": {
+        "package": "@frappe-inspector/cli",
+        "version": "1.2.3",
+        "license": "community"
+      },
+      "environment": {
+        "nodeVersion": "v22.11.0",
+        "npmVersion": "11.4.2"
+      },
+      "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+      "status": "success",
+      "scan": {
+        "exitCode": 1,
+        "completed": true,
+        "startedAt": "2026-07-30T23:26:51.9481195Z",
+        "endedAt": "2026-07-30T23:26:54.6389957Z",
+        "durationMs": 2690,
+        "errors": 581,
+        "warnings": 338,
+        "rawFindings": 919,
+        "riskyMigrations": 0,
+        "needsReview": 0,
+        "stderrEmpty": true,
+        "reportSha256": "5ab2c20e291380b58c8d49654e8014ed67acf475c8569213a825d2f6cef6e171"
+      },
+      "deterministic": true,
+      "reviewed": {
+        "total": 3,
+        "likelyActionable": 0,
+        "needsMaintainerContext": 1,
+        "falsePositive": 2,
+        "findings": [
+          {
+            "classification": "needs-maintainer-context",
+            "rule": "FI002",
+            "finding": "Appraisal.employee points to unknown DocType Employee.",
+            "location": "hrms/hr/doctype/appraisal/appraisal.json:58",
+            "evidence": "hrms/hooks.py declares required_apps = [\"frappe/erpnext\"]. Employee belongs to the omitted dependency schema, so the isolated app scan cannot decide the installed-bench result."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target hrms.patches.v15_0.check_version_compatibility_with_frappe could not be resolved.",
+            "location": "hrms/patches.txt:2",
+            "evidence": "The module exists at hrms/patches/v15_0/check_version_compatibility_with_frappe.py."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target hrms.patches.v16_0.merge_interview_round_with_interview_type could not be resolved.",
+            "location": "hrms/patches.txt:3",
+            "evidence": "The module exists at hrms/patches/v16_0/merge_interview_round_with_interview_type.py."
+          }
+        ]
+      },
+      "artifacts": {
+        "projectPage": "projects/hrms.md",
+        "report": "reports/hrms/report.md",
+        "checksum": "reports/hrms/report.sha256",
+        "metadata": "reports/hrms/metadata.json",
+        "screenshot": "screenshots/hrms.webp"
+      }
+    },
+    {
+      "project": "Payments",
+      "slug": "payments",
+      "repository": "https://github.com/frappe/payments.git",
+      "branch": "develop",
+      "commit": "aa3516827fe51d5557975b74e574e3bca9a3070d",
+      "commitDate": "2026-06-15T10:44:53+05:30",
+      "benchmarkDate": "2026-07-30",
+      "cli": {
+        "package": "@frappe-inspector/cli",
+        "version": "1.2.3",
+        "license": "community"
+      },
+      "environment": {
+        "nodeVersion": "v22.11.0",
+        "npmVersion": "11.4.2"
+      },
+      "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+      "status": "success",
+      "scan": {
+        "exitCode": 1,
+        "completed": true,
+        "startedAt": "2026-07-30T23:26:58.7965007Z",
+        "endedAt": "2026-07-30T23:26:59.3812804Z",
+        "durationMs": 584,
+        "errors": 47,
+        "warnings": 5,
+        "rawFindings": 52,
+        "riskyMigrations": 0,
+        "needsReview": 0,
+        "stderrEmpty": true,
+        "reportSha256": "79499332b8df6c8eff9f8703d7a36940799adcb15803e0556ef4c7f1b86cd563"
+      },
+      "deterministic": true,
+      "reviewed": {
+        "total": 3,
+        "likelyActionable": 0,
+        "needsMaintainerContext": 2,
+        "falsePositive": 1,
+        "findings": [
+          {
+            "classification": "needs-maintainer-context",
+            "rule": "FI010",
+            "finding": "Unknown DocType Web Form.",
+            "location": "payments/overrides/payment_webform.py:68",
+            "evidence": "Web Form is supplied by Frappe, whose schema was not included in this standalone app scan."
+          },
+          {
+            "classification": "needs-maintainer-context",
+            "rule": "FI010",
+            "finding": "Unknown DocType Payment Request.",
+            "location": "payments/payment_gateways/doctype/braintree_settings/braintree_settings.py:281",
+            "evidence": "The source intentionally loads Payment Request in a gateway integration; the standalone scan omitted the external app schema that supplies that DocType."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI030",
+            "finding": "Hook before_install target payments.utils.before_install could not be resolved.",
+            "location": "payments/hooks.py:66",
+            "evidence": "payments/utils/__init__.py re-exports before_install from payments/utils/utils.py, where the function is defined."
+          }
+        ]
+      },
+      "artifacts": {
+        "projectPage": "projects/payments.md",
+        "report": "reports/payments/report.md",
+        "checksum": "reports/payments/report.sha256",
+        "metadata": "reports/payments/metadata.json",
+        "screenshot": "screenshots/payments.webp"
+      }
+    },
+    {
+      "project": "Lending",
+      "slug": "lending",
+      "repository": "https://github.com/frappe/lending.git",
+      "branch": "develop",
+      "commit": "ee9269ba08b72fd22295a993986d6502ce1bc399",
+      "commitDate": "2026-07-29T10:47:12+05:30",
+      "benchmarkDate": "2026-07-30",
+      "cli": {
+        "package": "@frappe-inspector/cli",
+        "version": "1.2.3",
+        "license": "community"
+      },
+      "environment": {
+        "nodeVersion": "v22.11.0",
+        "npmVersion": "11.4.2"
+      },
+      "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+      "status": "success",
+      "scan": {
+        "exitCode": 1,
+        "completed": true,
+        "startedAt": "2026-07-30T23:27:01.6000545Z",
+        "endedAt": "2026-07-30T23:27:02.8967116Z",
+        "durationMs": 1296,
+        "errors": 161,
+        "warnings": 114,
+        "rawFindings": 275,
+        "riskyMigrations": 0,
+        "needsReview": 0,
+        "stderrEmpty": true,
+        "reportSha256": "73bd7a91f3fb5178f605338059bbf5bec25f9d523d59a5fe2a93f03345562e88"
+      },
+      "deterministic": true,
+      "reviewed": {
+        "total": 3,
+        "likelyActionable": 0,
+        "needsMaintainerContext": 1,
+        "falsePositive": 2,
+        "findings": [
+          {
+            "classification": "needs-maintainer-context",
+            "rule": "FI002",
+            "finding": "Loan Product.company points to unknown DocType Company.",
+            "location": "lending/loan_management/doctype/loan_product/loan_product.json:175",
+            "evidence": "lending/hooks.py declares required_apps = [\"erpnext\"]. Company is supplied outside this isolated app checkout."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target lending.patches.v15_0.generate_loan_repayment_schedule could not be resolved.",
+            "location": "lending/patches.txt:4",
+            "evidence": "The reported module exists at lending/patches/v15_0/generate_loan_repayment_schedule.py. This is the benchmark's detailed false-positive case study."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target lending.patches.v15_0.rename_process_asset_classification_doctype could not be resolved.",
+            "location": "lending/patches.txt:5",
+            "evidence": "The module exists at lending/patches/v15_0/rename_process_asset_classification_doctype.py."
+          }
+        ]
+      },
+      "artifacts": {
+        "projectPage": "projects/lending.md",
+        "report": "reports/lending/report.md",
+        "checksum": "reports/lending/report.sha256",
+        "metadata": "reports/lending/metadata.json",
+        "screenshot": "screenshots/lending.webp"
+      }
+    },
+    {
+      "project": "Education",
+      "slug": "education",
+      "repository": "https://github.com/frappe/education.git",
+      "branch": "develop",
+      "commit": "71aada478bf682f6d034fd4caa6f2f5438b5ace9",
+      "commitDate": "2026-06-05T15:45:42+03:00",
+      "benchmarkDate": "2026-07-30",
+      "cli": {
+        "package": "@frappe-inspector/cli",
+        "version": "1.2.3",
+        "license": "community"
+      },
+      "environment": {
+        "nodeVersion": "v22.11.0",
+        "npmVersion": "11.4.2"
+      },
+      "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+      "status": "success",
+      "scan": {
+        "exitCode": 1,
+        "completed": true,
+        "startedAt": "2026-07-30T23:27:06.1227631Z",
+        "endedAt": "2026-07-30T23:27:06.8095662Z",
+        "durationMs": 686,
+        "errors": 55,
+        "warnings": 41,
+        "rawFindings": 96,
+        "riskyMigrations": 0,
+        "needsReview": 0,
+        "stderrEmpty": true,
+        "reportSha256": "81accba895164be0a43791d6d57a9295b270c509ee48e1d0cca406ca0d2fddf5"
+      },
+      "deterministic": true,
+      "reviewed": {
+        "total": 3,
+        "likelyActionable": 0,
+        "needsMaintainerContext": 1,
+        "falsePositive": 2,
+        "findings": [
+          {
+            "classification": "needs-maintainer-context",
+            "rule": "FI002",
+            "finding": "Course.department points to unknown DocType Department.",
+            "location": "education/education/doctype/course/course.json:33",
+            "evidence": "education/hooks.py declares required_apps = [\"erpnext\"]. Department is supplied by the omitted dependency schema."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target education.patches.v14_0.create_student_party_type could not be resolved.",
+            "location": "education/patches.txt:2",
+            "evidence": "The module exists at education/patches/v14_0/create_student_party_type.py."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target education.patches.v14_0.create_parent_assessment_group could not be resolved.",
+            "location": "education/patches.txt:5",
+            "evidence": "The module exists at education/patches/v14_0/create_parent_assessment_group.py."
+          }
+        ]
+      },
+      "artifacts": {
+        "projectPage": "projects/education.md",
+        "report": "reports/education/report.md",
+        "checksum": "reports/education/report.sha256",
+        "metadata": "reports/education/metadata.json",
+        "screenshot": "screenshots/education.webp"
+      }
+    },
+    {
+      "project": "Helpdesk",
+      "slug": "helpdesk",
+      "repository": "https://github.com/frappe/helpdesk.git",
+      "branch": "develop",
+      "commit": "d51b186dc51b49fa7ac93a40df7e736e1a97708d",
+      "commitDate": "2026-07-31T03:53:33+05:30",
+      "benchmarkDate": "2026-07-30",
+      "cli": {
+        "package": "@frappe-inspector/cli",
+        "version": "1.2.3",
+        "license": "community"
+      },
+      "environment": {
+        "nodeVersion": "v22.11.0",
+        "npmVersion": "11.4.2"
+      },
+      "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+      "status": "success",
+      "scan": {
+        "exitCode": 1,
+        "completed": true,
+        "startedAt": "2026-07-30T23:27:09.0779919Z",
+        "endedAt": "2026-07-30T23:27:10.0291796Z",
+        "durationMs": 951,
+        "errors": 226,
+        "warnings": 21,
+        "rawFindings": 247,
+        "riskyMigrations": 0,
+        "needsReview": 0,
+        "stderrEmpty": true,
+        "reportSha256": "d03bd43c6e69479a55688cf70b70ea69db80bfbb4631e819adf5c604e9c14f98"
+      },
+      "deterministic": true,
+      "reviewed": {
+        "total": 3,
+        "likelyActionable": 0,
+        "needsMaintainerContext": 1,
+        "falsePositive": 2,
+        "findings": [
+          {
+            "classification": "needs-maintainer-context",
+            "rule": "FI010",
+            "finding": "Unknown DocType TP Call Log.",
+            "location": "helpdesk/helpdesk/doctype/hd_ticket/api.py:98",
+            "evidence": "helpdesk/hooks.py declares required_apps = [\"telephony\"]. The telephony schema was not part of this isolated checkout."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target helpdesk.patches.change_app_name_to_helpdesk could not be resolved.",
+            "location": "helpdesk/patches.txt:2",
+            "evidence": "The module exists at helpdesk/patches/change_app_name_to_helpdesk.py."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target helpdesk.patches.rename_doctypes_prefix_with_hd could not be resolved.",
+            "location": "helpdesk/patches.txt:3",
+            "evidence": "The module exists at helpdesk/patches/rename_doctypes_prefix_with_hd.py."
+          }
+        ]
+      },
+      "artifacts": {
+        "projectPage": "projects/helpdesk.md",
+        "report": "reports/helpdesk/report.md",
+        "checksum": "reports/helpdesk/report.sha256",
+        "metadata": "reports/helpdesk/metadata.json",
+        "screenshot": "screenshots/helpdesk.webp"
+      }
+    },
+    {
+      "project": "CRM",
+      "slug": "crm",
+      "repository": "https://github.com/frappe/crm.git",
+      "branch": "develop",
+      "commit": "824fc779b8db3945a6fbd6ea95b08701d6195d60",
+      "commitDate": "2026-07-31T02:09:52+05:30",
+      "benchmarkDate": "2026-07-30",
+      "cli": {
+        "package": "@frappe-inspector/cli",
+        "version": "1.2.3",
+        "license": "community"
+      },
+      "environment": {
+        "nodeVersion": "v22.11.0",
+        "npmVersion": "11.4.2"
+      },
+      "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+      "status": "success",
+      "scan": {
+        "exitCode": 1,
+        "completed": true,
+        "startedAt": "2026-07-30T23:27:12.6253574Z",
+        "endedAt": "2026-07-30T23:27:13.4961345Z",
+        "durationMs": 870,
+        "errors": 121,
+        "warnings": 45,
+        "rawFindings": 166,
+        "riskyMigrations": 0,
+        "needsReview": 0,
+        "stderrEmpty": true,
+        "reportSha256": "cff46db039c2c24a70296f0b47922af3cd11bf2223a9a272db6d4914140a6ac3"
+      },
+      "deterministic": true,
+      "reviewed": {
+        "total": 3,
+        "likelyActionable": 0,
+        "needsMaintainerContext": 1,
+        "falsePositive": 2,
+        "findings": [
+          {
+            "classification": "needs-maintainer-context",
+            "rule": "FI010",
+            "finding": "Unknown DocType WhatsApp Message.",
+            "location": "crm/api/whatsapp.py:129",
+            "evidence": "The reference is inside the WhatsApp integration. The isolated checkout does not include the optional integration schema, and crm/hooks.py does not make that deployment context explicit."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target crm.patches.v1_0.move_crm_note_data_to_fcrm_note could not be resolved.",
+            "location": "crm/patches.txt:4",
+            "evidence": "The module exists at crm/patches/v1_0/move_crm_note_data_to_fcrm_note.py."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target crm.patches.v1_0.rename_twilio_settings_to_crm_twilio_settings could not be resolved.",
+            "location": "crm/patches.txt:5",
+            "evidence": "The module exists at crm/patches/v1_0/rename_twilio_settings_to_crm_twilio_settings.py."
+          }
+        ]
+      },
+      "artifacts": {
+        "projectPage": "projects/crm.md",
+        "report": "reports/crm/report.md",
+        "checksum": "reports/crm/report.sha256",
+        "metadata": "reports/crm/metadata.json",
+        "screenshot": "screenshots/crm.webp"
+      }
+    },
+    {
+      "project": "Insights",
+      "slug": "insights",
+      "repository": "https://github.com/frappe/insights.git",
+      "branch": "develop",
+      "commit": "1a78fa6631d158f115c507d1224cc50a3d0de36a",
+      "commitDate": "2026-07-30T14:31:48+05:30",
+      "benchmarkDate": "2026-07-30",
+      "cli": {
+        "package": "@frappe-inspector/cli",
+        "version": "1.2.3",
+        "license": "community"
+      },
+      "environment": {
+        "nodeVersion": "v22.11.0",
+        "npmVersion": "11.4.2"
+      },
+      "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+      "status": "success",
+      "scan": {
+        "exitCode": 1,
+        "completed": true,
+        "startedAt": "2026-07-30T23:27:15.7836076Z",
+        "endedAt": "2026-07-30T23:27:16.4203582Z",
+        "durationMs": 636,
+        "errors": 36,
+        "warnings": 7,
+        "rawFindings": 43,
+        "riskyMigrations": 0,
+        "needsReview": 0,
+        "stderrEmpty": true,
+        "reportSha256": "b15865c2cb1776ea3361c3f097b1176d73f070138b6a137ac2ed17107f640fc3"
+      },
+      "deterministic": true,
+      "reviewed": {
+        "total": 3,
+        "likelyActionable": 0,
+        "needsMaintainerContext": 1,
+        "falsePositive": 2,
+        "findings": [
+          {
+            "classification": "needs-maintainer-context",
+            "rule": "FI002",
+            "finding": "Insights Team Member.user points to unknown DocType User.",
+            "location": "insights/insights/doctype/insights_team_member/insights_team_member.json:13",
+            "evidence": "User is a Frappe core DocType. This standalone app scan did not include the Frappe schema."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target insights.patches.normalize_workbook could not be resolved.",
+            "location": "insights/patches.txt:3",
+            "evidence": "The module exists at insights/patches/normalize_workbook.py."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target insights.patches.enable_data_store could not be resolved.",
+            "location": "insights/patches.txt:8",
+            "evidence": "The module exists at insights/patches/enable_data_store.py."
+          }
+        ]
+      },
+      "artifacts": {
+        "projectPage": "projects/insights.md",
+        "report": "reports/insights/report.md",
+        "checksum": "reports/insights/report.sha256",
+        "metadata": "reports/insights/metadata.json",
+        "screenshot": "screenshots/insights.webp"
+      }
+    },
+    {
+      "project": "Drive",
+      "slug": "drive",
+      "repository": "https://github.com/frappe/drive.git",
+      "branch": "develop",
+      "commit": "cd3438d1ab0b0fc1b8c10e282639ec0bd2ee7d82",
+      "commitDate": "2026-06-25T08:03:10+05:30",
+      "benchmarkDate": "2026-07-30",
+      "cli": {
+        "package": "@frappe-inspector/cli",
+        "version": "1.2.3",
+        "license": "community"
+      },
+      "environment": {
+        "nodeVersion": "v22.11.0",
+        "npmVersion": "11.4.2"
+      },
+      "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+      "status": "success",
+      "scan": {
+        "exitCode": 1,
+        "completed": true,
+        "startedAt": "2026-07-30T23:27:18.6377349Z",
+        "endedAt": "2026-07-30T23:27:19.1084589Z",
+        "durationMs": 470,
+        "errors": 114,
+        "warnings": 16,
+        "rawFindings": 130,
+        "riskyMigrations": 0,
+        "needsReview": 0,
+        "stderrEmpty": true,
+        "reportSha256": "46cbb923e1b36fabc04df5fba208b0e180783c277081626ff27eb692d40c9979"
+      },
+      "deterministic": true,
+      "reviewed": {
+        "total": 3,
+        "likelyActionable": 0,
+        "needsMaintainerContext": 1,
+        "falsePositive": 2,
+        "findings": [
+          {
+            "classification": "needs-maintainer-context",
+            "rule": "FI002",
+            "finding": "Drive Entity Activity Log.entity points to unknown DocType File.",
+            "location": "drive/drive/doctype/drive_entity_activity_log/drive_entity_activity_log.json:44",
+            "evidence": "File is a Frappe core DocType. The isolated app scan omitted the Frappe schema used by Drive at runtime."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target drive.patches.team_restructure could not be resolved.",
+            "location": "drive/patches.txt:2",
+            "evidence": "The module exists at drive/patches/team_restructure.py."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target drive.patches.update_roles could not be resolved.",
+            "location": "drive/patches.txt:3",
+            "evidence": "The module exists at drive/patches/update_roles.py."
+          }
+        ]
+      },
+      "artifacts": {
+        "projectPage": "projects/drive.md",
+        "report": "reports/drive/report.md",
+        "checksum": "reports/drive/report.sha256",
+        "metadata": "reports/drive/metadata.json",
+        "screenshot": "screenshots/drive.webp"
+      }
+    },
+    {
+      "project": "Gameplan",
+      "slug": "gameplan",
+      "repository": "https://github.com/frappe/gameplan.git",
+      "branch": "develop",
+      "commit": "1de86a8fce4a16e25ef1797fd890c1fbcc7ea89e",
+      "commitDate": "2026-07-30T23:28:11+05:30",
+      "benchmarkDate": "2026-07-30",
+      "cli": {
+        "package": "@frappe-inspector/cli",
+        "version": "1.2.3",
+        "license": "community"
+      },
+      "environment": {
+        "nodeVersion": "v22.11.0",
+        "npmVersion": "11.4.2"
+      },
+      "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+      "status": "success",
+      "scan": {
+        "exitCode": 1,
+        "completed": true,
+        "startedAt": "2026-07-30T23:27:20.9566212Z",
+        "endedAt": "2026-07-30T23:27:21.6157122Z",
+        "durationMs": 658,
+        "errors": 71,
+        "warnings": 27,
+        "rawFindings": 98,
+        "riskyMigrations": 0,
+        "needsReview": 0,
+        "stderrEmpty": true,
+        "reportSha256": "81376c790d4e4729cd01105c4ca059aafc2f0a54d7d023cadf761ebe7f340888"
+      },
+      "deterministic": true,
+      "reviewed": {
+        "total": 3,
+        "likelyActionable": 1,
+        "needsMaintainerContext": 0,
+        "falsePositive": 2,
+        "findings": [
+          {
+            "classification": "likely-actionable",
+            "rule": "FI031",
+            "finding": "Patch target gameplan.gameplan.doctype.team_user_profile.patches.create_user_profile could not be resolved.",
+            "location": "gameplan/patches.txt:6",
+            "evidence": "The checkout contains gp_user_profile, not team_user_profile. Later patch entries already use gameplan.gameplan.doctype.gp_user_profile, so the old package path is inconsistent with the current source tree."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target gameplan.gameplan.doctype.gp_user_profile.patches.backfill_community_order could not be resolved.",
+            "location": "gameplan/patches.txt:39",
+            "evidence": "The module exists at gameplan/doctype/gp_user_profile/patches/backfill_community_order.py."
+          },
+          {
+            "classification": "false-positive",
+            "rule": "FI031",
+            "finding": "Patch target gameplan.gameplan.doctype.gp_user_profile.patches.merge_profile_bento_card_types could not be resolved.",
+            "location": "gameplan/patches.txt:43",
+            "evidence": "The module exists at gameplan/doctype/gp_user_profile/patches/merge_profile_bento_card_types.py."
+          }
+        ]
+      },
+      "artifacts": {
+        "projectPage": "projects/gameplan.md",
+        "report": "reports/gameplan/report.md",
+        "checksum": "reports/gameplan/report.sha256",
+        "metadata": "reports/gameplan/metadata.json",
+        "screenshot": "screenshots/gameplan.webp"
+      }
+    }
+  ]
+}

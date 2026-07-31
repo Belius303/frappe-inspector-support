@@ -1,0 +1,45 @@
+{
+  "project": "erpnext",
+  "repository": "https://github.com/frappe/erpnext.git",
+  "branch": "develop",
+  "commit": "d59c5e36bcb53be84ec46bd5d29b5c0b2f46f929",
+  "commitDate": "2026-07-30T23:24:59+05:30",
+  "benchmarkDate": "2026-07-30",
+  "cliPackage": "@frappe-inspector/cli",
+  "cliVersion": "1.2.3",
+  "nodeVersion": "v22.11.0",
+  "npmVersion": "11.4.2",
+  "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+  "license": "community",
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-30T23:26:24.4502447Z",
+      "endedAt": "2026-07-30T23:26:37.6368651Z",
+      "durationMs": 13180,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "8fd2ecb762d48e10d820147250d0803f8dd0f8e7f0ea2a5d5932491521d215af",
+      "errors": 962,
+      "warnings": 430,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-30T23:26:37.7016277Z",
+      "endedAt": "2026-07-30T23:26:50.3485293Z",
+      "durationMs": 12635,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "8fd2ecb762d48e10d820147250d0803f8dd0f8e7f0ea2a5d5932491521d215af",
+      "errors": 962,
+      "warnings": 430,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

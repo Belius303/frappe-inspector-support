@@ -1,0 +1,45 @@
+{
+  "project": "insights",
+  "repository": "https://github.com/frappe/insights.git",
+  "branch": "develop",
+  "commit": "1a78fa6631d158f115c507d1224cc50a3d0de36a",
+  "commitDate": "2026-07-30T14:31:48+05:30",
+  "benchmarkDate": "2026-07-30",
+  "cliPackage": "@frappe-inspector/cli",
+  "cliVersion": "1.2.3",
+  "nodeVersion": "v22.11.0",
+  "npmVersion": "11.4.2",
+  "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+  "license": "community",
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-30T23:27:15.7836076Z",
+      "endedAt": "2026-07-30T23:27:16.4203582Z",
+      "durationMs": 636,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "b15865c2cb1776ea3361c3f097b1176d73f070138b6a137ac2ed17107f640fc3",
+      "errors": 36,
+      "warnings": 7,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-30T23:27:16.4372406Z",
+      "endedAt": "2026-07-30T23:27:17.2193518Z",
+      "durationMs": 782,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "b15865c2cb1776ea3361c3f097b1176d73f070138b6a137ac2ed17107f640fc3",
+      "errors": 36,
+      "warnings": 7,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

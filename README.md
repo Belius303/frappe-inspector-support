@@ -12,6 +12,14 @@ Frappe Inspector is a framework-aware static analysis suite for **Frappe Framewo
 
 It is available for JetBrains IDEs, VS Code, Cursor, the command line, MCP clients and GitHub Actions.
 
+## Public benchmark
+
+![Rendered overview of the ten-project Frappe Inspector Community benchmark](benchmarks/screenshots/overview.webp)
+
+The [public benchmark dataset](benchmarks/README.md) records reproducible standalone scans of ten public Frappe applications with CLI **1.2.3 Community**: **10 success / 0 failure**, **2,374 errors**, **1,044 warnings**, **3,418 raw findings**, and **10/10 deterministic** two-run reports. Exactly 30 representative findings were source-reviewed: 2 likely-actionable, 9 needs-maintainer-context and 19 false-positive.
+
+These isolated app scans omit Frappe and external dependency schemas, so raw counts include unresolved references supplied by other apps. Exit code `1` is the findings threshold, not a scan crash. No Pro license, JSON/SARIF export or migration diff was used. This is an independent product benchmark, not an endorsement, security assessment or security disclosure.
+
 ## Why Frappe Inspector?
 
 A schema edit that looks harmless can break code far away from the DocType definition. Frappe Inspector helps surface those relationships before the change reaches production.
