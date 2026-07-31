@@ -8,7 +8,7 @@
 - Added `frappe-inspector explain` and the MCP `explain_frappe_finding` tool so findings can be audited without guessing why they fired.
 - Improved optional-integration handling and local helper return inference to reduce noise on real Frappe applications.
 - Verified deterministic output on pinned CRM, Helpdesk, HRMS and Payments revisions. Reported items remain review candidates until maintainers validate exploitability and runtime context.
-- Published CLI and MCP 1.3.0 to npm, VS Code 1.3.0 to VS Code Marketplace and Open VSX, and refreshed the MCP Registry entry. JetBrains remains on 1.2.2.
+- Published signed-off 1.3.0 VSIX, CLI and MCP artifacts with SHA-256 checksums on GitHub. npm, VS Code Marketplace, Open VSX and MCP Registry remain separate rollout channels. JetBrains remains on 1.2.2.
 
 ## Cross-platform 1.0.1
 
