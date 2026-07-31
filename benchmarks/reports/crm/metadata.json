@@ -1,0 +1,45 @@
+{
+  "project": "crm",
+  "repository": "https://github.com/frappe/crm.git",
+  "branch": "develop",
+  "commit": "824fc779b8db3945a6fbd6ea95b08701d6195d60",
+  "commitDate": "2026-07-31T02:09:52+05:30",
+  "benchmarkDate": "2026-07-30",
+  "cliPackage": "@frappe-inspector/cli",
+  "cliVersion": "1.2.3",
+  "nodeVersion": "v22.11.0",
+  "npmVersion": "11.4.2",
+  "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+  "license": "community",
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-30T23:27:12.6253574Z",
+      "endedAt": "2026-07-30T23:27:13.4961345Z",
+      "durationMs": 870,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "cff46db039c2c24a70296f0b47922af3cd11bf2223a9a272db6d4914140a6ac3",
+      "errors": 121,
+      "warnings": 45,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-30T23:27:13.5055550Z",
+      "endedAt": "2026-07-30T23:27:14.3017200Z",
+      "durationMs": 796,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "cff46db039c2c24a70296f0b47922af3cd11bf2223a9a272db6d4914140a6ac3",
+      "errors": 121,
+      "warnings": 45,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

@@ -1,0 +1,45 @@
+{
+  "project": "drive",
+  "repository": "https://github.com/frappe/drive.git",
+  "branch": "develop",
+  "commit": "cd3438d1ab0b0fc1b8c10e282639ec0bd2ee7d82",
+  "commitDate": "2026-06-25T08:03:10+05:30",
+  "benchmarkDate": "2026-07-30",
+  "cliPackage": "@frappe-inspector/cli",
+  "cliVersion": "1.2.3",
+  "nodeVersion": "v22.11.0",
+  "npmVersion": "11.4.2",
+  "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+  "license": "community",
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-30T23:27:18.6377349Z",
+      "endedAt": "2026-07-30T23:27:19.1084589Z",
+      "durationMs": 470,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "46cbb923e1b36fabc04df5fba208b0e180783c277081626ff27eb692d40c9979",
+      "errors": 114,
+      "warnings": 16,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-30T23:27:19.1218138Z",
+      "endedAt": "2026-07-30T23:27:19.5829815Z",
+      "durationMs": 461,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "46cbb923e1b36fabc04df5fba208b0e180783c277081626ff27eb692d40c9979",
+      "errors": 114,
+      "warnings": 16,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

@@ -1,0 +1,45 @@
+{
+  "project": "payments",
+  "repository": "https://github.com/frappe/payments.git",
+  "branch": "develop",
+  "commit": "aa3516827fe51d5557975b74e574e3bca9a3070d",
+  "commitDate": "2026-06-15T10:44:53+05:30",
+  "benchmarkDate": "2026-07-30",
+  "cliPackage": "@frappe-inspector/cli",
+  "cliVersion": "1.2.3",
+  "nodeVersion": "v22.11.0",
+  "npmVersion": "11.4.2",
+  "command": "frappe-inspector scan <project-path> --format markdown --output <artifact-directory>/report.md",
+  "license": "community",
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-30T23:26:58.7965007Z",
+      "endedAt": "2026-07-30T23:26:59.3812804Z",
+      "durationMs": 584,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "79499332b8df6c8eff9f8703d7a36940799adcb15803e0556ef4c7f1b86cd563",
+      "errors": 47,
+      "warnings": 5,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-30T23:26:59.3997476Z",
+      "endedAt": "2026-07-30T23:26:59.9227939Z",
+      "durationMs": 522,
+      "exitCode": 1,
+      "completed": true,
+      "reportSha256": "79499332b8df6c8eff9f8703d7a36940799adcb15803e0556ef4c7f1b86cd563",
+      "errors": 47,
+      "warnings": 5,
+      "riskyMigrations": 0,
+      "needsReview": 0,
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}
