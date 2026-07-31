@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Belius303/frappe-inspector-support/blob/main/benchmarks/v2/schema.json",
+  "title": "Frappe Inspector Community benchmark v2 archive",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "benchmark",
+    "benchmarkDate",
+    "methodology",
+    "promotionBlockers",
+    "release",
+    "promotionDecision",
+    "totals",
+    "sources",
+    "projects"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "2.0.0" },
+    "benchmark": { "type": "string" },
+    "benchmarkDate": { "type": "string", "format": "date" },
+    "methodology": { "const": "methodology.md" },
+    "promotionBlockers": { "const": "promotion-blockers.md" },
+    "release": {
+      "type": "object",
+      "required": ["package", "version", "license", "registryMetadata", "engineCommit", "mergeCommit", "publishedGitHead", "installedBundleSha256"]
+    },
+    "promotionDecision": {
+      "type": "object",
+      "required": ["status", "siteIndexing", "rationale"],
+      "properties": {
+        "status": { "const": "not-promoted" },
+        "siteIndexing": { "const": "keep-noindex" },
+        "rationale": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "totals": {
+      "type": "object",
+      "required": ["projects", "runs", "completedRuns", "errors", "warnings", "notes", "deterministicProjects"]
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/source" }
+    },
+    "projects": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": { "$ref": "#/$defs/project" }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "source": {
+      "type": "object",
+      "required": ["repository", "commit", "commitDate"],
+      "properties": {
+        "repository": { "type": "string", "format": "uri" },
+        "commit": { "$ref": "#/$defs/commit" },
+        "commitDate": { "type": "string", "format": "date-time" }
+      }
+    },
+    "run": {
+      "type": "object",
+      "required": ["run", "startedAt", "endedAt", "durationMs", "exitCode", "completed", "errors", "warnings", "notes", "reportSha256", "stderrEmpty"],
+      "properties": {
+        "run": { "type": "integer", "minimum": 1, "maximum": 2 },
+        "durationMs": { "type": "integer", "minimum": 0 },
+        "exitCode": { "enum": [0, 1] },
+        "completed": { "const": true },
+        "errors": { "type": "integer", "minimum": 0 },
+        "warnings": { "type": "integer", "minimum": 0 },
+        "notes": { "type": "integer", "minimum": 0 },
+        "reportSha256": { "$ref": "#/$defs/sha256" },
+        "stderrEmpty": { "const": true }
+      }
+    },
+    "project": {
+      "type": "object",
+      "required": ["project", "repository", "commit", "commitDate", "benchApps", "indexedFiles", "command", "status", "deterministic", "runs", "interpretation", "artifacts"],
+      "properties": {
+        "project": { "type": "string" },
+        "repository": { "type": "string", "format": "uri" },
+        "commit": { "$ref": "#/$defs/commit" },
+        "commitDate": { "type": "string", "format": "date-time" },
+        "benchApps": { "type": "array", "minItems": 2 },
+        "indexedFiles": { "type": "integer", "minimum": 1 },
+        "command": { "type": "string" },
+        "status": { "const": "completed" },
+        "deterministic": { "const": true },
+        "runs": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/run" } },
+        "interpretation": { "type": "string" },
+        "artifacts": {
+          "type": "object",
+          "required": ["run1", "run2", "metadata", "checksums"]
+        }
+      }
+    }
+  }
+}

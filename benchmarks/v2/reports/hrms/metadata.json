@@ -1,0 +1,40 @@
+{
+  "project": "hrms",
+  "cliVersion": "1.2.8",
+  "license": "community",
+  "benchApps": [
+    "frappe",
+    "erpnext",
+    "hrms"
+  ],
+  "indexedFiles": 9678,
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-31T15:49:45.9064337Z",
+      "endedAt": "2026-07-31T15:51:07.4314366Z",
+      "durationMs": 81402,
+      "exitCode": 1,
+      "completed": true,
+      "errors": 9,
+      "warnings": 3,
+      "notes": 6,
+      "reportSha256": "c3cca20173433c04364bb93c2a180014e6edc3de3c8c993320545a50be79044b",
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-31T15:51:07.4744265Z",
+      "endedAt": "2026-07-31T15:52:07.9904392Z",
+      "durationMs": 60497,
+      "exitCode": 1,
+      "completed": true,
+      "errors": 9,
+      "warnings": 3,
+      "notes": 6,
+      "reportSha256": "c3cca20173433c04364bb93c2a180014e6edc3de3c8c993320545a50be79044b",
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

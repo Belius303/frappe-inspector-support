@@ -1,0 +1,13 @@
+{
+  "name": "@frappe-inspector/cli",
+  "version": "1.2.8",
+  "registry": "https://registry.npmjs.org",
+  "tarball": "https://registry.npmjs.org/@frappe-inspector/cli/-/cli-1.2.8.tgz",
+  "shasumSha1": "557b27448ce82cd7db883a0a878aa25aab8b840b",
+  "integritySha512": "sha512-rM+uwexBnmihJggbpjwGNV9a23TWjaT9I8g359NV7TjS/G3pEenrZyE/W3+zc2MZcHYK5HM8JnjjBdcpk4yLsA==",
+  "publishedGitHead": "c80340cc29d4230fb2866226bd937f796b72edf4",
+  "publishedGitHeadParent": "b8f536aa17a35b17c4e7332f1c50f186e17a891b",
+  "engineCommit": "6f776f560ae3f26eff043f3fd884842db1a5f520",
+  "installedBundle": "node_modules/@frappe-inspector/cli/dist/cli.mjs",
+  "installedBundleSha256": "a41a3c90405bbfa986e64ffa57e1b465945988afcfc88b605abf478dcedb1ae7"
+}

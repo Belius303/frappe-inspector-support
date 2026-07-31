@@ -1,0 +1,40 @@
+{
+  "project": "lending",
+  "cliVersion": "1.2.8",
+  "license": "community",
+  "benchApps": [
+    "frappe",
+    "erpnext",
+    "lending"
+  ],
+  "indexedFiles": 8810,
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-31T15:49:48.0683474Z",
+      "endedAt": "2026-07-31T15:51:02.7149504Z",
+      "durationMs": 74557,
+      "exitCode": 0,
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-31T15:51:02.7601473Z",
+      "endedAt": "2026-07-31T15:51:57.4676946Z",
+      "durationMs": 54693,
+      "exitCode": 0,
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

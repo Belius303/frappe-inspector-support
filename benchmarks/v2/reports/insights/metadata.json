@@ -1,0 +1,39 @@
+{
+  "project": "insights",
+  "cliVersion": "1.2.8",
+  "license": "community",
+  "benchApps": [
+    "frappe",
+    "insights"
+  ],
+  "indexedFiles": 3722,
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-31T15:49:52.3949696Z",
+      "endedAt": "2026-07-31T15:50:15.2767595Z",
+      "durationMs": 22726,
+      "exitCode": 0,
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "notes": 2,
+      "reportSha256": "1bd11c87db67fd708cf21300d0036800f8c76cdd1e21877c94d3d6af1d14b686",
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-31T15:50:15.3603349Z",
+      "endedAt": "2026-07-31T15:50:34.8442931Z",
+      "durationMs": 19464,
+      "exitCode": 0,
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "notes": 2,
+      "reportSha256": "1bd11c87db67fd708cf21300d0036800f8c76cdd1e21877c94d3d6af1d14b686",
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

@@ -1,0 +1,39 @@
+{
+  "project": "crm",
+  "cliVersion": "1.2.8",
+  "license": "community",
+  "benchApps": [
+    "frappe",
+    "crm"
+  ],
+  "indexedFiles": 4093,
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-31T15:49:51.2519669Z",
+      "endedAt": "2026-07-31T15:50:16.6614139Z",
+      "durationMs": 25225,
+      "exitCode": 1,
+      "completed": true,
+      "errors": 25,
+      "warnings": 0,
+      "notes": 7,
+      "reportSha256": "f098732b9f5d4299788cbe8bdd92133cba3694914ff31f493f74378d8d3be362",
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-31T15:50:16.7139680Z",
+      "endedAt": "2026-07-31T15:50:37.7196029Z",
+      "durationMs": 20987,
+      "exitCode": 1,
+      "completed": true,
+      "errors": 25,
+      "warnings": 0,
+      "notes": 7,
+      "reportSha256": "f098732b9f5d4299788cbe8bdd92133cba3694914ff31f493f74378d8d3be362",
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

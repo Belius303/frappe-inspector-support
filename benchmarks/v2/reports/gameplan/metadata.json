@@ -1,0 +1,39 @@
+{
+  "project": "gameplan",
+  "cliVersion": "1.2.8",
+  "license": "community",
+  "benchApps": [
+    "frappe",
+    "gameplan"
+  ],
+  "indexedFiles": 3776,
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-31T15:49:54.9154997Z",
+      "endedAt": "2026-07-31T15:50:17.6242819Z",
+      "durationMs": 22563,
+      "exitCode": 0,
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-31T15:50:17.6957515Z",
+      "endedAt": "2026-07-31T15:50:36.5104635Z",
+      "durationMs": 18798,
+      "exitCode": 0,
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

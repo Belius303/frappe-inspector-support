@@ -1,0 +1,40 @@
+{
+  "project": "helpdesk",
+  "cliVersion": "1.2.8",
+  "license": "community",
+  "benchApps": [
+    "frappe",
+    "telephony",
+    "helpdesk"
+  ],
+  "indexedFiles": 4090,
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-31T15:49:50.1328923Z",
+      "endedAt": "2026-07-31T15:50:15.3964302Z",
+      "durationMs": 25108,
+      "exitCode": 1,
+      "completed": true,
+      "errors": 9,
+      "warnings": 0,
+      "notes": 12,
+      "reportSha256": "12168cb3cb96a0aa4e2fa124ddd98492431d019a0b34085db8ac53301ba5f2f3",
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-31T15:50:15.4803138Z",
+      "endedAt": "2026-07-31T15:50:36.4878676Z",
+      "durationMs": 20987,
+      "exitCode": 1,
+      "completed": true,
+      "errors": 9,
+      "warnings": 0,
+      "notes": 12,
+      "reportSha256": "12168cb3cb96a0aa4e2fa124ddd98492431d019a0b34085db8ac53301ba5f2f3",
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}
