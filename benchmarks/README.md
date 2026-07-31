@@ -1,5 +1,7 @@
 # Public benchmark v1
 
+> **Archived technical baseline — not current product accuracy evidence.** These CLI 1.2.3 scans used isolated app checkouts without complete Frappe/ERPNext dependency schemas. Manual review found 19 false positives in the 30-finding sample. CLI 1.2.4 fixes standalone FI031 patch resolution and downgrades unavailable dependency-schema references; this dataset remains public only for reproducibility and regression comparison until a complete-bench benchmark replaces it.
+
 This dataset records isolated, standalone scans of ten public Frappe applications with `@frappe-inspector/cli` **1.2.3 Community** on 2026-07-30. All ten scans completed and produced reports. Exit code `1` is the configured findings-threshold result, not a scan failure.
 
 ![Rendered overview of the ten-project Frappe Inspector Community benchmark](screenshots/overview.webp)
