@@ -1,0 +1,39 @@
+{
+  "project": "drive",
+  "cliVersion": "1.2.8",
+  "license": "community",
+  "benchApps": [
+    "frappe",
+    "drive"
+  ],
+  "indexedFiles": 3521,
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-31T15:49:53.5525890Z",
+      "endedAt": "2026-07-31T15:50:15.1408367Z",
+      "durationMs": 21403,
+      "exitCode": 0,
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "notes": 30,
+      "reportSha256": "830559b85cb0ba6497cf56dec0aed86c521a22056835a1075eb2f49e56af3ac4",
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-31T15:50:15.1977143Z",
+      "endedAt": "2026-07-31T15:50:33.9815130Z",
+      "durationMs": 18766,
+      "exitCode": 0,
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "notes": 30,
+      "reportSha256": "830559b85cb0ba6497cf56dec0aed86c521a22056835a1075eb2f49e56af3ac4",
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

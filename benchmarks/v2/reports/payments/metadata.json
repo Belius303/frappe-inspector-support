@@ -1,0 +1,39 @@
+{
+  "project": "payments",
+  "cliVersion": "1.2.8",
+  "license": "community",
+  "benchApps": [
+    "frappe",
+    "payments"
+  ],
+  "indexedFiles": 3383,
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-31T15:49:47.0177526Z",
+      "endedAt": "2026-07-31T15:50:07.9013801Z",
+      "durationMs": 20696,
+      "exitCode": 1,
+      "completed": true,
+      "errors": 9,
+      "warnings": 0,
+      "notes": 7,
+      "reportSha256": "ee07d7bdd44bbd4fb02149ce29ed9b18d0304bbf897cb13f585719fc327cf350",
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-31T15:50:08.0118435Z",
+      "endedAt": "2026-07-31T15:50:26.5056931Z",
+      "durationMs": 18472,
+      "exitCode": 1,
+      "completed": true,
+      "errors": 9,
+      "warnings": 0,
+      "notes": 7,
+      "reportSha256": "ee07d7bdd44bbd4fb02149ce29ed9b18d0304bbf897cb13f585719fc327cf350",
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

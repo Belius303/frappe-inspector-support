@@ -1,0 +1,721 @@
+{
+  "schemaVersion": "2.0.0",
+  "benchmark": "Frappe Inspector Community complete-bench archive v2",
+  "benchmarkDate": "2026-07-31",
+  "methodology": "methodology.md",
+  "promotionBlockers": "promotion-blockers.md",
+  "release": {
+    "package": "@frappe-inspector/cli",
+    "version": "1.2.8",
+    "license": "community",
+    "registryMetadata": "npm-package.json",
+    "engineCommit": "6f776f560ae3f26eff043f3fd884842db1a5f520",
+    "mergeCommit": "b8f536aa17a35b17c4e7332f1c50f186e17a891b",
+    "publishedGitHead": "c80340cc29d4230fb2866226bd937f796b72edf4",
+    "installedBundleSha256": "a41a3c90405bbfa986e64ffa57e1b465945988afcfc88b605abf478dcedb1ae7"
+  },
+  "promotionDecision": {
+    "status": "not-promoted",
+    "siteIndexing": "keep-noindex",
+    "rationale": [
+      "Determinism proves repeatability, not finding precision.",
+      "Fifty-two of fifty-five errors are concentrated in optional app integration paths whose runtime guards are not fully modeled by local static scanning.",
+      "ERPNext retains three unresolved active references and one unresolved Link warning that require maintainer context.",
+      "No current VS Code 1.2.8 capture or separate Pro evidence campaign exists."
+    ]
+  },
+  "totals": {
+    "projects": 10,
+    "runs": 20,
+    "completedRuns": 20,
+    "exitZeroProjects": 5,
+    "exitOneProjects": 5,
+    "errors": 55,
+    "warnings": 4,
+    "notes": 79,
+    "run1DurationMs": 432909,
+    "run2DurationMs": 338069,
+    "deterministicProjects": 10,
+    "zeroErrorWarningProjects": 5,
+    "noFindingProjects": 3,
+    "notesOnlyProjects": 2
+  },
+  "sources": {
+    "frappe": {
+      "repository": "https://github.com/frappe/frappe",
+      "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+      "commitDate": "2026-07-31T16:27:13+05:30"
+    },
+    "telephony": {
+      "repository": "https://github.com/frappe/telephony",
+      "commit": "e04272a4d6b78862cfdbde4256a06b2cab79a607",
+      "commitDate": "2026-07-14T15:23:57+05:30"
+    },
+    "erpnext": {
+      "repository": "https://github.com/frappe/erpnext",
+      "commit": "d59c5e36bcb53be84ec46bd5d29b5c0b2f46f929",
+      "commitDate": "2026-07-30T23:24:59+05:30"
+    },
+    "hrms": {
+      "repository": "https://github.com/frappe/hrms",
+      "commit": "fd430b654630becd4ae5298089450c9b2abd3753",
+      "commitDate": "2026-07-30T15:02:03+05:30"
+    },
+    "payments": {
+      "repository": "https://github.com/frappe/payments",
+      "commit": "aa3516827fe51d5557975b74e574e3bca9a3070d",
+      "commitDate": "2026-06-15T10:44:53+05:30"
+    },
+    "lending": {
+      "repository": "https://github.com/frappe/lending",
+      "commit": "ee9269ba08b72fd22295a993986d6502ce1bc399",
+      "commitDate": "2026-07-29T10:47:12+05:30"
+    },
+    "education": {
+      "repository": "https://github.com/frappe/education",
+      "commit": "71aada478bf682f6d034fd4caa6f2f5438b5ace9",
+      "commitDate": "2026-06-05T15:45:42+03:00"
+    },
+    "helpdesk": {
+      "repository": "https://github.com/frappe/helpdesk",
+      "commit": "d51b186dc51b49fa7ac93a40df7e736e1a97708d",
+      "commitDate": "2026-07-31T03:53:33+05:30"
+    },
+    "crm": {
+      "repository": "https://github.com/frappe/crm",
+      "commit": "824fc779b8db3945a6fbd6ea95b08701d6195d60",
+      "commitDate": "2026-07-31T02:09:52+05:30"
+    },
+    "insights": {
+      "repository": "https://github.com/frappe/insights",
+      "commit": "1a78fa6631d158f115c507d1224cc50a3d0de36a",
+      "commitDate": "2026-07-30T14:31:48+05:30"
+    },
+    "drive": {
+      "repository": "https://github.com/frappe/drive",
+      "commit": "cd3438d1ab0b0fc1b8c10e282639ec0bd2ee7d82",
+      "commitDate": "2026-06-25T08:03:10+05:30"
+    },
+    "gameplan": {
+      "repository": "https://github.com/frappe/gameplan",
+      "commit": "1de86a8fce4a16e25ef1797fd890c1fbcc7ea89e",
+      "commitDate": "2026-07-30T23:28:11+05:30"
+    }
+  },
+  "projects": [
+    {
+      "project": "erpnext",
+      "repository": "https://github.com/frappe/erpnext",
+      "commit": "d59c5e36bcb53be84ec46bd5d29b5c0b2f46f929",
+      "commitDate": "2026-07-30T23:24:59+05:30",
+      "benchApps": [
+        {
+          "app": "frappe",
+          "repository": "https://github.com/frappe/frappe",
+          "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+          "commitDate": "2026-07-31T16:27:13+05:30"
+        },
+        {
+          "app": "erpnext",
+          "repository": "https://github.com/frappe/erpnext",
+          "commit": "d59c5e36bcb53be84ec46bd5d29b5c0b2f46f929",
+          "commitDate": "2026-07-30T23:24:59+05:30"
+        }
+      ],
+      "indexedFiles": 8310,
+      "command": "frappe-inspector scan <bench> --app erpnext --format markdown --output <report>",
+      "status": "completed",
+      "deterministic": true,
+      "runs": [
+        {
+          "run": 1,
+          "startedAt": "2026-07-31T15:49:44.6003709Z",
+          "endedAt": "2026-07-31T15:50:51.9457227Z",
+          "durationMs": 67212,
+          "exitCode": 1,
+          "completed": true,
+          "errors": 3,
+          "warnings": 1,
+          "notes": 15,
+          "reportSha256": "5fd336f347f87b6383c65a04bb1f05b1de9386cad0c9deea5a65dae4cf6e0eaa",
+          "stderrEmpty": true
+        },
+        {
+          "run": 2,
+          "startedAt": "2026-07-31T15:50:51.9887689Z",
+          "endedAt": "2026-07-31T15:51:44.1620651Z",
+          "durationMs": 52156,
+          "exitCode": 1,
+          "completed": true,
+          "errors": 3,
+          "warnings": 1,
+          "notes": 15,
+          "reportSha256": "5fd336f347f87b6383c65a04bb1f05b1de9386cad0c9deea5a65dae4cf6e0eaa",
+          "stderrEmpty": true
+        }
+      ],
+      "interpretation": "Three unresolved active DocType references and one unresolved Link target remain; the report also contains historical test and patch notes. Maintainer context is required.",
+      "artifacts": {
+        "run1": "reports/erpnext/report-run1.md",
+        "run2": "reports/erpnext/report-run2.md",
+        "metadata": "reports/erpnext/metadata.json",
+        "checksums": "reports/erpnext/checksums.sha256"
+      }
+    },
+    {
+      "project": "hrms",
+      "repository": "https://github.com/frappe/hrms",
+      "commit": "fd430b654630becd4ae5298089450c9b2abd3753",
+      "commitDate": "2026-07-30T15:02:03+05:30",
+      "benchApps": [
+        {
+          "app": "frappe",
+          "repository": "https://github.com/frappe/frappe",
+          "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+          "commitDate": "2026-07-31T16:27:13+05:30"
+        },
+        {
+          "app": "erpnext",
+          "repository": "https://github.com/frappe/erpnext",
+          "commit": "d59c5e36bcb53be84ec46bd5d29b5c0b2f46f929",
+          "commitDate": "2026-07-30T23:24:59+05:30"
+        },
+        {
+          "app": "hrms",
+          "repository": "https://github.com/frappe/hrms",
+          "commit": "fd430b654630becd4ae5298089450c9b2abd3753",
+          "commitDate": "2026-07-30T15:02:03+05:30"
+        }
+      ],
+      "indexedFiles": 9678,
+      "command": "frappe-inspector scan <bench> --app hrms --format markdown --output <report>",
+      "status": "completed",
+      "deterministic": true,
+      "runs": [
+        {
+          "run": 1,
+          "startedAt": "2026-07-31T15:49:45.9064337Z",
+          "endedAt": "2026-07-31T15:51:07.4314366Z",
+          "durationMs": 81402,
+          "exitCode": 1,
+          "completed": true,
+          "errors": 9,
+          "warnings": 3,
+          "notes": 6,
+          "reportSha256": "c3cca20173433c04364bb93c2a180014e6edc3de3c8c993320545a50be79044b",
+          "stderrEmpty": true
+        },
+        {
+          "run": 2,
+          "startedAt": "2026-07-31T15:51:07.4744265Z",
+          "endedAt": "2026-07-31T15:52:07.9904392Z",
+          "durationMs": 60497,
+          "exitCode": 1,
+          "completed": true,
+          "errors": 9,
+          "warnings": 3,
+          "notes": 6,
+          "reportSha256": "c3cca20173433c04364bb93c2a180014e6edc3de3c8c993320545a50be79044b",
+          "stderrEmpty": true
+        }
+      ],
+      "interpretation": "All errors and warnings target Lending DocTypes while Lending is not part of this bench. Static file scanning cannot prove the runtime installation guards.",
+      "artifacts": {
+        "run1": "reports/hrms/report-run1.md",
+        "run2": "reports/hrms/report-run2.md",
+        "metadata": "reports/hrms/metadata.json",
+        "checksums": "reports/hrms/checksums.sha256"
+      }
+    },
+    {
+      "project": "payments",
+      "repository": "https://github.com/frappe/payments",
+      "commit": "aa3516827fe51d5557975b74e574e3bca9a3070d",
+      "commitDate": "2026-06-15T10:44:53+05:30",
+      "benchApps": [
+        {
+          "app": "frappe",
+          "repository": "https://github.com/frappe/frappe",
+          "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+          "commitDate": "2026-07-31T16:27:13+05:30"
+        },
+        {
+          "app": "payments",
+          "repository": "https://github.com/frappe/payments",
+          "commit": "aa3516827fe51d5557975b74e574e3bca9a3070d",
+          "commitDate": "2026-06-15T10:44:53+05:30"
+        }
+      ],
+      "indexedFiles": 3383,
+      "command": "frappe-inspector scan <bench> --app payments --format markdown --output <report>",
+      "status": "completed",
+      "deterministic": true,
+      "runs": [
+        {
+          "run": 1,
+          "startedAt": "2026-07-31T15:49:47.0177526Z",
+          "endedAt": "2026-07-31T15:50:07.9013801Z",
+          "durationMs": 20696,
+          "exitCode": 1,
+          "completed": true,
+          "errors": 9,
+          "warnings": 0,
+          "notes": 7,
+          "reportSha256": "ee07d7bdd44bbd4fb02149ce29ed9b18d0304bbf897cb13f585719fc327cf350",
+          "stderrEmpty": true
+        },
+        {
+          "run": 2,
+          "startedAt": "2026-07-31T15:50:08.0118435Z",
+          "endedAt": "2026-07-31T15:50:26.5056931Z",
+          "durationMs": 18472,
+          "exitCode": 1,
+          "completed": true,
+          "errors": 9,
+          "warnings": 0,
+          "notes": 7,
+          "reportSha256": "ee07d7bdd44bbd4fb02149ce29ed9b18d0304bbf897cb13f585719fc327cf350",
+          "stderrEmpty": true
+        }
+      ],
+      "interpretation": "All errors target ERPNext-side payment or accounting DocTypes while ERPNext is not part of this bench. Static file scanning cannot prove every optional integration path.",
+      "artifacts": {
+        "run1": "reports/payments/report-run1.md",
+        "run2": "reports/payments/report-run2.md",
+        "metadata": "reports/payments/metadata.json",
+        "checksums": "reports/payments/checksums.sha256"
+      }
+    },
+    {
+      "project": "lending",
+      "repository": "https://github.com/frappe/lending",
+      "commit": "ee9269ba08b72fd22295a993986d6502ce1bc399",
+      "commitDate": "2026-07-29T10:47:12+05:30",
+      "benchApps": [
+        {
+          "app": "frappe",
+          "repository": "https://github.com/frappe/frappe",
+          "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+          "commitDate": "2026-07-31T16:27:13+05:30"
+        },
+        {
+          "app": "erpnext",
+          "repository": "https://github.com/frappe/erpnext",
+          "commit": "d59c5e36bcb53be84ec46bd5d29b5c0b2f46f929",
+          "commitDate": "2026-07-30T23:24:59+05:30"
+        },
+        {
+          "app": "lending",
+          "repository": "https://github.com/frappe/lending",
+          "commit": "ee9269ba08b72fd22295a993986d6502ce1bc399",
+          "commitDate": "2026-07-29T10:47:12+05:30"
+        }
+      ],
+      "indexedFiles": 8810,
+      "command": "frappe-inspector scan <bench> --app lending --format markdown --output <report>",
+      "status": "completed",
+      "deterministic": true,
+      "runs": [
+        {
+          "run": 1,
+          "startedAt": "2026-07-31T15:49:48.0683474Z",
+          "endedAt": "2026-07-31T15:51:02.7149504Z",
+          "durationMs": 74557,
+          "exitCode": 0,
+          "completed": true,
+          "errors": 0,
+          "warnings": 0,
+          "notes": 0,
+          "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+          "stderrEmpty": true
+        },
+        {
+          "run": 2,
+          "startedAt": "2026-07-31T15:51:02.7601473Z",
+          "endedAt": "2026-07-31T15:51:57.4676946Z",
+          "durationMs": 54693,
+          "exitCode": 0,
+          "completed": true,
+          "errors": 0,
+          "warnings": 0,
+          "notes": 0,
+          "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+          "stderrEmpty": true
+        }
+      ],
+      "interpretation": "No errors, warnings, or notes for the selected app scope.",
+      "artifacts": {
+        "run1": "reports/lending/report-run1.md",
+        "run2": "reports/lending/report-run2.md",
+        "metadata": "reports/lending/metadata.json",
+        "checksums": "reports/lending/checksums.sha256"
+      }
+    },
+    {
+      "project": "education",
+      "repository": "https://github.com/frappe/education",
+      "commit": "71aada478bf682f6d034fd4caa6f2f5438b5ace9",
+      "commitDate": "2026-06-05T15:45:42+03:00",
+      "benchApps": [
+        {
+          "app": "frappe",
+          "repository": "https://github.com/frappe/frappe",
+          "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+          "commitDate": "2026-07-31T16:27:13+05:30"
+        },
+        {
+          "app": "erpnext",
+          "repository": "https://github.com/frappe/erpnext",
+          "commit": "d59c5e36bcb53be84ec46bd5d29b5c0b2f46f929",
+          "commitDate": "2026-07-30T23:24:59+05:30"
+        },
+        {
+          "app": "education",
+          "repository": "https://github.com/frappe/education",
+          "commit": "71aada478bf682f6d034fd4caa6f2f5438b5ace9",
+          "commitDate": "2026-06-05T15:45:42+03:00"
+        }
+      ],
+      "indexedFiles": 8785,
+      "command": "frappe-inspector scan <bench> --app education --format markdown --output <report>",
+      "status": "completed",
+      "deterministic": true,
+      "runs": [
+        {
+          "run": 1,
+          "startedAt": "2026-07-31T15:49:49.2253371Z",
+          "endedAt": "2026-07-31T15:51:01.3330472Z",
+          "durationMs": 72017,
+          "exitCode": 0,
+          "completed": true,
+          "errors": 0,
+          "warnings": 0,
+          "notes": 0,
+          "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+          "stderrEmpty": true
+        },
+        {
+          "run": 2,
+          "startedAt": "2026-07-31T15:51:01.3819341Z",
+          "endedAt": "2026-07-31T15:51:54.6452856Z",
+          "durationMs": 53249,
+          "exitCode": 0,
+          "completed": true,
+          "errors": 0,
+          "warnings": 0,
+          "notes": 0,
+          "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+          "stderrEmpty": true
+        }
+      ],
+      "interpretation": "No errors, warnings, or notes for the selected app scope.",
+      "artifacts": {
+        "run1": "reports/education/report-run1.md",
+        "run2": "reports/education/report-run2.md",
+        "metadata": "reports/education/metadata.json",
+        "checksums": "reports/education/checksums.sha256"
+      }
+    },
+    {
+      "project": "helpdesk",
+      "repository": "https://github.com/frappe/helpdesk",
+      "commit": "d51b186dc51b49fa7ac93a40df7e736e1a97708d",
+      "commitDate": "2026-07-31T03:53:33+05:30",
+      "benchApps": [
+        {
+          "app": "frappe",
+          "repository": "https://github.com/frappe/frappe",
+          "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+          "commitDate": "2026-07-31T16:27:13+05:30"
+        },
+        {
+          "app": "telephony",
+          "repository": "https://github.com/frappe/telephony",
+          "commit": "e04272a4d6b78862cfdbde4256a06b2cab79a607",
+          "commitDate": "2026-07-14T15:23:57+05:30"
+        },
+        {
+          "app": "helpdesk",
+          "repository": "https://github.com/frappe/helpdesk",
+          "commit": "d51b186dc51b49fa7ac93a40df7e736e1a97708d",
+          "commitDate": "2026-07-31T03:53:33+05:30"
+        }
+      ],
+      "indexedFiles": 4090,
+      "command": "frappe-inspector scan <bench> --app helpdesk --format markdown --output <report>",
+      "status": "completed",
+      "deterministic": true,
+      "runs": [
+        {
+          "run": 1,
+          "startedAt": "2026-07-31T15:49:50.1328923Z",
+          "endedAt": "2026-07-31T15:50:15.3964302Z",
+          "durationMs": 25108,
+          "exitCode": 1,
+          "completed": true,
+          "errors": 9,
+          "warnings": 0,
+          "notes": 12,
+          "reportSha256": "12168cb3cb96a0aa4e2fa124ddd98492431d019a0b34085db8ac53301ba5f2f3",
+          "stderrEmpty": true
+        },
+        {
+          "run": 2,
+          "startedAt": "2026-07-31T15:50:15.4803138Z",
+          "endedAt": "2026-07-31T15:50:36.4878676Z",
+          "durationMs": 20987,
+          "exitCode": 1,
+          "completed": true,
+          "errors": 9,
+          "warnings": 0,
+          "notes": 12,
+          "reportSha256": "12168cb3cb96a0aa4e2fa124ddd98492431d019a0b34085db8ac53301ba5f2f3",
+          "stderrEmpty": true
+        }
+      ],
+      "interpretation": "All errors target Customer in ERPNext integration code while ERPNext is not part of this bench. Static file scanning cannot prove every optional integration path.",
+      "artifacts": {
+        "run1": "reports/helpdesk/report-run1.md",
+        "run2": "reports/helpdesk/report-run2.md",
+        "metadata": "reports/helpdesk/metadata.json",
+        "checksums": "reports/helpdesk/checksums.sha256"
+      }
+    },
+    {
+      "project": "crm",
+      "repository": "https://github.com/frappe/crm",
+      "commit": "824fc779b8db3945a6fbd6ea95b08701d6195d60",
+      "commitDate": "2026-07-31T02:09:52+05:30",
+      "benchApps": [
+        {
+          "app": "frappe",
+          "repository": "https://github.com/frappe/frappe",
+          "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+          "commitDate": "2026-07-31T16:27:13+05:30"
+        },
+        {
+          "app": "crm",
+          "repository": "https://github.com/frappe/crm",
+          "commit": "824fc779b8db3945a6fbd6ea95b08701d6195d60",
+          "commitDate": "2026-07-31T02:09:52+05:30"
+        }
+      ],
+      "indexedFiles": 4093,
+      "command": "frappe-inspector scan <bench> --app crm --format markdown --output <report>",
+      "status": "completed",
+      "deterministic": true,
+      "runs": [
+        {
+          "run": 1,
+          "startedAt": "2026-07-31T15:49:51.2519669Z",
+          "endedAt": "2026-07-31T15:50:16.6614139Z",
+          "durationMs": 25225,
+          "exitCode": 1,
+          "completed": true,
+          "errors": 25,
+          "warnings": 0,
+          "notes": 7,
+          "reportSha256": "f098732b9f5d4299788cbe8bdd92133cba3694914ff31f493f74378d8d3be362",
+          "stderrEmpty": true
+        },
+        {
+          "run": 2,
+          "startedAt": "2026-07-31T15:50:16.7139680Z",
+          "endedAt": "2026-07-31T15:50:37.7196029Z",
+          "durationMs": 20987,
+          "exitCode": 1,
+          "completed": true,
+          "errors": 25,
+          "warnings": 0,
+          "notes": 7,
+          "reportSha256": "f098732b9f5d4299788cbe8bdd92133cba3694914ff31f493f74378d8d3be362",
+          "stderrEmpty": true
+        }
+      ],
+      "interpretation": "Errors are concentrated in ERPNext and Frappe WhatsApp integration paths whose optional runtime guards are not fully modeled by the scanner.",
+      "artifacts": {
+        "run1": "reports/crm/report-run1.md",
+        "run2": "reports/crm/report-run2.md",
+        "metadata": "reports/crm/metadata.json",
+        "checksums": "reports/crm/checksums.sha256"
+      }
+    },
+    {
+      "project": "insights",
+      "repository": "https://github.com/frappe/insights",
+      "commit": "1a78fa6631d158f115c507d1224cc50a3d0de36a",
+      "commitDate": "2026-07-30T14:31:48+05:30",
+      "benchApps": [
+        {
+          "app": "frappe",
+          "repository": "https://github.com/frappe/frappe",
+          "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+          "commitDate": "2026-07-31T16:27:13+05:30"
+        },
+        {
+          "app": "insights",
+          "repository": "https://github.com/frappe/insights",
+          "commit": "1a78fa6631d158f115c507d1224cc50a3d0de36a",
+          "commitDate": "2026-07-30T14:31:48+05:30"
+        }
+      ],
+      "indexedFiles": 3722,
+      "command": "frappe-inspector scan <bench> --app insights --format markdown --output <report>",
+      "status": "completed",
+      "deterministic": true,
+      "runs": [
+        {
+          "run": 1,
+          "startedAt": "2026-07-31T15:49:52.3949696Z",
+          "endedAt": "2026-07-31T15:50:15.2767595Z",
+          "durationMs": 22726,
+          "exitCode": 0,
+          "completed": true,
+          "errors": 0,
+          "warnings": 0,
+          "notes": 2,
+          "reportSha256": "1bd11c87db67fd708cf21300d0036800f8c76cdd1e21877c94d3d6af1d14b686",
+          "stderrEmpty": true
+        },
+        {
+          "run": 2,
+          "startedAt": "2026-07-31T15:50:15.3603349Z",
+          "endedAt": "2026-07-31T15:50:34.8442931Z",
+          "durationMs": 19464,
+          "exitCode": 0,
+          "completed": true,
+          "errors": 0,
+          "warnings": 0,
+          "notes": 2,
+          "reportSha256": "1bd11c87db67fd708cf21300d0036800f8c76cdd1e21877c94d3d6af1d14b686",
+          "stderrEmpty": true
+        }
+      ],
+      "interpretation": "No errors or warnings; both notes are historical patch references to the pre-v3 Insights Data Source DocType.",
+      "artifacts": {
+        "run1": "reports/insights/report-run1.md",
+        "run2": "reports/insights/report-run2.md",
+        "metadata": "reports/insights/metadata.json",
+        "checksums": "reports/insights/checksums.sha256"
+      }
+    },
+    {
+      "project": "drive",
+      "repository": "https://github.com/frappe/drive",
+      "commit": "cd3438d1ab0b0fc1b8c10e282639ec0bd2ee7d82",
+      "commitDate": "2026-06-25T08:03:10+05:30",
+      "benchApps": [
+        {
+          "app": "frappe",
+          "repository": "https://github.com/frappe/frappe",
+          "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+          "commitDate": "2026-07-31T16:27:13+05:30"
+        },
+        {
+          "app": "drive",
+          "repository": "https://github.com/frappe/drive",
+          "commit": "cd3438d1ab0b0fc1b8c10e282639ec0bd2ee7d82",
+          "commitDate": "2026-06-25T08:03:10+05:30"
+        }
+      ],
+      "indexedFiles": 3521,
+      "command": "frappe-inspector scan <bench> --app drive --format markdown --output <report>",
+      "status": "completed",
+      "deterministic": true,
+      "runs": [
+        {
+          "run": 1,
+          "startedAt": "2026-07-31T15:49:53.5525890Z",
+          "endedAt": "2026-07-31T15:50:15.1408367Z",
+          "durationMs": 21403,
+          "exitCode": 0,
+          "completed": true,
+          "errors": 0,
+          "warnings": 0,
+          "notes": 30,
+          "reportSha256": "830559b85cb0ba6497cf56dec0aed86c521a22056835a1075eb2f49e56af3ac4",
+          "stderrEmpty": true
+        },
+        {
+          "run": 2,
+          "startedAt": "2026-07-31T15:50:15.1977143Z",
+          "endedAt": "2026-07-31T15:50:33.9815130Z",
+          "durationMs": 18766,
+          "exitCode": 0,
+          "completed": true,
+          "errors": 0,
+          "warnings": 0,
+          "notes": 30,
+          "reportSha256": "830559b85cb0ba6497cf56dec0aed86c521a22056835a1075eb2f49e56af3ac4",
+          "stderrEmpty": true
+        }
+      ],
+      "interpretation": "No errors or warnings; all notes come from patch files and are retained as historical review context.",
+      "artifacts": {
+        "run1": "reports/drive/report-run1.md",
+        "run2": "reports/drive/report-run2.md",
+        "metadata": "reports/drive/metadata.json",
+        "checksums": "reports/drive/checksums.sha256"
+      }
+    },
+    {
+      "project": "gameplan",
+      "repository": "https://github.com/frappe/gameplan",
+      "commit": "1de86a8fce4a16e25ef1797fd890c1fbcc7ea89e",
+      "commitDate": "2026-07-30T23:28:11+05:30",
+      "benchApps": [
+        {
+          "app": "frappe",
+          "repository": "https://github.com/frappe/frappe",
+          "commit": "a38f6430410966b90e2c7efcf84d77698ae74d60",
+          "commitDate": "2026-07-31T16:27:13+05:30"
+        },
+        {
+          "app": "gameplan",
+          "repository": "https://github.com/frappe/gameplan",
+          "commit": "1de86a8fce4a16e25ef1797fd890c1fbcc7ea89e",
+          "commitDate": "2026-07-30T23:28:11+05:30"
+        }
+      ],
+      "indexedFiles": 3776,
+      "command": "frappe-inspector scan <bench> --app gameplan --format markdown --output <report>",
+      "status": "completed",
+      "deterministic": true,
+      "runs": [
+        {
+          "run": 1,
+          "startedAt": "2026-07-31T15:49:54.9154997Z",
+          "endedAt": "2026-07-31T15:50:17.6242819Z",
+          "durationMs": 22563,
+          "exitCode": 0,
+          "completed": true,
+          "errors": 0,
+          "warnings": 0,
+          "notes": 0,
+          "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+          "stderrEmpty": true
+        },
+        {
+          "run": 2,
+          "startedAt": "2026-07-31T15:50:17.6957515Z",
+          "endedAt": "2026-07-31T15:50:36.5104635Z",
+          "durationMs": 18798,
+          "exitCode": 0,
+          "completed": true,
+          "errors": 0,
+          "warnings": 0,
+          "notes": 0,
+          "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+          "stderrEmpty": true
+        }
+      ],
+      "interpretation": "No errors, warnings, or notes for the selected app scope.",
+      "artifacts": {
+        "run1": "reports/gameplan/report-run1.md",
+        "run2": "reports/gameplan/report-run2.md",
+        "metadata": "reports/gameplan/metadata.json",
+        "checksums": "reports/gameplan/checksums.sha256"
+      }
+    }
+  ]
+}

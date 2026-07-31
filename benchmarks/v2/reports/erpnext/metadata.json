@@ -1,0 +1,39 @@
+{
+  "project": "erpnext",
+  "cliVersion": "1.2.8",
+  "license": "community",
+  "benchApps": [
+    "frappe",
+    "erpnext"
+  ],
+  "indexedFiles": 8310,
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-31T15:49:44.6003709Z",
+      "endedAt": "2026-07-31T15:50:51.9457227Z",
+      "durationMs": 67212,
+      "exitCode": 1,
+      "completed": true,
+      "errors": 3,
+      "warnings": 1,
+      "notes": 15,
+      "reportSha256": "5fd336f347f87b6383c65a04bb1f05b1de9386cad0c9deea5a65dae4cf6e0eaa",
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-31T15:50:51.9887689Z",
+      "endedAt": "2026-07-31T15:51:44.1620651Z",
+      "durationMs": 52156,
+      "exitCode": 1,
+      "completed": true,
+      "errors": 3,
+      "warnings": 1,
+      "notes": 15,
+      "reportSha256": "5fd336f347f87b6383c65a04bb1f05b1de9386cad0c9deea5a65dae4cf6e0eaa",
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}

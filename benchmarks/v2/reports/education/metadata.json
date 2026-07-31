@@ -1,0 +1,40 @@
+{
+  "project": "education",
+  "cliVersion": "1.2.8",
+  "license": "community",
+  "benchApps": [
+    "frappe",
+    "erpnext",
+    "education"
+  ],
+  "indexedFiles": 8785,
+  "runs": [
+    {
+      "run": 1,
+      "startedAt": "2026-07-31T15:49:49.2253371Z",
+      "endedAt": "2026-07-31T15:51:01.3330472Z",
+      "durationMs": 72017,
+      "exitCode": 0,
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+      "stderrEmpty": true
+    },
+    {
+      "run": 2,
+      "startedAt": "2026-07-31T15:51:01.3819341Z",
+      "endedAt": "2026-07-31T15:51:54.6452856Z",
+      "durationMs": 53249,
+      "exitCode": 0,
+      "completed": true,
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6",
+      "stderrEmpty": true
+    }
+  ],
+  "deterministic": true
+}
