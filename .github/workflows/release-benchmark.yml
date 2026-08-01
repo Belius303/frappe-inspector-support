@@ -1,0 +1,20 @@
+name: Publish Benchmark Release
+
+on:
+  push:
+    tags:
+      - "v*-evidence"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Frappe Inspector 1.3.1 Benchmark Evidence
+          body_path: docs/release-v1.3.1-benchmark.md
