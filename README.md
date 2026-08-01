@@ -187,6 +187,7 @@ Community features remain available without a paid license and after a Pro licen
 - [GitHub Actions and CI](docs/ci.md)
 - [Analysis rules](docs/rules.md)
 - [Benchmark evidence](docs/benchmarks.md)
+- [60-second demo script](docs/demo-script.md)
 - [Community vs Pro](docs/free-vs-pro.md)
 - [Runtime wiring diff](docs/runtime-wiring-diff.md)
 - [Changelog](docs/changelog.md)
