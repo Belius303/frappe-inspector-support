@@ -13,7 +13,7 @@ Install Frappe Inspector from VS Code Marketplace, Open VSX or the [latest publi
 Install the public npm package:
 
 ```shell
-npm install --global @frappe-inspector/cli@1.3.0
+npm install --global @frappe-inspector/cli@1.3.1
 ```
 
 Run `frappe-inspector scan .` for Community diagnostics or `frappe-inspector diff . --base-ref origin/main` with Universal Pro.
@@ -27,7 +27,7 @@ See `docs/ci.md`. Check out full Git history with `fetch-depth: 0` and store Uni
 Install the public package, then configure `frappe-inspector-mcp` as a local stdio server in a compatible client:
 
 ```shell
-npm install --global @frappe-inspector/mcp@1.3.0
+npm install --global @frappe-inspector/mcp@1.3.1
 ```
 
 The server reads project files but never executes them.

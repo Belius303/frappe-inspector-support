@@ -1,5 +1,9 @@
 # Public Changelog
 
+## Cross-platform 1.3.1
+
+- Refreshed VS Code/Open VSX/npm/MCP/GitHub Action listing metadata with benchmark evidence and Frappe-specific security positioning.
+
 ## Cross-platform 1.3.0
 
 - Added interprocedural Python flow analysis across local helpers for Frappe request data, permission checks and sensitive sinks.

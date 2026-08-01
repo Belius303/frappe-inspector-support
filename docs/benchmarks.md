@@ -20,11 +20,11 @@ The controlled corpus covers minimized Frappe cases for:
 - broken hooks and patches;
 - unsafe migration diffs.
 
-Current result for CLI/Core 1.3.0:
+Current result for CLI/Core 1.3.1:
 
 | Tool | Version | TP | FP | FN | Precision | Recall | F1 |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Frappe Inspector | 1.3.0 | 16 | 0 | 0 | 100.0% | 100.0% | 100.0% |
+| Frappe Inspector | 1.3.1 | 16 | 0 | 0 | 100.0% | 100.0% | 100.0% |
 | Bandit | 1.9.4 | 2 | 1 | 14 | 66.7% | 12.5% | 21.1% |
 | Semgrep | 1.172.0 | 1 | 0 | 15 | 100.0% | 6.3% | 11.8% |
 
