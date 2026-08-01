@@ -6,7 +6,7 @@
 [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/mohamedtazihnyine.frappe-inspector?label=VS%20Code)](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector)
 [![GitHub issues](https://img.shields.io/github/issues/Belius303/frappe-inspector-support)](https://github.com/Belius303/frappe-inspector-support/issues)
 
-[Website](https://frappeinspector.xyz) · [Pricing](https://frappeinspector.xyz/pricing) · [JetBrains](https://plugins.jetbrains.com/plugin/32992-frappe-inspector) · [VS Code](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector) · [MCP Registry](https://prod.registry.modelcontextprotocol.io/) · [GitHub Marketplace](https://github.com/marketplace/actions/frappe-inspector) · [Downloads](https://github.com/Belius303/frappe-inspector-support/releases/latest) · [Documentation](docs/getting-started.md)
+[Website](https://frappeinspector.xyz) · [Benchmarks](docs/benchmarks.md) · [Pricing](https://frappeinspector.xyz/pricing) · [JetBrains](https://plugins.jetbrains.com/plugin/32992-frappe-inspector) · [VS Code](https://marketplace.visualstudio.com/items?itemName=mohamedtazihnyine.frappe-inspector) · [MCP Registry](https://prod.registry.modelcontextprotocol.io/) · [GitHub Marketplace](https://github.com/marketplace/actions/frappe-inspector) · [Downloads](https://github.com/Belius303/frappe-inspector-support/releases/latest) · [Documentation](docs/getting-started.md)
 
 Frappe Inspector is a framework-aware static analysis suite for **Frappe Framework** and **ERPNext** projects. It connects the files and concepts that general-purpose tools usually treat separately: DocType JSON, Python controllers, client scripts, hooks, patches, fixtures, Custom Fields, Property Setters, permissions and migrations.
 
@@ -29,7 +29,7 @@ It can help you:
 - detect risky type, link-target, required/default and uniqueness changes;
 - generate Markdown, JSON and SARIF reports for supported workflows;
 - trace Frappe-aware security flows across local Python helpers, permission guards and sensitive sinks;
-- explain why a finding was emitted with source, sink and related-location evidence;
+- explain findings with source, sink, related-location evidence and fix guidance;
 - give AI assistants deterministic, Frappe-aware context through a local MCP server.
 
 Project analysis runs locally. Your source code is not uploaded to Frappe Inspector for analysis.
@@ -63,6 +63,22 @@ Snapshot from official registries on 2026-07-30:
 | GitHub Action | Live on Marketplace |
 
 [Star or follow the public project](https://github.com/Belius303/frappe-inspector-support) to track releases, documentation and issues.
+
+## Benchmark evidence
+
+Frappe Inspector is benchmarked against Frappe-specific cases that generic Python scanners do not model: DocType schema, whitelisted endpoints, guest access, permission bypasses, hooks, patches and unsafe migrations.
+
+Controlled benchmark snapshot for CLI/Core 1.3.0:
+
+| Tool | Version | TP | FP | FN | Precision | Recall |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Frappe Inspector | 1.3.0 | 16 | 0 | 0 | 100.0% | 100.0% |
+| Bandit | 1.9.4 | 2 | 1 | 14 | 66.7% | 12.5% |
+| Semgrep | 1.172.0 | 1 | 0 | 15 | 100.0% | 6.3% |
+
+This is a Frappe-specific controlled benchmark, not a global claim over every static analyzer or project type. The complete-bench public archive remains separate and measures repeatability/noise boundaries rather than current 1.3.0 accuracy.
+
+See [Benchmark methodology and raw artifacts](docs/benchmarks.md).
 
 ## Quick start
 
@@ -170,6 +186,7 @@ Community features remain available without a paid license and after a Pro licen
 - [MCP server](docs/mcp.md)
 - [GitHub Actions and CI](docs/ci.md)
 - [Analysis rules](docs/rules.md)
+- [Benchmark evidence](docs/benchmarks.md)
 - [Community vs Pro](docs/free-vs-pro.md)
 - [Runtime wiring diff](docs/runtime-wiring-diff.md)
 - [Changelog](docs/changelog.md)

@@ -1,0 +1,254 @@
+{
+  "version": 1,
+  "name": "Frappe Inspector ground-truth accuracy corpus",
+  "description": "Controlled Frappe fixtures for precision, recall, false-positive and missed-bug measurement.",
+  "countedSeverities": ["warning", "error"],
+  "cases": [
+    {
+      "id": "dynamic-sql-flow",
+      "title": "Whitelisted input reaches dynamic SQL through a local helper",
+      "source": "ERPNext #28512 / dynamic query regression coverage",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "@frappe.whitelist()",
+          "def search(term):",
+          "    return run_search(term)",
+          "def run_search(value):",
+          "    query = f'select name from tabCustomer where name = {value}'",
+          "    return frappe.db.sql(query)"
+        ] }
+      ],
+      "expectedFindings": [
+        { "id": "dynamic-sql-taint", "ruleId": "FI040", "path": "apps/sales/sales/api.py", "severity": "error", "properties": { "entryPoint": "search", "sink": "frappe.db.sql" } }
+      ]
+    },
+    {
+      "id": "parameterized-sql-negative",
+      "title": "Parameterized SQL remains clean",
+      "source": "Negative control for bound query parameters",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "@frappe.whitelist()",
+          "def search(term):",
+          "    return frappe.db.sql('select name from tabCustomer where name = %s', (term,))"
+        ] }
+      ],
+      "expectedFindings": []
+    },
+    {
+      "id": "guest-permission-bypass",
+      "title": "Guest endpoint reaches ignore_permissions without a server guard",
+      "source": "ERPNext #39164 / website list permission bypass pattern",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "@frappe.whitelist(allow_guest=True)",
+          "def update_customer(name):",
+          "    doc = frappe.get_doc('Customer', name)",
+          "    doc.save(ignore_permissions=True)"
+        ] }
+      ],
+      "expectedFindings": [
+        { "id": "guest-ignore-permissions", "ruleId": "FI042", "path": "apps/sales/sales/api.py", "severity": "error", "properties": { "entryPoint": "update_customer", "sink": "ignore_permissions" } }
+      ]
+    },
+    {
+      "id": "guarded-permission-bypass-negative",
+      "title": "Explicit server permission guard suppresses permission-bypass finding",
+      "source": "Negative control for server-side permission guards",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "@frappe.whitelist(allow_guest=True)",
+          "def update_customer(name):",
+          "    frappe.has_permission('Customer', 'write', throw=True)",
+          "    doc = frappe.get_doc('Customer', name)",
+          "    doc.save(ignore_permissions=True)"
+        ] }
+      ],
+      "expectedFindings": []
+    },
+    {
+      "id": "request-controlled-sinks",
+      "title": "Request data reaches dynamic identifiers, URL, file path and code execution sinks",
+      "source": "Security source-to-sink regression suite",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Customer\",\"module\":\"Sales\",\"fields\":[{\"fieldname\":\"customer_name\",\"fieldtype\":\"Data\"}],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe, requests",
+          "@frappe.whitelist()",
+          "def inspect(url, filename, fieldname):",
+          "    requests.get(url)",
+          "    open(filename).read()",
+          "    frappe.db.get_value('Customer', 'x', fieldname)",
+          "    return eval(fieldname)"
+        ] }
+      ],
+      "expectedFindings": [
+        { "id": "dynamic-query-identifier", "ruleId": "FI043", "path": "apps/sales/sales/api.py", "severity": "warning", "properties": { "entryPoint": "inspect", "sink": "frappe.db.get_value" } },
+        { "id": "ssrf-url", "ruleId": "FI044", "path": "apps/sales/sales/api.py", "severity": "error", "properties": { "entryPoint": "inspect", "sink": "requests.get" } },
+        { "id": "path-traversal", "ruleId": "FI045", "path": "apps/sales/sales/api.py", "severity": "error", "properties": { "entryPoint": "inspect", "sink": "open" } },
+        { "id": "dynamic-code", "ruleId": "FI048", "path": "apps/sales/sales/api.py", "severity": "error", "properties": { "entryPoint": "inspect", "sink": "eval" } }
+      ]
+    },
+    {
+      "id": "guest-document-leak",
+      "title": "Guest endpoint returns a document without visible permission checks",
+      "source": "GHSL-2026-012 linked-document exposure pattern",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/accounts/doctype/user_secret/user_secret.json", "content": "{\"doctype\":\"DocType\",\"name\":\"User Secret\",\"module\":\"Sales\",\"fields\":[],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "@frappe.whitelist(allow_guest=True)",
+          "def leak(name):",
+          "    record = frappe.get_doc('User Secret', name)",
+          "    return record"
+        ] }
+      ],
+      "expectedFindings": [
+        { "id": "guest-document-return", "ruleId": "FI052", "path": "apps/sales/sales/api.py", "severity": "warning", "properties": { "entryPoint": "leak", "sink": "frappe.get_doc" } }
+      ]
+    },
+    {
+      "id": "guest-public-permissions",
+      "title": "Guest role has sensitive DocType permissions and public read bypass",
+      "source": "ERPNext advisory class for guest-exposed records",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/accounts/doctype/user_secret/user_secret.json", "content": "{\"doctype\":\"DocType\",\"name\":\"User Secret\",\"module\":\"Sales\",\"fields\":[{\"fieldname\":\"api_secret\",\"fieldtype\":\"Data\"}],\"permissions\":[{\"role\":\"Guest\",\"read\":1,\"write\":1,\"export\":1}]}" },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "@frappe.whitelist(allow_guest=True)",
+          "def list_entries():",
+          "    return frappe.get_all('User Secret', fields=['name', 'api_secret'])"
+        ] }
+      ],
+      "expectedFindings": [
+        { "id": "guest-sensitive-permission", "ruleId": "FI050", "path": "apps/sales/sales/accounts/doctype/user_secret/user_secret.json", "severity": "error", "properties": { "docType": "User Secret", "role": "Guest" } },
+        { "id": "guest-get-all-bypass", "ruleId": "FI051", "path": "apps/sales/sales/api.py", "severity": "error", "properties": { "entryPoint": "list_entries", "sink": "frappe.get_all" } }
+      ]
+    },
+    {
+      "id": "client-only-authorization",
+      "title": "Role restriction exists in JavaScript but not in the controller",
+      "source": "Frappe #38657 client-only authorization pattern",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Customer\",\"module\":\"Sales\",\"fields\":[{\"fieldname\":\"private\",\"fieldtype\":\"Check\"}],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.js", "lines": ["frappe.ui.form.on('Customer', { refresh(frm) { if (!frappe.user.has_role('Manager')) frm.set_df_property('private', 'read_only', 1); } });"] },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.py", "lines": ["from frappe.model.document import Document", "class Customer(Document):", "    pass"] }
+      ],
+      "expectedFindings": [
+        { "id": "client-only-field-guard", "ruleId": "FI046", "path": "apps/sales/sales/accounts/doctype/customer/customer.js", "severity": "warning", "properties": { "docType": "Customer", "field": "private" } }
+      ]
+    },
+    {
+      "id": "optional-app-guard-negative",
+      "title": "Optional app guard prevents missing dependency from becoming an unconditional error",
+      "source": "Optional integration negative control",
+      "files": [
+        { "path": "apps/frappe/frappe/hooks.py", "lines": ["app_name = 'frappe'"] },
+        { "path": "apps/frappe/frappe/modules.txt", "lines": ["Core"] },
+        { "path": "apps/erpnext/erpnext/hooks.py", "lines": ["app_name = 'erpnext'"] },
+        { "path": "apps/erpnext/erpnext/modules.txt", "lines": ["Accounts"] },
+        { "path": "apps/hrms/hrms/hooks.py", "lines": ["app_name = 'hrms'", "required_apps = ['erpnext']"] },
+        { "path": "apps/hrms/hrms/modules.txt", "lines": ["HR"] },
+        { "path": "apps/hrms/hrms/loan.py", "lines": [
+          "import frappe",
+          "def if_lending_app_installed(fn):",
+          "    def wrapper(*args):",
+          "        if 'lending' in frappe.get_installed_apps():",
+          "            return fn(*args)",
+          "    return wrapper",
+          "@if_lending_app_installed",
+          "def process():",
+          "    frappe.get_doc('Loan')"
+        ] }
+      ],
+      "expectedFindings": [],
+      "allowedFindings": [
+        { "id": "optional-loan-note", "ruleId": "FI010", "path": "apps/hrms/hrms/loan.py", "severity": "note", "properties": { "target": "Loan", "externalSchema": true } }
+      ]
+    },
+    {
+      "id": "unknown-field-effective-schema",
+      "title": "Unknown field is detected against the effective DocType schema",
+      "source": "Python/JSON cross-file schema reference coverage",
+      "includeAdvanced": true,
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Customer\",\"module\":\"Sales\",\"fields\":[{\"fieldname\":\"customer_name\",\"fieldtype\":\"Data\"}],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "def load_customer(name):",
+          "    customer = frappe.get_doc('Customer', name)",
+          "    return customer",
+          "def display(name):",
+          "    record = load_customer(name)",
+          "    return record.customer_nam"
+        ] }
+      ],
+      "expectedFindings": [
+        { "id": "unknown-python-field", "ruleId": "FI011", "path": "apps/sales/sales/api.py", "severity": "error", "properties": { "docType": "Customer", "field": "customer_nam" } }
+      ]
+    },
+    {
+      "id": "broken-hook-and-patch",
+      "title": "Broken hook and patch targets are detected",
+      "source": "Runtime wiring regression coverage",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": [
+          "app_name = 'sales'",
+          "doc_events = {'Invoice': {'on_update': 'sales.integrations.missing.on_update'}}"
+        ] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/patches.txt", "lines": ["sales.patches.v1.missing_patch"] }
+      ],
+      "expectedFindings": [
+        { "id": "broken-hook-target", "ruleId": "FI030", "path": "apps/sales/sales/hooks.py", "severity": "warning" },
+        { "id": "broken-patch-target", "ruleId": "FI031", "path": "apps/sales/sales/patches.txt", "severity": "error" }
+      ]
+    },
+    {
+      "id": "unsafe-migration-diff",
+      "title": "Schema diff catches unsafe link change, removed field and required field addition",
+      "source": "Migration safety regression coverage",
+      "baselineFiles": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Customer\",\"module\":\"Sales\",\"fields\":[],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/accounts/doctype/supplier/supplier.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Supplier\",\"module\":\"Sales\",\"fields\":[],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Invoice\",\"module\":\"Sales\",\"fields\":[{\"fieldname\":\"customer\",\"fieldtype\":\"Link\",\"options\":\"Customer\"},{\"fieldname\":\"old_code\",\"fieldtype\":\"Data\"}],\"permissions\":[]}" }
+      ],
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Customer\",\"module\":\"Sales\",\"fields\":[],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/accounts/doctype/supplier/supplier.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Supplier\",\"module\":\"Sales\",\"fields\":[],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Invoice\",\"module\":\"Sales\",\"fields\":[{\"fieldname\":\"customer\",\"fieldtype\":\"Link\",\"options\":\"Supplier\"},{\"fieldname\":\"approval_code\",\"fieldtype\":\"Data\",\"reqd\":1}],\"permissions\":[]}" }
+      ],
+      "expectedFindings": [
+        { "id": "unsafe-link-target-change", "ruleId": "FI-MIG004", "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "severity": "error", "properties": { "docType": "Invoice", "field": "customer" } },
+        { "id": "removed-field", "ruleId": "FI-MIG002", "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "severity": "error", "properties": { "docType": "Invoice", "field": "old_code" } },
+        { "id": "required-field-added", "ruleId": "FI-MIG005", "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "severity": "error", "properties": { "docType": "Invoice", "field": "approval_code" } }
+      ]
+    }
+  ]
+}

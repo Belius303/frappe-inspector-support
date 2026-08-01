@@ -39,6 +39,6 @@
 | `FI-MIG013` | Default value changed | Warning |
 | `FI-MIG014` | Label changed | Warning |
 
-Security findings include source-to-sink evidence where the engine can prove an externally reachable path. Optional integrations guarded by installed-app checks, DocType existence checks, recognized decorators, or integration boundaries are contextualized instead of being reported as unconditional project errors.
+Security findings include source-to-sink evidence and concise fix guidance where the engine can prove an externally reachable path. Optional integrations guarded by installed-app checks, DocType existence checks, recognized decorators, or integration boundaries are contextualized instead of being reported as unconditional project errors.
 
 Static analysis is intentionally conservative. Reflection, runtime monkey-patching and dynamically generated code may still require manual review.

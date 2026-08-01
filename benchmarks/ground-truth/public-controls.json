@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "name": "Frappe public benchmark controls",
+  "evidenceBoundary": "Noise and determinism controls from complete public benches. These are not accuracy ground truth for current CLI 1.3.0.",
+  "capturedWithCli": "1.2.8",
+  "currentCli": "1.3.0",
+  "artifactPath": "benchmarks/v2/artifacts/<project>/metadata.raw.json",
+  "cases": [
+    {
+      "project": "lending",
+      "commitShort": "ee9269ba",
+      "benchApps": ["frappe", "erpnext", "lending"],
+      "indexedFiles": 8810,
+      "expected": { "errors": 0, "warnings": 0, "notes": 0, "deterministic": true },
+      "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6"
+    },
+    {
+      "project": "education",
+      "commitShort": "71aada47",
+      "benchApps": ["frappe", "erpnext", "education"],
+      "indexedFiles": 8785,
+      "expected": { "errors": 0, "warnings": 0, "notes": 0, "deterministic": true },
+      "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6"
+    },
+    {
+      "project": "gameplan",
+      "commitShort": "1de86a8f",
+      "benchApps": ["frappe", "gameplan"],
+      "indexedFiles": 3776,
+      "expected": { "errors": 0, "warnings": 0, "notes": 0, "deterministic": true },
+      "reportSha256": "c8a17874e333bacda6b7000d3b678108dc3b0a7a6f01a0a9f40eea4fd8b19fc6"
+    },
+    {
+      "project": "insights",
+      "commitShort": "1bd11c87",
+      "benchApps": ["frappe", "insights"],
+      "indexedFiles": 3722,
+      "expected": { "errors": 0, "warnings": 0, "notes": 2, "deterministic": true },
+      "reportSha256": "1bd11c87db67fd708cf21300d0036800f8c76cdd1e21877c94d3d6af1d14b686"
+    },
+    {
+      "project": "drive",
+      "commitShort": "830559b8",
+      "benchApps": ["frappe", "drive"],
+      "indexedFiles": 3521,
+      "expected": { "errors": 0, "warnings": 0, "notes": 30, "deterministic": true },
+      "reportSha256": "830559b85cb0ba6497cf56dec0aed86c521a22056835a1075eb2f49e56af3ac4"
+    }
+  ]
+}

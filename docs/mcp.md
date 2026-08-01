@@ -2,7 +2,7 @@
 
 The Frappe Inspector MCP server exposes read-only, framework-aware analysis of local Frappe and ERPNext projects to compatible AI clients through the Model Context Protocol.
 
-Current npm package: [`@frappe-inspector/mcp`](https://www.npmjs.com/package/@frappe-inspector/mcp), version **1.2.2**.
+Current npm package: [`@frappe-inspector/mcp`](https://www.npmjs.com/package/@frappe-inspector/mcp), version **1.3.0**.
 
 Project files are read as text and are never executed by the server.
 
@@ -64,6 +64,8 @@ Configuration locations and environment-variable handling depend on the MCP clie
 | Tool | Edition | Purpose |
 | --- | --- | --- |
 | `scan_frappe_project` | Community | Run a static scan and return structured diagnostics |
+| `explain_frappe_finding` | Community | Return confidence, evidence and source-to-sink context for matching findings |
+| `suggest_frappe_remediation` | Community | Return concise remediation guidance for matching Frappe Inspector findings |
 | `list_doctypes` | Community | List detected apps, modules, DocTypes, fields and source files |
 | `get_doctype` | Community/Pro | Return a DocType schema; Pro includes licensed effective-schema overlays |
 | `find_field_usages` | Pro | Find recognized Python and JavaScript field usages |

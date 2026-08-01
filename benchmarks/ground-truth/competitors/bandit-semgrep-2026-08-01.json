@@ -1,0 +1,64 @@
+[
+  {
+    "toolName": "Bandit",
+    "version": "1.9.4",
+    "findings": [
+      {
+        "caseId": "dynamic-sql-flow",
+        "ruleId": "Bandit:B608",
+        "equivalentRuleId": "FI040",
+        "path": "apps/sales/sales/api.py",
+        "line": 6,
+        "severity": "warning",
+        "message": "Possible SQL injection vector through string-based query construction.",
+        "properties": {
+          "testId": "B608",
+          "testName": "hardcoded_sql_expressions"
+        }
+      },
+      {
+        "caseId": "request-controlled-sinks",
+        "ruleId": "Bandit:B113",
+        "path": "apps/sales/sales/api.py",
+        "line": 4,
+        "severity": "warning",
+        "message": "Call to requests without timeout",
+        "properties": {
+          "testId": "B113",
+          "testName": "request_without_timeout"
+        }
+      },
+      {
+        "caseId": "request-controlled-sinks",
+        "ruleId": "Bandit:B307",
+        "equivalentRuleId": "FI048",
+        "path": "apps/sales/sales/api.py",
+        "line": 7,
+        "severity": "warning",
+        "message": "Use of possibly insecure function - consider using safer ast.literal_eval.",
+        "properties": {
+          "testId": "B307",
+          "testName": "blacklist"
+        }
+      }
+    ]
+  },
+  {
+    "toolName": "Semgrep",
+    "version": "1.172.0",
+    "findings": [
+      {
+        "caseId": "request-controlled-sinks",
+        "ruleId": "Semgrep:python.lang.security.audit.eval-detected.eval-detected",
+        "equivalentRuleId": "FI048",
+        "path": "apps/sales/sales/api.py",
+        "line": 7,
+        "severity": "warning",
+        "message": "Detected the use of eval(). eval() can be dangerous if used to evaluate dynamic content. If this content can be input from outside the program, this may be a code injection vulnerability. Ensure evaluated content is not definable by external sources.",
+        "properties": {
+          "checkId": "python.lang.security.audit.eval-detected.eval-detected"
+        }
+      }
+    ]
+  }
+]

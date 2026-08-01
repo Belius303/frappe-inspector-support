@@ -2,7 +2,7 @@
 
 The Frappe Inspector CLI runs framework-aware Frappe and ERPNext static analysis from a terminal.
 
-Current npm package: [`@frappe-inspector/cli`](https://www.npmjs.com/package/@frappe-inspector/cli), version **1.2.2**.
+Current npm package: [`@frappe-inspector/cli`](https://www.npmjs.com/package/@frappe-inspector/cli), version **1.3.0**.
 
 ## Requirements
 
@@ -41,6 +41,8 @@ Write a Markdown report:
 ```shell
 frappe-inspector scan . --format markdown --output frappe-inspector.md
 ```
+
+Markdown and terminal output include concise fix guidance for high-value Frappe rules when available.
 
 Choose the minimum severity that fails the process:
 
@@ -129,6 +131,16 @@ frappe-inspector diff . --baseline .frappe-inspector/snapshot.json
 ```
 
 JSON and SARIF require Universal Pro. Pretty and Markdown output are available for Community scans.
+
+## Explain a finding
+
+Use `explain` to isolate one rule/source pair and keep the evidence chain visible:
+
+```shell
+frappe-inspector explain . --rule FI042 --source apps/erpnext/api.py --line 42
+```
+
+Security findings include entry, flow, guard and sink evidence when the analyzer can prove the path.
 
 ## Exit codes
 
