@@ -1,9 +1,9 @@
 {
   "version": 1,
   "name": "Frappe public benchmark controls",
-  "evidenceBoundary": "Noise and determinism controls from complete public benches. These are not accuracy ground truth for current CLI 1.3.0.",
+  "evidenceBoundary": "Noise and determinism controls from complete public benches. These are not accuracy ground truth for current CLI 1.3.2.",
   "capturedWithCli": "1.2.8",
-  "currentCli": "1.3.0",
+  "currentCli": "1.3.2",
   "artifactPath": "benchmarks/v2/artifacts/<project>/metadata.raw.json",
   "cases": [
     {

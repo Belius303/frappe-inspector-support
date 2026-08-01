@@ -5,7 +5,7 @@ Frappe Inspector is measured with two separate evidence layers:
 1. a controlled Frappe-specific accuracy corpus;
 2. public complete-bench controls for repeatability and noise boundaries.
 
-The controlled corpus is the only layer used for precision/recall claims. The public complete-bench archive is retained separately and is not relabeled as current CLI 1.3.0 accuracy evidence.
+The controlled corpus is the only layer used for precision/recall claims. The public complete-bench archive is retained separately and is not relabeled as current CLI 1.3.2 accuracy evidence.
 
 ## Controlled Accuracy Corpus
 
@@ -20,13 +20,13 @@ The controlled corpus covers minimized Frappe cases for:
 - broken hooks and patches;
 - unsafe migration diffs.
 
-Current result for CLI/Core 1.3.1:
+Current result for CLI/Core 1.3.2. Three Frappe Inspector expectations require baseline/current migration comparison, so generic scanners are evaluated only against the 17 generic findings:
 
-| Tool | Version | TP | FP | FN | Precision | Recall | F1 |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Frappe Inspector | 1.3.1 | 16 | 0 | 0 | 100.0% | 100.0% | 100.0% |
-| Bandit | 1.9.4 | 2 | 1 | 14 | 66.7% | 12.5% | 21.1% |
-| Semgrep | 1.172.0 | 1 | 0 | 15 | 100.0% | 6.3% | 11.8% |
+| Tool | Version | Scope | Cases | Expected | TP | FP | FN | Precision | Recall | F1 |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Frappe Inspector | 1.3.2 | Generic + migration | 22 | 20 | 20 | 0 | 0 | 100.0% | 100.0% | 100.0% |
+| Bandit | 1.9.4 | Generic only | 21 | 17 | 2 | 3 | 15 | 40.0% | 11.8% | 18.2% |
+| Semgrep | 1.172.0 | Generic only | 21 | 17 | 1 | 0 | 16 | 100.0% | 5.9% | 11.1% |
 
 Bandit and Semgrep were executed as real tools, then normalized into the same TP/FP/FN table. Third-party results are not invented.
 
@@ -71,7 +71,8 @@ These cases demonstrate repeatability and noise control. They are not presented 
 
 ## Evidence Boundary
 
-- The 16/16 result is a controlled Frappe-specific benchmark, not a global claim over every static analyzer or project type.
+- The 20/20 result is a controlled Frappe-specific benchmark, not a global claim over every static analyzer or project type.
+- Three expectations require a migration baseline; Bandit and Semgrep are not penalized for those cases.
 - Bandit and Semgrep are general-purpose tools and were not given custom Frappe-specific rules.
 - Public complete-bench results were captured with CLI 1.2.8 and are preserved with that provenance.
 - Frappe Inspector is independent software and is not endorsed by Frappe Technologies or scanned project maintainers.

@@ -30,6 +30,7 @@ It can help you:
 - generate Markdown, JSON and SARIF reports for supported workflows;
 - trace Frappe-aware security flows across local Python helpers, permission guards and sensitive sinks;
 - explain findings with source, sink, related-location evidence and fix guidance;
+- review pull requests and migration plans through MCP;
 - give AI assistants deterministic, Frappe-aware context through a local MCP server.
 
 Project analysis runs locally. Your source code is not uploaded to Frappe Inspector for analysis.
@@ -45,7 +46,7 @@ Project analysis runs locally. Your source code is not uploaded to Frappe Inspec
 | MCP server | Frappe-aware tools for compatible AI clients | [MCP Registry](https://prod.registry.modelcontextprotocol.io/) · Search: `io.github.Belius303/frappe-inspector` |
 | GitHub Action | Pull-request checks and migration safety | [GitHub Marketplace](https://github.com/marketplace/actions/frappe-inspector) |
 
-The latest release contains the current cross-platform packages and SHA-256 checksums. VS Code/Cursor, the CLI and the MCP server are version **1.3.1**. The JetBrains plugin remains on **1.2.2** and is not part of this release.
+The latest release contains the current cross-platform packages and SHA-256 checksums. VS Code/Cursor, the CLI and the MCP server are version **1.3.2**. The JetBrains plugin remains on **1.2.2** and is not part of this release.
 
 Version 1.3.0 adds interprocedural Python analysis for high-impact Frappe security patterns, evidence-rich explanations in every Node client, and more precise handling of optional integrations and local helper functions. Findings from public repositories are treated as review candidates, not confirmed vulnerabilities.
 
@@ -68,15 +69,15 @@ Snapshot from official registries on 2026-07-30:
 
 Frappe Inspector is benchmarked against Frappe-specific cases that generic Python scanners do not model: DocType schema, whitelisted endpoints, guest access, permission bypasses, hooks, patches and unsafe migrations.
 
-Controlled benchmark snapshot for CLI/Core 1.3.1:
+Controlled benchmark snapshot for CLI/Core 1.3.2. Frappe Inspector includes 3 migration-only expectations; generic competitors use the 17-finding generic subset:
 
-| Tool | Version | TP | FP | FN | Precision | Recall |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| Frappe Inspector | 1.3.1 | 16 | 0 | 0 | 100.0% | 100.0% |
-| Bandit | 1.9.4 | 2 | 1 | 14 | 66.7% | 12.5% |
-| Semgrep | 1.172.0 | 1 | 0 | 15 | 100.0% | 6.3% |
+| Tool | Version | Scope | Expected | TP | FP | FN | Precision | Recall |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Frappe Inspector | 1.3.2 | Generic + migration | 20 | 20 | 0 | 0 | 100.0% | 100.0% |
+| Bandit | 1.9.4 | Generic only | 17 | 2 | 3 | 15 | 40.0% | 11.8% |
+| Semgrep | 1.172.0 | Generic only | 17 | 1 | 0 | 16 | 100.0% | 5.9% |
 
-This is a Frappe-specific controlled benchmark, not a global claim over every static analyzer or project type. The complete-bench public archive remains separate and measures repeatability/noise boundaries rather than current 1.3.1 accuracy.
+This is a Frappe-specific controlled benchmark, not a global claim over every static analyzer or project type. Generic tools are not penalized for unavailable migration baselines. The complete-bench public archive remains separate and measures repeatability/noise boundaries rather than current 1.3.2 accuracy.
 
 See [Benchmark methodology and raw artifacts](docs/benchmarks.md).
 
@@ -187,6 +188,7 @@ Community features remain available without a paid license and after a Pro licen
 - [GitHub Actions and CI](docs/ci.md)
 - [Analysis rules](docs/rules.md)
 - [Benchmark evidence](docs/benchmarks.md)
+- [1.3.2 release notes](docs/release-v1.3.2.md)
 - [1.3.1 benchmark release notes](docs/release-v1.3.1-benchmark.md)
 - [60-second demo script](docs/demo-script.md)
 - [Community vs Pro](docs/free-vs-pro.md)

@@ -40,6 +40,30 @@
           "testId": "B307",
           "testName": "blacklist"
         }
+      },
+      {
+        "caseId": "website-context-ssrf",
+        "ruleId": "Bandit:B113",
+        "path": "apps/portal/portal/www/preview.py",
+        "line": 3,
+        "severity": "warning",
+        "message": "Call to requests without timeout",
+        "properties": {
+          "testId": "B113",
+          "testName": "request_without_timeout"
+        }
+      },
+      {
+        "caseId": "fixed-destination-http-negative",
+        "ruleId": "Bandit:B113",
+        "path": "apps/sales/sales/api.py",
+        "line": 4,
+        "severity": "warning",
+        "message": "Call to requests without timeout",
+        "properties": {
+          "testId": "B113",
+          "testName": "request_without_timeout"
+        }
       }
     ]
   },

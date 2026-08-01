@@ -1,5 +1,12 @@
 # Public Changelog
 
+## Cross-platform 1.3.2
+
+- Added VS Code Explain & Fix code actions and a structured evidence panel.
+- Added MCP pull-request and migration-plan review tools.
+- Added richer GitHub Action annotations, job summaries and stable SARIF fingerprints.
+- Expanded the controlled benchmark to 22 cases and 20 expected findings with separate migration/generic scopes.
+
 ## Cross-platform 1.3.1
 
 - Refreshed VS Code/Open VSX/npm/MCP/GitHub Action listing metadata with benchmark evidence and Frappe-specific security positioning.

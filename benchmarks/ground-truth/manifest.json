@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "name": "Frappe Inspector ground-truth accuracy corpus",
   "description": "Controlled Frappe fixtures for precision, recall, false-positive and missed-bug measurement.",
   "countedSeverities": ["warning", "error"],
@@ -227,6 +227,175 @@
       ]
     },
     {
+      "id": "guest-state-change",
+      "title": "Guest endpoint updates a document without authentication or permission checks",
+      "source": "Negative authorization regression pattern for guest mutations",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "@frappe.whitelist(allow_guest=True)",
+          "def confirm_email(contact):",
+          "    frappe.db.set_value('Contact', contact, 'email_id', frappe.form_dict.email)"
+        ] }
+      ],
+      "expectedFindings": [
+        { "id": "guest-unguarded-state-change", "ruleId": "FI041", "path": "apps/sales/sales/api.py", "severity": "error", "properties": { "entryPoint": "confirm_email", "sink": "frappe.db.set_value" } }
+      ]
+    },
+    {
+      "id": "signed-callback-negative",
+      "title": "Signed guest callback validates its payload before changing state",
+      "source": "Negative control for authenticated webhook callbacks",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "@frappe.whitelist(allow_guest=True)",
+          "def payment_callback(payload):",
+          "    validate_signature(payload)",
+          "    frappe.db.set_value('Payment Request', payload, 'status', 'Paid')"
+        ] }
+      ],
+      "expectedFindings": []
+    },
+    {
+      "id": "website-context-ssrf",
+      "title": "Website context fetches a caller-controlled remote URL",
+      "source": "Frappe website controller SSRF regression pattern",
+      "files": [
+        { "path": "apps/portal/portal/hooks.py", "lines": ["app_name = 'portal'"] },
+        { "path": "apps/portal/portal/modules.txt", "lines": ["Portal"] },
+        { "path": "apps/portal/portal/www/preview.py", "lines": [
+          "import requests",
+          "def get_context(context):",
+          "    context.preview = requests.get(context.source_url).text"
+        ] }
+      ],
+      "expectedFindings": [
+        { "id": "website-context-controlled-url", "ruleId": "FI044", "path": "apps/portal/portal/www/preview.py", "severity": "error", "properties": { "entryPoint": "get_context", "sink": "requests.get" } }
+      ]
+    },
+    {
+      "id": "fixed-destination-http-negative",
+      "title": "Request data is sent to a fixed integration destination",
+      "source": "Negative SSRF control for caller-controlled payloads with a fixed host",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe, requests",
+          "@frappe.whitelist()",
+          "def notify(message):",
+          "    return requests.post('https://events.example.com/frappe', json={'message': message})"
+        ] }
+      ],
+      "expectedFindings": []
+    },
+    {
+      "id": "validated-query-identifier-negative",
+      "title": "Search field is validated before use as a query identifier",
+      "source": "Negative control for Frappe search input validation",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "@frappe.whitelist()",
+          "@validate_and_sanitize_search_inputs",
+          "def customer_query(doctype, txt, searchfield):",
+          "    return frappe.get_all(doctype, fields=['name', searchfield], filters={searchfield: txt})"
+        ] }
+      ],
+      "expectedFindings": []
+    },
+    {
+      "id": "permission-aware-guest-read-negative",
+      "title": "Guest endpoint uses a permission-aware list for public records",
+      "source": "Negative control for get_list and non-sensitive public fields",
+      "files": [
+        { "path": "apps/portal/portal/hooks.py", "lines": ["app_name = 'portal'"] },
+        { "path": "apps/portal/portal/modules.txt", "lines": ["Portal"] },
+        { "path": "apps/portal/portal/api.py", "lines": [
+          "import frappe",
+          "@frappe.whitelist(allow_guest=True)",
+          "def published_articles():",
+          "    return frappe.get_list('Article', fields=['name', 'title'], filters={'published': 1})"
+        ] }
+      ],
+      "expectedFindings": []
+    },
+    {
+      "id": "server-field-guard-negative",
+      "title": "Client field restriction is mirrored by server validation",
+      "source": "Negative control for client and server authorization parity",
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Customer\",\"module\":\"Sales\",\"fields\":[{\"fieldname\":\"credit_limit\",\"fieldtype\":\"Currency\"}],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.js", "lines": ["frappe.ui.form.on('Customer', { refresh(frm) { if (!frappe.user.has_role('Accounts Manager')) frm.set_df_property('credit_limit', 'read_only', 1); } });"] },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.py", "lines": [
+          "import frappe",
+          "from frappe.model.document import Document",
+          "class Customer(Document):",
+          "    def validate(self):",
+          "        if self.credit_limit and 'Accounts Manager' not in frappe.get_roles():",
+          "            frappe.throw('Only Accounts Managers can set a credit limit', frappe.PermissionError)"
+        ] }
+      ],
+      "expectedFindings": []
+    },
+    {
+      "id": "owner-scoped-all-negative",
+      "title": "All-role write permission is limited to owned documents",
+      "source": "Negative control for record-owner permission scoping",
+      "files": [
+        { "path": "apps/portal/portal/hooks.py", "lines": ["app_name = 'portal'"] },
+        { "path": "apps/portal/portal/modules.txt", "lines": ["Portal"] },
+        { "path": "apps/portal/portal/doctype/profile/profile.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Profile\",\"module\":\"Portal\",\"fields\":[],\"permissions\":[{\"role\":\"All\",\"read\":1,\"write\":1,\"if_owner\":1}]}" }
+      ],
+      "expectedFindings": []
+    },
+    {
+      "id": "unknown-query-fields",
+      "title": "ORM filters and projections reference fields outside the effective schema",
+      "source": "Frappe query/schema typo regression pattern",
+      "includeAdvanced": true,
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Customer\",\"module\":\"Sales\",\"fields\":[{\"fieldname\":\"customer_name\",\"fieldtype\":\"Data\"},{\"fieldname\":\"territory\",\"fieldtype\":\"Data\"}],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "def active_customers():",
+          "    return frappe.get_all('Customer', filters={'territorry': 'North'}, fields=['name', 'customer_name', 'credit_score'])"
+        ] }
+      ],
+      "expectedFindings": [
+        { "id": "unknown-filter-field", "ruleId": "FI011", "path": "apps/sales/sales/api.py", "severity": "error", "properties": { "docType": "Customer", "field": "territorry" } },
+        { "id": "unknown-projected-field", "ruleId": "FI011", "path": "apps/sales/sales/api.py", "severity": "error", "properties": { "docType": "Customer", "field": "credit_score" } }
+      ]
+    },
+    {
+      "id": "known-query-fields-negative",
+      "title": "ORM filters and projections match the effective schema",
+      "source": "Negative control for valid Frappe ORM field references",
+      "includeAdvanced": true,
+      "files": [
+        { "path": "apps/sales/sales/hooks.py", "lines": ["app_name = 'sales'"] },
+        { "path": "apps/sales/sales/modules.txt", "lines": ["Sales"] },
+        { "path": "apps/sales/sales/accounts/doctype/customer/customer.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Customer\",\"module\":\"Sales\",\"fields\":[{\"fieldname\":\"customer_name\",\"fieldtype\":\"Data\"},{\"fieldname\":\"territory\",\"fieldtype\":\"Data\"}],\"permissions\":[]}" },
+        { "path": "apps/sales/sales/api.py", "lines": [
+          "import frappe",
+          "def active_customers():",
+          "    return frappe.get_all('Customer', filters={'territory': 'North'}, fields=['name', 'customer_name'])"
+        ] }
+      ],
+      "expectedFindings": []
+    },
+    {
       "id": "unsafe-migration-diff",
       "title": "Schema diff catches unsafe link change, removed field and required field addition",
       "source": "Migration safety regression coverage",
@@ -245,9 +414,9 @@
         { "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "content": "{\"doctype\":\"DocType\",\"name\":\"Invoice\",\"module\":\"Sales\",\"fields\":[{\"fieldname\":\"customer\",\"fieldtype\":\"Link\",\"options\":\"Supplier\"},{\"fieldname\":\"approval_code\",\"fieldtype\":\"Data\",\"reqd\":1}],\"permissions\":[]}" }
       ],
       "expectedFindings": [
-        { "id": "unsafe-link-target-change", "ruleId": "FI-MIG004", "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "severity": "error", "properties": { "docType": "Invoice", "field": "customer" } },
-        { "id": "removed-field", "ruleId": "FI-MIG002", "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "severity": "error", "properties": { "docType": "Invoice", "field": "old_code" } },
-        { "id": "required-field-added", "ruleId": "FI-MIG005", "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "severity": "error", "properties": { "docType": "Invoice", "field": "approval_code" } }
+        { "id": "unsafe-link-target-change", "ruleId": "FI-MIG004", "scope": "migration", "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "severity": "error", "properties": { "docType": "Invoice", "field": "customer" } },
+        { "id": "removed-field", "ruleId": "FI-MIG002", "scope": "migration", "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "severity": "error", "properties": { "docType": "Invoice", "field": "old_code" } },
+        { "id": "required-field-added", "ruleId": "FI-MIG005", "scope": "migration", "path": "apps/sales/sales/accounts/doctype/invoice/invoice.json", "severity": "error", "properties": { "docType": "Invoice", "field": "approval_code" } }
       ]
     }
   ]

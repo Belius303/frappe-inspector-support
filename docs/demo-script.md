@@ -20,7 +20,7 @@ Open a Frappe bench with a small fixture containing:
 
 ## Narration
 
-> Generic Python scanners see files. Frappe Inspector sees the Frappe project model: DocTypes, whitelisted endpoints, hooks, patches, permissions and migrations. On the controlled Frappe benchmark, it detects 16/16 expected findings with zero false positives.
+> Generic Python scanners see files. Frappe Inspector sees the Frappe project model: DocTypes, whitelisted endpoints, hooks, patches, permissions and migrations. On the 22-case controlled Frappe benchmark, it detects all 20 expected findings with zero false positives.
 
 ## Evidence Links
 
