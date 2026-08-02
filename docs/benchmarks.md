@@ -5,7 +5,7 @@ Frappe Inspector is measured with two separate evidence layers:
 1. a controlled Frappe-specific accuracy corpus;
 2. public complete-bench controls for repeatability and noise boundaries.
 
-The controlled corpus is the only layer used for precision/recall claims. The public complete-bench archive is retained separately and is not relabeled as current CLI 1.3.2 accuracy evidence.
+The controlled corpus is the only layer used for precision/recall claims. The public complete-bench archive is retained separately and is not relabeled as current CLI 1.4.0 accuracy evidence.
 
 ## Controlled Accuracy Corpus
 
@@ -20,11 +20,11 @@ The controlled corpus covers minimized Frappe cases for:
 - broken hooks and patches;
 - unsafe migration diffs.
 
-Current result for CLI/Core 1.3.2. Three Frappe Inspector expectations require baseline/current migration comparison, so generic scanners are evaluated only against the 17 generic findings:
+Current result for CLI/Core 1.4.0. Three Frappe Inspector expectations require baseline/current migration comparison, so generic scanners are evaluated only against the 17 generic findings:
 
 | Tool | Version | Scope | Cases | Expected | TP | FP | FN | Precision | Recall | F1 |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Frappe Inspector | 1.3.2 | Generic + migration | 22 | 20 | 20 | 0 | 0 | 100.0% | 100.0% | 100.0% |
+| Frappe Inspector | 1.4.0 | Generic + migration | 22 | 20 | 20 | 0 | 0 | 100.0% | 100.0% | 100.0% |
 | Bandit | 1.9.4 | Generic only | 21 | 17 | 2 | 3 | 15 | 40.0% | 11.8% | 18.2% |
 | Semgrep | 1.172.0 | Generic only | 21 | 17 | 1 | 0 | 16 | 100.0% | 5.9% | 11.1% |
 

@@ -1,11 +1,12 @@
 # Public Changelog
 
+## Cross-platform 1.4.0
+
+- Added intelligent PR diff, auditable suppressions, team policies, actionable migration plans, PR comments and HTML reports.
+
 ## Cross-platform 1.3.2
 
-- Added VS Code Explain & Fix code actions and a structured evidence panel.
-- Added MCP pull-request and migration-plan review tools.
-- Added richer GitHub Action annotations, job summaries and stable SARIF fingerprints.
-- Expanded the controlled benchmark to 22 cases and 20 expected findings with separate migration/generic scopes.
+- Added VS Code Explain & Fix, MCP PR/migration reviews, richer Action evidence and a 22-case benchmark.
 
 ## Cross-platform 1.3.1
 
