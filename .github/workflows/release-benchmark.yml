@@ -18,3 +18,4 @@ jobs:
         with:
           name: Frappe Inspector 1.4.0
           body_path: docs/release-v1.4.0.md
+          files: release-v1.4.0/*

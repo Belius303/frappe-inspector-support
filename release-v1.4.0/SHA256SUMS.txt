@@ -1,0 +1,4 @@
+f00654fde434feec59a71295e757aedd8ba453d65015c93464965d2cc1c82b62  frappe-inspector-action-v1.4.0.zip
+6dac1e3302cf518c46be7ff6b63b27ef93e6263b5e05bfafbc984acca8359eb4  frappe-inspector-cli-1.4.0.tgz
+0cb9a15cbba6e8479294339c2b719c5701afa3626cb95c6ca7829915cb295d1d  frappe-inspector-mcp-1.4.0.tgz
+a373bd0a2ce85bd66cfb5b3473324d819c49b2640a32b0653d0ffa644f323d88  frappe-inspector-vscode-1.4.0.vsix
